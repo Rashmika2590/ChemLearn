@@ -181,23 +181,32 @@ class PracticeScreen extends StatelessWidget {
 // Updated: Autocomplete Search Field (Fixed for latest flutter_typeahead)
 // ═══════════════════════════════════════════════════════════════
 
-class _CompoundSearchField extends StatelessWidget {
+class _CompoundSearchField extends StatefulWidget {
   final String hint;
   final ValueChanged<String> onSelected;
 
   const _CompoundSearchField({required this.hint, required this.onSelected});
 
   @override
+  State<_CompoundSearchField> createState() => _CompoundSearchFieldState();
+}
+
+class _CompoundSearchFieldState extends State<_CompoundSearchField> {
+  // 1. Controller එකක් හදාගන්න
+  final TextEditingController _controller = TextEditingController();
+
+  @override
   Widget build(BuildContext context) {
     return TypeAheadField<String>(
-      // 1. decoration එක වෙනස් වෙලා තියෙන්නේ මෙහෙමයි
+      // 2. මෙතන controller එක අනිවාර්යයෙන්ම දෙන්න
+      controller: _controller,
       builder: (context, controller, focusNode) {
         return TextField(
           controller: controller,
           focusNode: focusNode,
           style: const TextStyle(color: Colors.white),
           decoration: InputDecoration(
-            hintText: hint,
+            hintText: widget.hint,
             hintStyle: const TextStyle(color: Colors.white30),
             filled: true,
             fillColor: AppTheme.cardDark,
@@ -209,21 +218,19 @@ class _CompoundSearchField extends StatelessWidget {
           ),
         );
       },
-      // 2. suggestionsCallback එක තියෙන්නේ මෙහෙමයි
       suggestionsCallback: (pattern) async =>
           await PubChemService.getSuggestions(pattern),
-
-      // 3. itemBuilder එකේ item එක වෙනුවට suggestion දාන්න
       itemBuilder: (context, suggestion) => ListTile(
         title: Text(suggestion, style: const TextStyle(color: Colors.white)),
       ),
-
-      // 4. අලුත් version එකේ නම 'onSelected' පමණයි
-      onSelected: onSelected,
+      onSelected: (suggestion) {
+        // 3. මෙතනදී text එක set කරන්න
+        _controller.text = suggestion;
+        widget.onSelected(suggestion);
+      },
     );
   }
 }
-
 // ═══════════════════════════════════════════════════════════════
 // EXISTING HELPERS (Updated slightly)
 // ═══════════════════════════════════════════════════════════════
@@ -350,27 +357,27 @@ class _ResultCard extends StatelessWidget {
                 ),
               ),
               const Spacer(),
-              Container(
-                padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
-                decoration: BoxDecoration(
-                  color: Colors.white.withValues(alpha: 0.2),
-                  borderRadius: BorderRadius.circular(6),
-                ),
-                child: const Row(
-                  children: [
-                    Icon(Icons.auto_awesome, color: Colors.white, size: 12),
-                    SizedBox(width: 4),
-                    Text(
-                      'Groq Llama 3',
-                      style: TextStyle(
-                        fontSize: 10,
-                        color: Colors.white,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                  ],
-                ),
-              ),
+              // Container(
+              //   padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+              //   decoration: BoxDecoration(
+              //     color: Colors.white.withValues(alpha: 0.2),
+              //     borderRadius: BorderRadius.circular(6),
+              //   ),
+              //   child: const Row(
+              //     children: [
+              //       Icon(Icons.auto_awesome, color: Colors.white, size: 12),
+              //       SizedBox(width: 4),
+              //       Text(
+              //         'Groq Llama 3',
+              //         style: TextStyle(
+              //           fontSize: 10,
+              //           color: Colors.white,
+              //           fontWeight: FontWeight.bold,
+              //         ),
+              //       ),
+              //     ],
+              //   ),
+              // ),
             ],
           ),
           const SizedBox(height: 14),
