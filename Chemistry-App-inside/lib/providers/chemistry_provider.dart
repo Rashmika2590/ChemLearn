@@ -109,6 +109,10 @@ class ChemistryProvider extends ChangeNotifier {
   String? _selectedReactantB;
   String? get selectedReactantB => _selectedReactantB;
 
+  // මේ ටික ඔයාගේ දැනට තියෙන code එකේ variables වලට යටින් දාන්න
+  String? get reactantA => _selectedReactantA;
+  String? get reactantB => _selectedReactantB;
+
   String? _selectedCondition;
   String? get selectedCondition => _selectedCondition;
 
