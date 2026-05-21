@@ -6,7 +6,7 @@ import '../core/theme/app_theme.dart';
 import '../providers/chemistry_provider.dart';
 import '../services/pubchem_service.dart';
 
-/// Interactive practice lab with Autocomplete search
+/// Interactive practice lab with Autocomplete search and Visual Reaction Flow
 class PracticeScreen extends StatelessWidget {
   const PracticeScreen({super.key});
 
@@ -53,41 +53,9 @@ class PracticeScreen extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                // ── Instructions ─────────────────────────
-                Container(
-                  width: double.infinity,
-                  padding: const EdgeInsets.all(18),
-                  decoration: BoxDecoration(
-                    color: AppTheme.cardDark,
-                    borderRadius: BorderRadius.circular(14),
-                    border: Border.all(
-                      color: Colors.white.withValues(alpha: 0.06),
-                    ),
-                  ),
-                  child: const Row(
-                    children: [
-                      Icon(
-                        Icons.lightbulb_outline,
-                        color: Color(0xFFA78BFA),
-                        size: 22,
-                      ),
-                      SizedBox(width: 14),
-                      Expanded(
-                        child: Text(
-                          'Search and select reactants, then tap "React!" to analyze.',
-                          style: TextStyle(
-                            color: Colors.white60,
-                            fontSize: 13,
-                            height: 1.5,
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
+                _buildInstructions(),
                 const SizedBox(height: 28),
 
-                // ── Reactant A (Autocomplete) ──────────
                 const _SectionLabel(label: 'Reactant A', icon: Icons.science),
                 const SizedBox(height: 10),
                 _CompoundSearchField(
@@ -96,7 +64,6 @@ class PracticeScreen extends StatelessWidget {
                 ),
                 const SizedBox(height: 22),
 
-                // ── Reactant B (Autocomplete) ──────────
                 const _SectionLabel(
                   label: 'Reactant B (optional)',
                   icon: Icons.science,
@@ -108,7 +75,6 @@ class PracticeScreen extends StatelessWidget {
                 ),
                 const SizedBox(height: 22),
 
-                // ── Condition ────────────────────────────
                 const _SectionLabel(
                   label: 'Reaction Condition',
                   icon: Icons.thermostat,
@@ -121,43 +87,18 @@ class PracticeScreen extends StatelessWidget {
                 ),
                 const SizedBox(height: 32),
 
-                // ── React Button ─────────────────────────
-                SizedBox(
-                  width: double.infinity,
-                  height: 54,
-                  child: ElevatedButton.icon(
-                    onPressed: provider.isEnriching
-                        ? null
-                        : () => provider.checkReaction(),
-                    icon: provider.isEnriching
-                        ? const SizedBox(
-                            width: 20,
-                            height: 20,
-                            child: CircularProgressIndicator(
-                              color: Colors.white,
-                              strokeWidth: 2,
-                            ),
-                          )
-                        : const Icon(Icons.bolt_rounded),
-                    label: Text(
-                      provider.isEnriching ? 'Analyzing...' : 'React!',
-                    ),
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: const Color(0xFF7C3AED),
-                      foregroundColor: Colors.white,
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(14),
-                      ),
-                    ),
-                  ),
-                ),
+                _buildReactButton(provider),
                 const SizedBox(height: 28),
 
+                // ── Visual Flow & Results ─────────
                 if (provider.isEnriching) const _LoadingShimmerCard(),
+
                 if (!provider.isEnriching && provider.lastResult != null) ...[
+                  // මෙතනදී අර කලින් තිබ්බ පරාමිතීන් ඔක්කොම අයින් කරලා provider එක විතරක් යවන්න
+                  _buildReactionVisualizer(provider),
                   _ResultCard(result: provider.lastResult!),
-                  const SizedBox(height: 16),
                 ],
+
                 if (!provider.isEnriching &&
                     provider.pubChemData != null &&
                     provider.lastResult?.isCorrect == true) ...[
@@ -171,91 +112,193 @@ class PracticeScreen extends StatelessWidget {
       ),
     );
   }
+
+  // Helper Widgets
+  Widget _buildInstructions() => Container(
+    width: double.infinity,
+    padding: const EdgeInsets.all(18),
+    decoration: BoxDecoration(
+      color: AppTheme.cardDark,
+      borderRadius: BorderRadius.circular(14),
+      border: Border.all(color: Colors.white.withValues(alpha: 0.06)),
+    ),
+    child: const Row(
+      children: [
+        Icon(Icons.lightbulb_outline, color: Color(0xFFA78BFA), size: 22),
+        SizedBox(width: 14),
+        Expanded(
+          child: Text(
+            'Search and select reactants, then tap "React!" to analyze.',
+            style: TextStyle(color: Colors.white60, fontSize: 13, height: 1.5),
+          ),
+        ),
+      ],
+    ),
+  );
+
+  Widget _buildReactButton(ChemistryProvider provider) => SizedBox(
+    width: double.infinity,
+    height: 54,
+    child: ElevatedButton.icon(
+      onPressed: provider.isEnriching ? null : () => provider.checkReaction(),
+      icon: provider.isEnriching
+          ? const SizedBox(
+              width: 20,
+              height: 20,
+              child: CircularProgressIndicator(
+                color: Colors.white,
+                strokeWidth: 2,
+              ),
+            )
+          : const Icon(Icons.bolt_rounded),
+      label: Text(provider.isEnriching ? 'Analyzing...' : 'React!'),
+      style: ElevatedButton.styleFrom(
+        backgroundColor: const Color(0xFF7C3AED),
+        foregroundColor: Colors.white,
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(14)),
+      ),
+    ),
+  );
+
+  // ── Visual Reaction Flow Widget ──────────────────────────
+  Widget _buildReactionVisualizer(
+    ChemistryProvider provider, // පරණ parameters අයින් කරලා provider එක දෙන්න
+  ) {
+    // මෙතනින් දත්ත ටික ගන්න
+    final reactantA = provider.selectedReactantA;
+    final reactantB = provider.selectedReactantB;
+    final condition = provider.selectedCondition;
+    final resultName = provider.lastResult?.product?.name;
+    return Container(
+      margin: const EdgeInsets.only(bottom: 20),
+      padding: const EdgeInsets.all(16),
+      decoration: BoxDecoration(
+        color: AppTheme.cardDark.withOpacity(0.5),
+        borderRadius: BorderRadius.circular(16),
+        border: Border.all(color: Colors.white10),
+      ),
+      child: SingleChildScrollView(
+        scrollDirection: Axis.horizontal,
+        child: Row(
+          children: [
+            _buildMoleculeChip(reactantA ?? '???'),
+            if (reactantB != null && reactantB.isNotEmpty) ...[
+              const Icon(Icons.add, color: Colors.white38),
+              _buildMoleculeChip(reactantB),
+            ],
+            // _buildReactionVisualizer ඇතුළේ තියෙන Text widget එක:
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 12),
+              child: Column(
+                children: [
+                  const Icon(Icons.arrow_forward, color: Colors.purpleAccent),
+                  Text(
+                    condition ??
+                        'Condition', // මෙතන 'Condition' වෙනුවට condition variable එක පාවිච්චි කරන්න
+                    style: const TextStyle(fontSize: 8, color: Colors.white38),
+                  ),
+                ],
+              ),
+            ),
+            _buildMoleculeChip(resultName ?? 'Result', isProduct: true),
+          ],
+        ),
+      ),
+    );
+  }
+
+  Widget _buildMoleculeChip(String label, {bool isProduct = false}) {
+    return Container(
+      padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+      decoration: BoxDecoration(
+        color: isProduct
+            ? Colors.purple.withOpacity(0.2)
+            : Colors.white.withOpacity(0.05),
+        borderRadius: BorderRadius.circular(8),
+        border: Border.all(
+          color: isProduct ? Colors.purpleAccent : Colors.white24,
+        ),
+      ),
+      child: Text(
+        label,
+        style: TextStyle(
+          color: isProduct ? Colors.purpleAccent : Colors.white,
+          fontWeight: FontWeight.bold,
+        ),
+      ),
+    );
+  }
 }
 
 // ═══════════════════════════════════════════════════════════════
-// NEW HELPER: Autocomplete Search Field
+// Search Component
 // ═══════════════════════════════════════════════════════════════
-
-// ═══════════════════════════════════════════════════════════════
-// Updated: Autocomplete Search Field (Fixed for latest flutter_typeahead)
-// ═══════════════════════════════════════════════════════════════
-
 class _CompoundSearchField extends StatefulWidget {
   final String hint;
   final ValueChanged<String> onSelected;
-
   const _CompoundSearchField({required this.hint, required this.onSelected});
-
   @override
   State<_CompoundSearchField> createState() => _CompoundSearchFieldState();
 }
 
 class _CompoundSearchFieldState extends State<_CompoundSearchField> {
-  // 1. Controller එකක් හදාගන්න
   final TextEditingController _controller = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
     return TypeAheadField<String>(
-      // 2. මෙතන controller එක අනිවාර්යයෙන්ම දෙන්න
       controller: _controller,
-      builder: (context, controller, focusNode) {
-        return TextField(
-          controller: controller,
-          focusNode: focusNode,
-          style: const TextStyle(color: Colors.white),
-          decoration: InputDecoration(
-            hintText: widget.hint,
-            hintStyle: const TextStyle(color: Colors.white30),
-            filled: true,
-            fillColor: AppTheme.cardDark,
-            border: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(14),
-              borderSide: BorderSide.none,
-            ),
-            prefixIcon: const Icon(Icons.search, color: Colors.white38),
+      builder: (context, controller, focusNode) => TextField(
+        controller: controller,
+        focusNode: focusNode,
+        style: const TextStyle(color: Colors.white),
+        decoration: InputDecoration(
+          hintText: widget.hint,
+          hintStyle: const TextStyle(color: Colors.white30),
+          filled: true,
+          fillColor: AppTheme.cardDark,
+          border: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(14),
+            borderSide: BorderSide.none,
           ),
-        );
-      },
+          prefixIcon: const Icon(Icons.search, color: Colors.white38),
+        ),
+      ),
       suggestionsCallback: (pattern) async =>
           await PubChemService.getSuggestions(pattern),
       itemBuilder: (context, suggestion) => ListTile(
         title: Text(suggestion, style: const TextStyle(color: Colors.white)),
       ),
       onSelected: (suggestion) {
-        // 3. මෙතනදී text එක set කරන්න
         _controller.text = suggestion;
         widget.onSelected(suggestion);
       },
     );
   }
 }
-// ═══════════════════════════════════════════════════════════════
-// EXISTING HELPERS (Updated slightly)
-// ═══════════════════════════════════════════════════════════════
 
+// ═══════════════════════════════════════════════════════════════
+// UI Helpers (Labels, Dropdowns, Cards) - Keep them as they are
+// ═══════════════════════════════════════════════════════════════
 class _SectionLabel extends StatelessWidget {
   final String label;
   final IconData icon;
   const _SectionLabel({required this.label, required this.icon});
   @override
-  Widget build(BuildContext context) {
-    return Row(
-      children: [
-        Icon(icon, size: 18, color: Colors.white38),
-        const SizedBox(width: 8),
-        Text(
-          label,
-          style: const TextStyle(
-            fontSize: 14,
-            fontWeight: FontWeight.w600,
-            color: Colors.white70,
-          ),
+  Widget build(BuildContext context) => Row(
+    children: [
+      Icon(icon, size: 18, color: Colors.white38),
+      const SizedBox(width: 8),
+      Text(
+        label,
+        style: const TextStyle(
+          fontSize: 14,
+          fontWeight: FontWeight.w600,
+          color: Colors.white70,
         ),
-      ],
-    );
-  }
+      ),
+    ],
+  );
 }
 
 class _ConditionDropdown extends StatelessWidget {
@@ -267,38 +310,37 @@ class _ConditionDropdown extends StatelessWidget {
     required this.conditions,
     required this.onChanged,
   });
-
   @override
-  Widget build(BuildContext context) {
-    return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 16),
-      decoration: BoxDecoration(
-        color: AppTheme.cardDark,
-        borderRadius: BorderRadius.circular(14),
-      ),
-      child: DropdownButtonHideUnderline(
-        child: DropdownButton<String>(
-          value: value,
-          isExpanded: true,
-          hint: const Text(
-            'Select condition',
-            style: TextStyle(color: Colors.white30, fontSize: 14),
-          ),
-          dropdownColor: AppTheme.cardDark,
-          items: conditions
-              .map(
-                (c) => DropdownMenuItem(
-                  value: c,
-                  child: Text(c, style: const TextStyle(color: Colors.white)),
-                ),
-              )
-              .toList(),
-          onChanged: onChanged,
+  Widget build(BuildContext context) => Container(
+    padding: const EdgeInsets.symmetric(horizontal: 16),
+    decoration: BoxDecoration(
+      color: AppTheme.cardDark,
+      borderRadius: BorderRadius.circular(14),
+    ),
+    child: DropdownButtonHideUnderline(
+      child: DropdownButton<String>(
+        value: value,
+        isExpanded: true,
+        hint: const Text(
+          'Select condition',
+          style: TextStyle(color: Colors.white30, fontSize: 14),
         ),
+        dropdownColor: AppTheme.cardDark,
+        items: conditions
+            .map(
+              (c) => DropdownMenuItem(
+                value: c,
+                child: Text(c, style: const TextStyle(color: Colors.white)),
+              ),
+            )
+            .toList(),
+        onChanged: onChanged,
       ),
-    );
-  }
+    ),
+  );
 }
+
+// ResultCard, LoadingShimmerCard, PubChemCard - (මම කලින් දීපු කෝඩ් එකේ තිබ්බ ඒවාම තමයි මචං මෙතනත් පාවිච්චි කරන්නේ)
 
 // Result Card, Shimmer Card, PubChem Card classes stay the same...
 // (මම කලින් දීපු ඒවම තමයි මචං, ඒවා මෙතනට ආයිත් පාවිච්චි කරන්න)
