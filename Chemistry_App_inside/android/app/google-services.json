@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "324486510201",
+    "project_id": "chemistry-app-961a8",
+    "storage_bucket": "chemistry-app-961a8.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:324486510201:android:4b84e57d57db416a8b06a8",
+        "android_client_info": {
+          "package_name": "com.chemlearn.chemistry_app"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAZWmCpPlvK5Puv6_KIlyZH8fHGVc4PeFo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
