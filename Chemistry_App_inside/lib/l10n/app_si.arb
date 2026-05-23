@@ -1,0 +1,56 @@
+{
+  "@@locale": "si",
+
+  "appTitle": "ChemLearn",
+  "appSubtitle": "කාබනික රසායන විද්‍යාව ප්‍රගුණ කරන්න",
+
+  "loadingData": "රසායන විද්‍යා දත්ත පූරණය වෙමින්…",
+  "retry": "නැවත උත්සාහ කරන්න",
+
+  "yourScore": "ඔබේ ලකුණු",
+  "points": "ලකුණු",
+
+  "correct": "නිවැරදි",
+  "attempts": "උත්සාහයන්",
+  "lessons": "පාඩම්",
+
+  "startLearning": "ඉගෙනීම ආරම්භ කරන්න",
+  "lessonsSubtitle": "මාතෘකා {count} · සම්පූර්ණ කළ {completed}",
+
+  "practiceLab": "පුහුණු රසායනාගාරය",
+  "practiceLabSubtitle": "ප්‍රතික්‍රියාකාරක මිශ්‍ර කර නිෂ්පාදන සොයා ගන්න",
+
+  "chemistryTutor": "රසායන විද්‍යා උපදේශකයා",
+  "chemistryTutorSubtitle": "AI බලයෙන් ක්‍රියාත්මක ප්‍රශ්නෝත්තර",
+
+  "settings": "සැකසුම්",
+  "language": "භාෂාව",
+
+  "noLessons": "තවමත් පාඩම් ලබා ගත නොහැක.",
+  "level": "{level} මට්ටම",
+  "reactionsCount": "ප්‍රතික්‍රියා {count}",
+
+  "reactantA": "ප්‍රතික්‍රියාකාරක A",
+  "reactantB": "ප්‍රතික්‍රියාකාරක B (අත්‍යවශ්‍ය නොවේ)",
+  "reactionCondition": "ප්‍රතික්‍රියා කොන්දේසි",
+  "selectCondition": "කොන්දේසිය තෝරන්න",
+  "reactButton": "ප්‍රතික්‍රියා කරවන්න!",
+  "analyzing": "විශ්ලේෂණය කරමින්...",
+  "instructions": "ප්‍රතික්‍රියාකාරක සොයාගෙන තෝරාගන්න, පසුව විශ්ලේෂණය කිරීමට \"ප්‍රතික්‍රියා කරවන්න!\" බොත්තම ඔබන්න.",
+  "aiFormulating": "AI ප්‍රතිචාරයක් සකස් කරමින් පවතී...",
+  "pubChemData": "PubChem දත්ත",
+  "iupacName": "IUPAC නාමය",
+  "formula": "සූත්‍රය",
+  "molecularWeight": "අණුක ස්කන්ධය",
+  "reactionOccurred": "ප්‍රතික්‍රියාව සිදු විය!",
+  "noReaction": "ප්‍රතික්‍රියාවක් සිදු වූයේ නැත",
+  "productName": "නිෂ්පාදනය: {name}",
+
+  "clearChat": "චැට් එක මකන්න",
+  "aiTutorUnavailable": "AI උපදේශකයා ලබා ගත නොහැක",
+  "aiTutorRequiresKey": "AI උපදේශකයා සඳහා Gemini API යතුරක් අවශ්‍ය වේ.",
+  "askAnything": "කාබනික රසායන විද්‍යාව ගැන ඔබට අවශ්‍ය ඕනෑම දෙයක් මාගෙන් අසන්න!",
+  "iCanExplain": "මට ප්‍රතික්‍රියා, සංකල්ප පැහැදිලි කළ හැකි අතර රසායන විද්‍යාව වඩා හොඳින් අවබෝධ කර ගැනීමට ඔබට සහාය විය හැකිය.",
+  "thinking": "සිතමින් පවතිනවා…",
+  "askAQuestion": "රසායන විද්‍යාව පිළිබඳ ප්‍රශ්නයක් අසන්න…"
+}

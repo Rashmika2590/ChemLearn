@@ -1,7 +1,8 @@
+import 'package:chemistry_app/core/theme/app_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import '../core/theme/app_theme.dart';
+import '../l10n/app_localizations.dart';
 import '../models/lesson.dart';
 import '../providers/chemistry_provider.dart';
 import 'lesson_detail_screen.dart';
@@ -13,14 +14,14 @@ class LessonListScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('Lessons')),
+      appBar: AppBar(title: Text(AppLocalizations.of(context)!.lessons)),
       body: Consumer<ChemistryProvider>(
         builder: (context, provider, _) {
           if (provider.lessons.isEmpty) {
-            return const Center(
+            return Center(
               child: Text(
-                'No lessons available yet.',
-                style: TextStyle(color: Colors.white54),
+                AppLocalizations.of(context)!.noLessons,
+                style: const TextStyle(color: Colors.white54),
               ),
             );
           }
@@ -71,9 +72,7 @@ class _LessonCard extends StatelessWidget {
     return GestureDetector(
       onTap: () => Navigator.push(
         context,
-        MaterialPageRoute(
-          builder: (_) => LessonDetailScreen(lesson: lesson),
-        ),
+        MaterialPageRoute(builder: (_) => LessonDetailScreen(lesson: lesson)),
       ),
       child: Container(
         margin: const EdgeInsets.only(bottom: 16),
@@ -138,7 +137,7 @@ class _LessonCard extends StatelessWidget {
                     ),
                     const SizedBox(height: 4),
                     Text(
-                      'Level ${lesson.level} · ${lesson.relatedReactions.length} reactions',
+                      '${AppLocalizations.of(context)!.level(lesson.level)} · ${AppLocalizations.of(context)!.reactionsCount(lesson.relatedReactions.length)}',
                       style: const TextStyle(
                         fontSize: 12,
                         color: Colors.white38,
@@ -152,10 +151,16 @@ class _LessonCard extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.only(right: 18),
               child: isCompleted
-                  ? const Icon(Icons.check_circle,
-                      color: AppTheme.accentGreen, size: 24)
-                  : Icon(Icons.arrow_forward_ios_rounded,
-                      color: Colors.white.withValues(alpha: 0.3), size: 16),
+                  ? const Icon(
+                      Icons.check_circle,
+                      color: AppTheme.accentGreen,
+                      size: 24,
+                    )
+                  : Icon(
+                      Icons.arrow_forward_ios_rounded,
+                      color: Colors.white.withValues(alpha: 0.3),
+                      size: 16,
+                    ),
             ),
           ],
         ),

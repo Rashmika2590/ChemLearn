@@ -19,7 +19,7 @@ class ChemistryRepository {
   List<Lesson>? _lessons;
 
   ChemistryRepository({FirestoreService? firestoreService})
-      : _firestoreService = firestoreService;
+    : _firestoreService = firestoreService;
 
   // ── Compounds ─────────────────────────────────────────────
 
@@ -29,7 +29,7 @@ class ChemistryRepository {
 
     if (_firestoreService != null) {
       try {
-        final data = await _firestoreService!.getCompounds();
+        final data = await _firestoreService.getCompounds();
         if (data.isNotEmpty) {
           _compounds = data;
           return _compounds!;
@@ -61,7 +61,7 @@ class ChemistryRepository {
 
     if (_firestoreService != null) {
       try {
-        final data = await _firestoreService!.getReactions();
+        final data = await _firestoreService.getReactions();
         if (data.isNotEmpty) {
           _reactions = data;
           return _reactions!;
@@ -83,7 +83,7 @@ class ChemistryRepository {
 
     if (_firestoreService != null) {
       try {
-        final data = await _firestoreService!.getLessons();
+        final data = await _firestoreService.getLessons();
         if (data.isNotEmpty) {
           _lessons = data;
           return _lessons!;
@@ -102,8 +102,8 @@ class ChemistryRepository {
   /// Pushes seed data to Firestore (useful for initial setup).
   Future<void> seedFirestore() async {
     if (_firestoreService == null) return;
-    await _firestoreService!.seedCompounds(SeedData.compounds);
-    await _firestoreService!.seedReactions(SeedData.reactions);
-    await _firestoreService!.seedLessons(SeedData.lessons);
+    await _firestoreService.seedCompounds(SeedData.compounds);
+    await _firestoreService.seedReactions(SeedData.reactions);
+    await _firestoreService.seedLessons(SeedData.lessons);
   }
 }

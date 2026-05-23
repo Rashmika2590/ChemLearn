@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import '../core/theme/app_theme.dart';
+import '../l10n/app_localizations.dart';
 import '../providers/chemistry_provider.dart';
 
 /// AI-powered chemistry tutor chat screen.
@@ -49,11 +50,11 @@ class _TutorScreenState extends State<TutorScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Chemistry Tutor'),
+        title: Text(AppLocalizations.of(context)!.chemistryTutor),
         actions: [
           IconButton(
             icon: const Icon(Icons.delete_outline_rounded),
-            tooltip: 'Clear chat',
+            tooltip: AppLocalizations.of(context)!.clearChat,
             onPressed: () {
               context.read<ChemistryProvider>().clearTutorChat();
             },
@@ -105,20 +106,19 @@ class _TutorScreenState extends State<TutorScreen> {
                   color: AppTheme.accentOrange, size: 36),
             ),
             const SizedBox(height: 20),
-            const Text(
-              'AI Tutor Unavailable',
-              style: TextStyle(
+            Text(
+              AppLocalizations.of(context)!.aiTutorUnavailable,
+              style: const TextStyle(
                 fontSize: 18,
                 fontWeight: FontWeight.w700,
                 color: Colors.white,
               ),
             ),
             const SizedBox(height: 8),
-            const Text(
-              'The AI tutor requires a Gemini API key.\n'
-              'Run with: flutter run --dart-define=GEMINI_API_KEY=your_key',
+            Text(
+              AppLocalizations.of(context)!.aiTutorRequiresKey,
               textAlign: TextAlign.center,
-              style: TextStyle(color: Colors.white38, fontSize: 13, height: 1.6),
+              style: const TextStyle(color: Colors.white38, fontSize: 13, height: 1.6),
             ),
           ],
         ),
@@ -144,20 +144,20 @@ class _TutorScreenState extends State<TutorScreen> {
                   color: Color(0xFF00E5FF), size: 36),
             ),
             const SizedBox(height: 20),
-            const Text(
-              'Ask me anything about\nOrganic Chemistry!',
+            Text(
+              AppLocalizations.of(context)!.askAnything,
               textAlign: TextAlign.center,
-              style: TextStyle(
+              style: const TextStyle(
                 fontSize: 18,
                 fontWeight: FontWeight.w700,
                 color: Colors.white,
               ),
             ),
             const SizedBox(height: 12),
-            const Text(
-              'I can explain reactions, concepts,\nand help you understand chemistry better.',
+            Text(
+              AppLocalizations.of(context)!.iCanExplain,
               textAlign: TextAlign.center,
-              style: TextStyle(color: Colors.white38, fontSize: 13, height: 1.5),
+              style: const TextStyle(color: Colors.white38, fontSize: 13, height: 1.5),
             ),
             const SizedBox(height: 28),
             // Suggested questions
@@ -229,9 +229,9 @@ class _TutorScreenState extends State<TutorScreen> {
               ),
             ),
             const SizedBox(width: 10),
-            const Text(
-              'Thinking…',
-              style: TextStyle(color: Colors.white38, fontSize: 13),
+            Text(
+              AppLocalizations.of(context)!.thinking,
+              style: const TextStyle(color: Colors.white38, fontSize: 13),
             ),
           ],
         ),
@@ -260,7 +260,7 @@ class _TutorScreenState extends State<TutorScreen> {
               controller: _controller,
               style: const TextStyle(color: Colors.white, fontSize: 15),
               decoration: InputDecoration(
-                hintText: 'Ask a chemistry question…',
+                hintText: AppLocalizations.of(context)!.askAQuestion,
                 hintStyle: const TextStyle(color: Colors.white24),
                 filled: true,
                 fillColor: AppTheme.cardDark,
