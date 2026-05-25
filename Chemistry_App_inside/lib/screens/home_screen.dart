@@ -1,3 +1,4 @@
+import 'package:chemistry_app/screens/conversion_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -88,6 +89,27 @@ class HomeScreen extends StatelessWidget {
                     ),
                   ),
                   const SizedBox(height: 16),
+                  // ── Conversion Master Card ──────────────────────────
+                  _buildNavCard(
+                    context,
+                    icon: Icons.sync_alt_rounded,
+                    title: AppLocalizations.of(context)!.conversionMaster,
+                    subtitle: AppLocalizations.of(context)!.conversionSubtitle,
+                    gradient: const LinearGradient(
+                      begin: Alignment.topLeft,
+                      end: Alignment.bottomRight,
+                      colors: [Color(0xFF1E88E5), Color(0xFF64B5F6)],
+                    ),
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (_) => const ConversionScreen(),
+                        ),
+                      );
+                    },
+                  ),
+                  const SizedBox(height: 16), // ඊට පස්සේ tutor කාඩ් එක එනවා
                   _buildNavCard(
                     context,
                     icon: Icons.psychology_rounded,

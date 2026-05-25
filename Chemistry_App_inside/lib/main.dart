@@ -1,5 +1,6 @@
 import 'package:chemistry_app/firebase_options.dart';
 import 'package:chemistry_app/l10n/app_localizations.dart';
+import 'package:chemistry_app/providers/conversion_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
@@ -17,21 +18,15 @@ import 'providers/locale_provider.dart';
 import 'screens/home_screen.dart';
 import 'services/pubchem_service.dart';
 
-/// Entry point for the ChemLearn application.
-///
-/// Initializes Firebase, sets up dependency injection via Provider,
-/// and launches the app with the dark science-inspired theme.
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
-  // Initialize Environment variables (.env)
   try {
     await dotenv.load(fileName: ".env");
   } catch (e) {
     debugPrint('Failed to load .env file: $e');
   }
 
-  // Initialize Firebase
   bool firebaseInitialized = false;
   try {
     await Firebase.initializeApp(
@@ -39,19 +34,10 @@ void main() async {
     );
     firebaseInitialized = true;
   } catch (e) {
-    debugPrint('Firebase init failed (using seed data fallback): $e');
+    debugPrint('Firebase init failed: $e');
   }
 
-  // 🎯 වෙනස් කළ තැන: .env ෆයිල් එකෙන් API Key එක ලස්සනට කියවගන්නවා
   final geminiApiKey = dotenv.env['OPENAI_API_KEY'] ?? '';
-
-  if (geminiApiKey.isEmpty) {
-    debugPrint(
-      '⚠️ WARNING: GEMINI_API_KEY is empty in .env file! AI will run in offline mode.',
-    );
-  } else {
-    debugPrint('🚀 AI Service successfully initialized with API Key from .env');
-  }
 
   runApp(
     ChemLearnApp(
@@ -73,23 +59,24 @@ class ChemLearnApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // Set up dependency graph — only create FirestoreService if Firebase is available
     final firestoreService = firebaseAvailable ? FirestoreService() : null;
     final repository = ChemistryRepository(firestoreService: firestoreService);
-    final aiService = AiService(apiKey: geminiApiKey);
     final pubChemService = PubChemService();
 
     return MultiProvider(
       providers: [
+        // 1. මුලින්ම AI Service එක Provider එකක් ලෙස register කරන්න
+        Provider<AiService>(create: (_) => AiService(apiKey: geminiApiKey)),
         ChangeNotifierProvider(create: (_) => LocaleProvider()),
+
+        // 2. ඉතිරි Provider වලට AiService එක inject කරන්න
         ChangeNotifierProxyProvider<LocaleProvider, ChemistryProvider>(
           create: (context) {
             final provider = ChemistryProvider(
               repository: repository,
-              aiService: aiService,
+              aiService: Provider.of<AiService>(context, listen: false),
               pubChemService: pubChemService,
             );
-            // Kick off data loading immediately
             provider.initialize();
             return provider;
           },
@@ -100,13 +87,19 @@ class ChemLearnApp extends StatelessWidget {
             return chemistryProvider!;
           },
         ),
-        ChangeNotifierProxyProvider2<LocaleProvider, ChemistryProvider, LessonProvider>(
+        ChangeNotifierProxyProvider2<
+          LocaleProvider,
+          ChemistryProvider,
+          LessonProvider
+        >(
           create: (context) {
             final provider = LessonProvider(
               repository: LessonRepository(),
-              chemistryProvider: Provider.of<ChemistryProvider>(context, listen: false),
+              chemistryProvider: Provider.of<ChemistryProvider>(
+                context,
+                listen: false,
+              ),
             );
-            // Kick off data loading immediately
             provider.loadLessons();
             return provider;
           },
@@ -117,6 +110,11 @@ class ChemLearnApp extends StatelessWidget {
             return lessonProvider!;
           },
         ),
+        ChangeNotifierProvider<ConversionProvider>(
+          create: (context) => ConversionProvider(
+            // මෙතනට අවශ්‍ය dependencies ඇතුලත් කරන්න
+          ),
+        ),
       ],
       child: Consumer<LocaleProvider>(
         builder: (context, localeProvider, _) {
@@ -125,20 +123,13 @@ class ChemLearnApp extends StatelessWidget {
             debugShowCheckedModeBanner: false,
             theme: AppTheme.darkTheme,
             locale: localeProvider.locale,
-
-            // ── Localization ────────────────────────
             localizationsDelegates: const [
               AppLocalizations.delegate,
               GlobalMaterialLocalizations.delegate,
               GlobalWidgetsLocalizations.delegate,
               GlobalCupertinoLocalizations.delegate,
             ],
-            supportedLocales: const [
-              Locale('en'), // English
-              Locale('si'), // Sinhala
-            ],
-
-            // ────────────────────────────────────────
+            supportedLocales: const [Locale('en'), Locale('si')],
             home: const HomeScreen(),
           );
         },

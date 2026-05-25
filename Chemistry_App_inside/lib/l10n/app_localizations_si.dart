@@ -51,7 +51,7 @@ class AppLocalizationsSi extends AppLocalizations {
       'ප්‍රතික්‍රියාකාරක මිශ්‍ර කර නිෂ්පාදන සොයා ගන්න';
 
   @override
-  String get chemistryTutor => 'රසායන විද්‍යා උපදේශකයා';
+  String get chemistryTutor => 'කාබනික රසායන විද්‍යා උපදේශකයා';
 
   @override
   String get chemistryTutorSubtitle => 'AI බලයෙන් ක්‍රියාත්මක ප්‍රශ්නෝත්තර';
@@ -146,4 +146,73 @@ class AppLocalizationsSi extends AppLocalizations {
 
   @override
   String get askAQuestion => 'රසායන විද්‍යාව පිළිබඳ ප්‍රශ්නයක් අසන්න…';
+
+  @override
+  String get conversionMaster => 'පරිවර්තන මාස්ටර්';
+
+  @override
+  String get conversionSubtitle =>
+      'පියවරෙන් පියවර කාබනික ප්‍රතික්‍රියා ප්‍රගුණ කරන්න';
+
+  @override
+  String get conversions => 'පරිවර්තන';
+
+  @override
+  String get start => 'ආරම්භය';
+
+  @override
+  String get current => 'වර්තමානය';
+
+  @override
+  String get target => 'ඉලක්කය';
+
+  @override
+  String get gameOver => 'ක්‍රීඩාව අවසන්!';
+
+  @override
+  String scoreRestart(int score) {
+    return 'ලකුණු: $score. නැවත අභියෝගය ආරම්භ කරන්න?';
+  }
+
+  @override
+  String get restart => 'නැවත ආරම්භ කරන්න';
+
+  @override
+  String get playAgain => 'නැවත ක්‍රීඩා කරන්න';
+
+  @override
+  String get searchReagents => 'ප්‍රතික්‍රියාකාරක සොයන්න...';
+
+  @override
+  String newChallenge(String start, String target) {
+    return 'නව අභියෝගය: $start සිට $target දක්වා පරිවර්තනය කරන්න!';
+  }
+
+  @override
+  String get excellentLevelComplete => 'විශිෂ්ටයි! මට්ටම සම්පූර්ණයි.';
+
+  @override
+  String get correctKeepGoing => 'නිවැරදියි! ඉදිරියට යන්න.';
+
+  @override
+  String get incorrectTryAgain =>
+      'වැරදියි! වෙනත් ප්‍රතික්‍රියාකාරකයක් උත්සාහ කරන්න.';
+
+  @override
+  String get nextLevel => 'ඊළඟ මට්ටම';
+
+  @override
+  String get exit => 'පිටවන්න';
+
+  @override
+  String get yourScoreLabel => 'ඔබේ ලකුණු';
+
+  @override
+  String get totalScore => 'සම්පූර්ණ ලකුණු';
+
+  @override
+  String get stepsCompleted => 'සම්පූර්ණ කළ පියවර';
+
+  @override
+  String get newChallengeButton => 'නව අභියෝගය';
 }

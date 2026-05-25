@@ -223,4 +223,53 @@ Translate only the values of the JSON fields into the requested language (Sinhal
       return null;
     }
   }
+
+  // convertions
+  Future<Map<String, dynamic>?> getRandomConversion(bool isSinhala) async {
+    final prompt = '''
+    Give me a random organic chemistry conversion suitable for a school student.
+    Return ONLY a raw JSON object with these keys: 
+    "start_name", "target_name".
+    Ensure the conversion takes 2-3 steps.
+  ''';
+
+    try {
+      final response = await http.post(
+        Uri.parse(_baseUrl),
+        headers: {
+          'Authorization': 'Bearer $apiKey',
+          'Content-Type': 'application/json',
+        },
+        body: jsonEncode({
+          'model': _modelName,
+          'response_format': {'type': 'json_object'},
+          'temperature': 0.8, // Randomness එක වැඩි කරන්න
+          'messages': [
+            {'role': 'system', 'content': _getLanguageInstruction(isSinhala)},
+            {'role': 'user', 'content': prompt},
+          ],
+        }),
+      );
+      return jsonDecode(
+        jsonDecode(response.body)['choices'][0]['message']['content'],
+      );
+    } catch (e) {
+      return null;
+    }
+  }
+
+  // AiService.dart එකට එකතු කරන්න
+  Future<String?> getMechanism(
+    String reactant,
+    String reagent,
+    bool isSinhala,
+  ) async {
+    final prompt =
+        '''
+    Show the reaction mechanism for: $reactant + $reagent.
+    Explain the electron movement step-by-step using simple terms.
+    If in Sinhala, explain in natural Sinhala with English terms for compounds.
+  ''';
+    return _generateOneShot(prompt, isSinhala: isSinhala);
+  }
 }

@@ -179,7 +179,7 @@ abstract class AppLocalizations {
   /// Navigation card title for AI Tutor
   ///
   /// In en, this message translates to:
-  /// **'Chemistry Tutor'**
+  /// **'Organic Chemistry Tutor'**
   String get chemistryTutor;
 
   /// Subtitle for AI Tutor card
@@ -349,6 +349,132 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Ask a chemistry question…'**
   String get askAQuestion;
+
+  /// Title for Conversion Master feature
+  ///
+  /// In en, this message translates to:
+  /// **'Conversion Master'**
+  String get conversionMaster;
+
+  /// Subtitle for Conversion Master card
+  ///
+  /// In en, this message translates to:
+  /// **'Master your organic reactions step-by-step'**
+  String get conversionSubtitle;
+
+  /// App bar title for Conversion screen
+  ///
+  /// In en, this message translates to:
+  /// **'conversions'**
+  String get conversions;
+
+  /// Start compound label
+  ///
+  /// In en, this message translates to:
+  /// **'START'**
+  String get start;
+
+  /// Current compound label
+  ///
+  /// In en, this message translates to:
+  /// **'CURRENT'**
+  String get current;
+
+  /// Target compound label
+  ///
+  /// In en, this message translates to:
+  /// **'TARGET'**
+  String get target;
+
+  /// Game over dialog title
+  ///
+  /// In en, this message translates to:
+  /// **'Game Over!'**
+  String get gameOver;
+
+  /// Game over dialog content
+  ///
+  /// In en, this message translates to:
+  /// **'Score: {score}. Restart the challenge?'**
+  String scoreRestart(int score);
+
+  /// Restart button label
+  ///
+  /// In en, this message translates to:
+  /// **'Restart'**
+  String get restart;
+
+  /// Play again button label
+  ///
+  /// In en, this message translates to:
+  /// **'PLAY AGAIN'**
+  String get playAgain;
+
+  /// Search field hint text
+  ///
+  /// In en, this message translates to:
+  /// **'Search reagents...'**
+  String get searchReagents;
+
+  /// Feedback when starting new level
+  ///
+  /// In en, this message translates to:
+  /// **'New Challenge: Transform {start} to {target}!'**
+  String newChallenge(String start, String target);
+
+  /// Success message when level completed
+  ///
+  /// In en, this message translates to:
+  /// **'Excellent! Level Complete.'**
+  String get excellentLevelComplete;
+
+  /// Success message for correct step
+  ///
+  /// In en, this message translates to:
+  /// **'Correct! Keep going.'**
+  String get correctKeepGoing;
+
+  /// Error message for incorrect reagent
+  ///
+  /// In en, this message translates to:
+  /// **'Incorrect! Try another reagent.'**
+  String get incorrectTryAgain;
+
+  /// Next level button label
+  ///
+  /// In en, this message translates to:
+  /// **'Next Level'**
+  String get nextLevel;
+
+  /// Exit button label
+  ///
+  /// In en, this message translates to:
+  /// **'Exit'**
+  String get exit;
+
+  /// Label for local score in conversion game
+  ///
+  /// In en, this message translates to:
+  /// **'Your Score'**
+  String get yourScoreLabel;
+
+  /// Label for global total score
+  ///
+  /// In en, this message translates to:
+  /// **'Total Score'**
+  String get totalScore;
+
+  /// Label for number of steps completed
+  ///
+  /// In en, this message translates to:
+  /// **'Steps Completed'**
+  String get stepsCompleted;
+
+  /// Tooltip for new challenge button
+  ///
+  /// In en, this message translates to:
+  /// **'New Challenge'**
+  String get newChallengeButton;
 }
 
 class _AppLocalizationsDelegate

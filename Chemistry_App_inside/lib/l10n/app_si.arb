@@ -20,7 +20,7 @@
   "practiceLab": "පුහුණු රසායනාගාරය",
   "practiceLabSubtitle": "ප්‍රතික්‍රියාකාරක මිශ්‍ර කර නිෂ්පාදන සොයා ගන්න",
 
-  "chemistryTutor": "රසායන විද්‍යා උපදේශකයා",
+  "chemistryTutor": "කාබනික රසායන විද්‍යා උපදේශකයා",
   "chemistryTutorSubtitle": "AI බලයෙන් ක්‍රියාත්මක ප්‍රශ්නෝත්තර",
 
   "settings": "සැකසුම්",
@@ -52,5 +52,39 @@
   "askAnything": "කාබනික රසායන විද්‍යාව ගැන ඔබට අවශ්‍ය ඕනෑම දෙයක් මාගෙන් අසන්න!",
   "iCanExplain": "මට ප්‍රතික්‍රියා, සංකල්ප පැහැදිලි කළ හැකි අතර රසායන විද්‍යාව වඩා හොඳින් අවබෝධ කර ගැනීමට ඔබට සහාය විය හැකිය.",
   "thinking": "සිතමින් පවතිනවා…",
-  "askAQuestion": "රසායන විද්‍යාව පිළිබඳ ප්‍රශ්නයක් අසන්න…"
+  "askAQuestion": "රසායන විද්‍යාව පිළිබඳ ප්‍රශ්නයක් අසන්න…",
+
+  "conversionMaster": "පරිවර්තන මාස්ටර්",
+  "conversionSubtitle": "පියවරෙන් පියවර කාබනික ප්‍රතික්‍රියා ප්‍රගුණ කරන්න",
+  "conversions": "පරිවර්තන",
+  "start": "ආරම්භය",
+  "current": "වර්තමානය",
+  "target": "ඉලක්කය",
+  "gameOver": "ක්‍රීඩාව අවසන්!",
+  "scoreRestart": "ලකුණු: {score}. නැවත අභියෝගය ආරම්භ කරන්න?",
+  "restart": "නැවත ආරම්භ කරන්න",
+  "playAgain": "නැවත ක්‍රීඩා කරන්න",
+  "searchReagents": "ප්‍රතික්‍රියාකාරක සොයන්න...",
+  "newChallenge": "නව අභියෝගය: {start} සිට {target} දක්වා පරිවර්තනය කරන්න!",
+  "excellentLevelComplete": "විශිෂ්ටයි! මට්ටම සම්පූර්ණයි.",
+  "correctKeepGoing": "නිවැරදියි! ඉදිරියට යන්න.",
+  "incorrectTryAgain": "වැරදියි! වෙනත් ප්‍රතික්‍රියාකාරකයක් උත්සාහ කරන්න.",
+
+  "nextLevel": "ඊළඟ මට්ටම",
+  "@nextLevel": { "description": "Next level button label" },
+
+  "exit": "පිටවන්න",
+  "@exit": { "description": "Exit button label" },
+
+  "yourScoreLabel": "ඔබේ ලකුණු",
+  "@yourScoreLabel": { "description": "Label for local score in conversion game" },
+
+  "totalScore": "සම්පූර්ණ ලකුණු",
+  "@totalScore": { "description": "Label for global total score" },
+
+  "stepsCompleted": "සම්පූර්ණ කළ පියවර",
+  "@stepsCompleted": { "description": "Label for number of steps completed" },
+
+  "newChallengeButton": "නව අභියෝගය",
+  "@newChallengeButton": { "description": "Tooltip for new challenge button" }
 }

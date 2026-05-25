@@ -7,6 +7,7 @@ import '../repositories/chemistry_repository.dart';
 import '../services/ai_service.dart';
 import '../services/pubchem_service.dart';
 import '../core/constants/app_constants.dart';
+import '../services/scoring_service.dart';
 
 /// Local ReactionResult structure maintained for UI compatibility
 class ReactionResult {
@@ -75,7 +76,6 @@ class ChemistryProvider extends ChangeNotifier {
     }
   }
 
-  // Points add කරන්න මේ method එකත් අනිවාර්යයෙන්ම තියෙන්න ඕනේ
   bool get _isSinhala => _currentLocale.languageCode == 'si';
 
   // ── Loading State ─────────────────────────────────────────
@@ -103,12 +103,44 @@ class ChemistryProvider extends ChangeNotifier {
   int _correctAttempts = 0;
   int get correctAttempts => _correctAttempts;
 
-  /// Adds points to the user's global score (e.g. from quiz completion).
+  /// Adds points to the user's global score
   void addPoints(int points) {
     if (points > 0) {
       _score += points;
       notifyListeners();
+      _saveScore();
     }
+  }
+
+  /// Deduct points as penalty
+  void deductPoints(int points) {
+    if (points > 0) {
+      _score = (_score - points).clamp(0, double.infinity).toInt();
+      notifyListeners();
+      _saveScore();
+    }
+  }
+
+  /// Increment total attempts counter
+  void incrementTotalAttempts() {
+    _totalAttempts++;
+    notifyListeners();
+    _saveStats();
+  }
+
+  /// Increment correct attempts counter
+  void incrementCorrectAttempts() {
+    _correctAttempts++;
+    notifyListeners();
+    _saveStats();
+  }
+
+  /// Reset practice stats (optional)
+  void resetPracticeStats() {
+    _totalAttempts = 0;
+    _correctAttempts = 0;
+    notifyListeners();
+    _saveStats();
   }
 
   // ── Completed Lessons ─────────────────────────────────────
@@ -118,8 +150,18 @@ class ChemistryProvider extends ChangeNotifier {
   bool isLessonCompleted(String id) => _completedLessonIds.contains(id);
 
   void markLessonCompleted(String id) {
-    _completedLessonIds.add(id);
-    notifyListeners();
+    if (!_completedLessonIds.contains(id)) {
+      _completedLessonIds.add(id);
+
+      // Award points for lesson completion
+      final scoringService = ScoringService();
+      // Note: You'll need context here. We'll handle this differently
+      // For now, just add points directly
+      addPoints(100);
+
+      notifyListeners();
+      _saveCompletedLessons();
+    }
   }
 
   // ── Practice Lab State ────────────────────────────────────
@@ -129,7 +171,6 @@ class ChemistryProvider extends ChangeNotifier {
   String? _selectedReactantB;
   String? get selectedReactantB => _selectedReactantB;
 
-  // මේ ටික ඔයාගේ දැනට තියෙන code එකේ variables වලට යටින් දාන්න
   String? get reactantA => _selectedReactantA;
   String? get reactantB => _selectedReactantB;
 
@@ -169,6 +210,7 @@ class ChemistryProvider extends ChangeNotifier {
     try {
       _compounds = await _repository.getCompounds();
       _lessons = await _repository.getLessons();
+      await _loadSavedData();
     } catch (e) {
       _errorMessage = 'Failed to load data: $e';
     } finally {
@@ -203,7 +245,7 @@ class ChemistryProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  /// Provides static fallback conditions since old validator is removed
+  /// Provides static fallback conditions
   List<String> get availableConditions {
     return [
       'Acid catalyst (H₂SO₄)',
@@ -216,7 +258,7 @@ class ChemistryProvider extends ChangeNotifier {
   }
 
   /// 🎯 100% Dynamic Reaction Checker using Groq AI and PubChem API
-  Future<void> checkReaction() async {
+  Future<void> checkReaction({BuildContext? context}) async {
     // Build selected reactant list
     final reactantIds = <String>[
       if (_selectedReactantA != null) _selectedReactantA!,
@@ -240,10 +282,10 @@ class ChemistryProvider extends ChangeNotifier {
         .map((id) => compoundById(id)?.name ?? id)
         .toList();
 
-    _totalAttempts++;
+    incrementTotalAttempts();
 
     try {
-      // 1️⃣ Groq AI එකෙන් Response එක ලබා ගැනීම
+      // 1️⃣ Groq AI Response
       final aiResult = await _aiService.predictReaction(
         reactantNames: reactantNames,
         condition: _selectedCondition!,
@@ -253,20 +295,29 @@ class ChemistryProvider extends ChangeNotifier {
       if (aiResult != null &&
           aiResult['product_name'] != null &&
           aiResult['product_name'].toString().toLowerCase() != 'no reaction') {
-        _correctAttempts++;
-        _score += AppConstants.correctReactionPoints;
+        incrementCorrectAttempts();
+        addPoints(AppConstants.correctReactionPoints);
+
+        // Add points via scoring service if context available
+        if (context != null) {
+          final scoringService = ScoringService();
+          await scoringService.addPoints(
+            context,
+            mode: GameMode.practice,
+            action: 'correct_reaction',
+          );
+        }
 
         final pName = aiResult['product_name'].toString();
         final pFormula = aiResult['formula']?.toString() ?? '';
         _aiExplanation = aiResult['explanation']?.toString() ?? '';
 
-        // 2️⃣ PubChem API එකෙන් Product එකේ සැබෑ දත්ත ලබා ගැනීම
+        // 2️⃣ PubChem API for real data
         final pubChemRaw = await _pubChemService.getCompound(pName);
 
         if (pubChemRaw != null) {
           _pubChemData = pubChemRaw;
         } else {
-          // Fallback if PubChem doesn't return anything
           _pubChemData = PubChemCompound(
             cid: 0,
             iupacName: pName,
@@ -276,7 +327,6 @@ class ChemistryProvider extends ChangeNotifier {
           );
         }
 
-        // UI එකට ගැළපෙන ලෙස runtime එකේදී ReactionResult එක සෑදීම
         _lastResult = ReactionResult(
           isCorrect: true,
           message: 'Success!',
@@ -288,7 +338,6 @@ class ChemistryProvider extends ChangeNotifier {
           ),
         );
       } else {
-        // AI එකෙන් "No Reaction" හෝ වෙනත් Error එකක් ආවොත්
         _aiExplanation =
             aiResult?['explanation']?.toString() ??
             "No organic reaction occurs under these conditions.";
@@ -324,7 +373,7 @@ class ChemistryProvider extends ChangeNotifier {
 
   // ── Tutor Chat ────────────────────────────────────────────
 
-  /// Sends a question to the AI tutor and appends the response.
+  /// Sends a question to the AI tutor
   Future<void> askTutor(String question) async {
     if (question.trim().isEmpty) return;
 
@@ -368,10 +417,43 @@ class ChemistryProvider extends ChangeNotifier {
   /// Look up a compound by ID.
   Compound? compoundById(String id) {
     try {
-      // මෙතන id එක සමානද බලන්න, සමහර විට name එක වෙන්න ඇති id එක ලෙස එන්නේ
       return _compounds.firstWhere((c) => c.id == id || c.name == id);
     } catch (_) {
       return null;
     }
+  }
+
+  // ── Persistence Methods ───────────────────────────────────
+
+  Future<void> _saveScore() async {
+    // TODO: Implement with SharedPreferences
+    // final prefs = await SharedPreferences.getInstance();
+    // await prefs.setInt('user_score', _score);
+  }
+
+  Future<void> _saveStats() async {
+    // TODO: Implement with SharedPreferences
+    // final prefs = await SharedPreferences.getInstance();
+    // await prefs.setInt('total_attempts', _totalAttempts);
+    // await prefs.setInt('correct_attempts', _correctAttempts);
+  }
+
+  Future<void> _saveCompletedLessons() async {
+    // TODO: Implement with SharedPreferences
+    // final prefs = await SharedPreferences.getInstance();
+    // await prefs.setStringList('completed_lessons', _completedLessonIds.toList());
+  }
+
+  Future<void> _loadSavedData() async {
+    // TODO: Implement loading from SharedPreferences
+    // final prefs = await SharedPreferences.getInstance();
+    // _score = prefs.getInt('user_score') ?? 0;
+    // _totalAttempts = prefs.getInt('total_attempts') ?? 0;
+    // _correctAttempts = prefs.getInt('correct_attempts') ?? 0;
+    // final completed = prefs.getStringList('completed_lessons');
+    // if (completed != null) {
+    //   _completedLessonIds.addAll(completed);
+    // }
+    // notifyListeners();
   }
 }
