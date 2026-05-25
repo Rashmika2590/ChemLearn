@@ -1,0 +1,150 @@
+{
+  "@@locale": "en",
+
+  "appTitle": "ChemLearn",
+  "@appTitle": { "description": "The application title" },
+
+  "appSubtitle": "Master Organic Chemistry",
+  "@appSubtitle": { "description": "Tagline shown below the app title" },
+
+  "loadingData": "Loading chemistry data…",
+  "@loadingData": { "description": "Shown while chemistry data is being fetched" },
+
+  "retry": "Retry",
+  "@retry": { "description": "Retry button label" },
+
+  "yourScore": "Your Score",
+  "@yourScore": { "description": "Score card heading" },
+
+  "points": "points",
+  "@points": { "description": "Label below the score number" },
+
+  "correct": "Correct",
+  "@correct": { "description": "Quick stats label – correct attempts" },
+
+  "attempts": "Attempts",
+  "@attempts": { "description": "Quick stats label – total attempts" },
+
+  "lessons": "Lessons",
+  "@lessons": { "description": "Navigation card title / stats label" },
+
+  "startLearning": "Start Learning",
+  "@startLearning": { "description": "Section heading above nav cards" },
+
+  "lessonsSubtitle": "{count} topics · {completed} completed",
+  "@lessonsSubtitle": {
+    "description": "Subtitle for the Lessons navigation card",
+    "placeholders": {
+      "count": { "type": "int", "example": "5" },
+      "completed": { "type": "int", "example": "2" }
+    }
+  },
+
+  "practiceLab": "Practice Lab",
+  "@practiceLab": { "description": "Navigation card title for Practice Lab" },
+
+  "practiceLabSubtitle": "Mix reactants & discover products",
+  "@practiceLabSubtitle": { "description": "Subtitle for Practice Lab card" },
+
+  "chemistryTutor": "Chemistry Tutor",
+  "@chemistryTutor": { "description": "Navigation card title for AI Tutor" },
+
+  "chemistryTutorSubtitle": "AI-powered Q&A for organic chemistry",
+  "@chemistryTutorSubtitle": { "description": "Subtitle for AI Tutor card" },
+
+  "settings": "Settings",
+  "@settings": { "description": "Settings label" },
+
+  "language": "Language",
+  "@language": { "description": "Language selector label" },
+
+  "noLessons": "No lessons available yet.",
+  "@noLessons": { "description": "Shown when the lesson list is empty" },
+
+  "level": "Level {level}",
+  "@level": {
+    "description": "Level indicator for lessons",
+    "placeholders": {
+      "level": { "type": "int", "example": "1" }
+    }
+  },
+
+  "reactionsCount": "{count} reactions",
+  "@reactionsCount": {
+    "description": "Number of reactions in a lesson",
+    "placeholders": {
+      "count": { "type": "int", "example": "3" }
+    }
+  },
+
+  "reactantA": "Reactant A",
+  "@reactantA": { "description": "Label for the first reactant" },
+
+  "reactantB": "Reactant B (optional)",
+  "@reactantB": { "description": "Label for the second reactant" },
+
+  "reactionCondition": "Reaction Condition",
+  "@reactionCondition": { "description": "Label for the reaction condition dropdown" },
+
+  "selectCondition": "Select condition",
+  "@selectCondition": { "description": "Hint for the reaction condition dropdown" },
+
+  "reactButton": "React!",
+  "@reactButton": { "description": "Button to trigger reaction check" },
+
+  "analyzing": "Analyzing...",
+  "@analyzing": { "description": "Shown during reaction analysis" },
+
+  "instructions": "Search and select reactants, then tap \"React!\" to analyze.",
+  "@instructions": { "description": "App usage instructions" },
+
+  "aiFormulating": "AI is formulating response...",
+  "@aiFormulating": { "description": "Loading text for AI response" },
+
+  "pubChemData": "PubChem Data",
+  "@pubChemData": { "description": "Section title for PubChem info" },
+
+  "iupacName": "IUPAC Name",
+  "@iupacName": { "description": "Label for IUPAC name" },
+
+  "formula": "Formula",
+  "@formula": { "description": "Label for molecular formula" },
+
+  "molecularWeight": "Molecular Weight",
+  "@molecularWeight": { "description": "Label for molecular weight" },
+
+  "reactionOccurred": "Reaction Occurred!",
+  "@reactionOccurred": { "description": "Success message for a valid reaction" },
+
+  "noReaction": "No Reaction",
+  "@noReaction": { "description": "Message when no reaction occurs" },
+
+  "productName": "Product: {name}",
+  "@productName": {
+    "description": "Label for the reaction product",
+    "placeholders": {
+      "name": { "type": "String", "example": "Ethene" }
+    }
+  },
+
+  "clearChat": "Clear chat",
+  "@clearChat": { "description": "Tooltip for clearing chat" },
+
+  "aiTutorUnavailable": "AI Tutor Unavailable",
+  "@aiTutorUnavailable": { "description": "Banner when AI is offline" },
+
+  "aiTutorRequiresKey": "The AI tutor requires a Gemini API key.",
+  "@aiTutorRequiresKey": { "description": "Error message when API key is missing" },
+
+  "askAnything": "Ask me anything about\nOrganic Chemistry!",
+  "@askAnything": { "description": "Welcome msg for AI tutor" },
+
+  "iCanExplain": "I can explain reactions, concepts,\nand help you understand chemistry better.",
+  "@iCanExplain": { "description": "AI tutor capabilities info" },
+
+  "thinking": "Thinking…",
+  "@thinking": { "description": "Shown when AI is processing a chat query" },
+
+  "askAQuestion": "Ask a chemistry question…",
+  "@askAQuestion": { "description": "Hint for chat input" }
+}

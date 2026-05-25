@@ -1,14 +1,19 @@
 import 'package:chemistry_app/firebase_options.dart';
+import 'package:chemistry_app/l10n/app_localizations.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:provider/provider.dart';
 
 import 'core/theme/app_theme.dart';
 import 'services/firestore_service.dart';
 import 'services/ai_service.dart';
 import 'repositories/chemistry_repository.dart';
+import 'repositories/lesson_repository.dart';
 import 'providers/chemistry_provider.dart';
+import 'providers/lesson_provider.dart';
+import 'providers/locale_provider.dart';
 import 'screens/home_screen.dart';
 import 'services/pubchem_service.dart';
 
@@ -76,8 +81,9 @@ class ChemLearnApp extends StatelessWidget {
 
     return MultiProvider(
       providers: [
-        ChangeNotifierProvider(
-          create: (_) {
+        ChangeNotifierProvider(create: (_) => LocaleProvider()),
+        ChangeNotifierProxyProvider<LocaleProvider, ChemistryProvider>(
+          create: (context) {
             final provider = ChemistryProvider(
               repository: repository,
               aiService: aiService,
@@ -87,13 +93,55 @@ class ChemLearnApp extends StatelessWidget {
             provider.initialize();
             return provider;
           },
+          update: (context, localeProvider, chemistryProvider) {
+            if (localeProvider.locale != null) {
+              chemistryProvider!.updateLocale(localeProvider.locale!);
+            }
+            return chemistryProvider!;
+          },
+        ),
+        ChangeNotifierProxyProvider2<LocaleProvider, ChemistryProvider, LessonProvider>(
+          create: (context) {
+            final provider = LessonProvider(
+              repository: LessonRepository(),
+              chemistryProvider: Provider.of<ChemistryProvider>(context, listen: false),
+            );
+            // Kick off data loading immediately
+            provider.loadLessons();
+            return provider;
+          },
+          update: (context, localeProvider, chemistryProvider, lessonProvider) {
+            if (localeProvider.locale != null) {
+              lessonProvider!.updateLocale(localeProvider.locale!.languageCode);
+            }
+            return lessonProvider!;
+          },
         ),
       ],
-      child: MaterialApp(
-        title: 'ChemLearn',
-        debugShowCheckedModeBanner: false,
-        theme: AppTheme.darkTheme,
-        home: const HomeScreen(),
+      child: Consumer<LocaleProvider>(
+        builder: (context, localeProvider, _) {
+          return MaterialApp(
+            title: 'ChemLearn',
+            debugShowCheckedModeBanner: false,
+            theme: AppTheme.darkTheme,
+            locale: localeProvider.locale,
+
+            // ── Localization ────────────────────────
+            localizationsDelegates: const [
+              AppLocalizations.delegate,
+              GlobalMaterialLocalizations.delegate,
+              GlobalWidgetsLocalizations.delegate,
+              GlobalCupertinoLocalizations.delegate,
+            ],
+            supportedLocales: const [
+              Locale('en'), // English
+              Locale('si'), // Sinhala
+            ],
+
+            // ────────────────────────────────────────
+            home: const HomeScreen(),
+          );
+        },
       ),
     );
   }

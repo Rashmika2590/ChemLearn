@@ -1,0 +1,603 @@
+[
+  {
+    "id": "halohydrocarbons_01",
+    "title": {
+      "en": "Halohydrocarbons: Nucleophilic Substitution & Elimination",
+      "si": "හේලෝහයිඩ්‍රොකාබන: නියුක්ලියෝෆිලික ආදේශන සහ නිෂ්ක්‍රමණය"
+    },
+    "body": {
+      "en": "Halohydrocarbons contain C-X bond where X is a halogen. Polar nature makes carbon electrophilic.\n\nSN1 Mechanism: Unimolecular, two steps, carbocation intermediate, favors tertiary alkyl halides.\n\nSN2 Mechanism: Bimolecular, one step (concerted), inversion of configuration (Walden inversion).\n\nElimination (E1/E2): Formation of alkenes by removing HX.\n\nReactivity trend: RI > RBr > RCl > RF (due to C-X bond strength).\n\nGrignard Reagent: R-X + Mg (dry ether) -> R-Mg-X. Powerful nucleophile.",
+      "si": "හේලෝහයිඩ්‍රොකාබනවල C-X බන්ධනයක් අඩංගු වේ (X=හේලජන). ධ්‍රැවීය ස්වභාවය නිසා කාබන් ඉලෙක්ට්‍රෝනකාමී වේ.\n\nSN1 යාන්ත්‍රණය: අණුක එකක්, පියවර දෙකක්, කාබෝකැටායන අතරමැදියෙක් ඇත. තෘතීයික ඇල්කයිල් හේලයිඩ වලට වඩාත් හිතකරයි.\n\nSN2 යාන්ත්‍රණය: අණුක දෙකක්, පියවර එකයි (එකවර සිදුවේ), වින්‍යාසය ප්‍රතිලෝම වේ (වෝල්ඩන් ප්‍රතිලෝමනය).\n\nනිෂ්ක්‍රමණය (E1/E2): HX ඉවත් කිරීමෙන් ඇල්කීන සෑදීම.\n\nප්‍රතික්‍රියාශීලීතා ප්‍රවණතාවය: RI > RBr > RCl > RF (C-X බන්ධන ශක්තිය හේතුවෙන්).\n\nග්‍රිනාඩ් ප්‍රතිකාරකය: R-X + Mg (වියළි ඊතර්) -> R-Mg-X. ප්‍රබල නියුක්ලියෝෆයිලයක් වේ."
+    },
+    "level": 2,
+    "related_reactions": ["sn1", "sn2", "elimination", "grignard"],
+    "quizzes": [
+      {
+        "question": {
+          "en": "Which mechanism involves a carbocation intermediate?",
+          "si": "කාබෝකැටායන අතරමැදියෙක් සම්බන්ධ වන යාන්ත්‍රණය කුමක්ද?"
+        },
+        "options": [
+          { "en": "SN1", "si": "SN1" },
+          { "en": "SN2", "si": "SN2" },
+          { "en": "E2", "si": "E2" },
+          { "en": "Free radical", "si": "මුක්ත මූල" }
+        ],
+        "correctOptionIndex": 0,
+        "points": 20
+      },
+      {
+        "question": {
+          "en": "What is the result of Walden Inversion?",
+          "si": "වෝල්ඩන් ප්‍රතිලෝමනයේ ප්‍රතිඵලය කුමක්ද?"
+        },
+        "options": [
+          { "en": "Retention", "si": "පැවතීම" },
+          { "en": "Racemization", "si": "රැසෙමිකරණය" },
+          { "en": "Inversion of configuration", "si": "වින්‍යාසය ප්‍රතිලෝම වීම" },
+          { "en": "Elimination", "si": "නිෂ්ක්‍රමණය" }
+        ],
+        "correctOptionIndex": 2,
+        "points": 20
+      },
+      {
+        "question": {
+          "en": "Which alkyl halide reacts fastest in SN2?",
+          "si": "SN2 ප්‍රතික්‍රියාවේදී වේගයෙන්ම ප්‍රතික්‍රියා කරන්නේ කුමන ඇල්කයිල් හේලයිඩයද?"
+        },
+        "options": [
+          { "en": "Primary", "si": "ප්‍රාථමික" },
+          { "en": "Secondary", "si": "ද්විතියික" },
+          { "en": "Tertiary", "si": "තෘතීයික" },
+          { "en": "None", "si": "නැත" }
+        ],
+        "correctOptionIndex": 0,
+        "points": 20
+      },
+      {
+        "question": {
+          "en": "What is the product of Grignard reagent formation?",
+          "si": "ග්‍රිනාඩ් ප්‍රතිකාරකය සෑදීමේදී ලැබෙන නිෂ්පාදිතය කුමක්ද?"
+        },
+        "options": [
+          { "en": "Alkane", "si": "ඇල්කේන" },
+          { "en": "Alkyl magnesium halide", "si": "ඇල්කයිල් මැග්නීසියම් හේලයිඩ" },
+          { "en": "Alkene", "si": "ඇල්කීන" },
+          { "en": "Alcohol", "si": "ඇල්කොහොල" }
+        ],
+        "correctOptionIndex": 1,
+        "points": 20
+      },
+      {
+        "question": {
+          "en": "Which C-X bond is weakest?",
+          "si": "කුමන C-X බන්ධනය දුර්වලමද?"
+        },
+        "options": [
+          { "en": "C-F", "si": "C-F" },
+          { "en": "C-Cl", "si": "C-Cl" },
+          { "en": "C-Br", "si": "C-Br" },
+          { "en": "C-I", "si": "C-I" }
+        ],
+        "correctOptionIndex": 3,
+        "points": 20
+      }
+    ]
+  },
+
+  {
+    "id": "alcohols_01",
+    "title": {
+      "en": "Alcohols and Phenols",
+      "si": "ඇල්කොහොල සහ ෆීනෝල"
+    },
+    "body": {
+      "en": "General formula R-OH. Alcohols are classified as primary, secondary, tertiary.\n\nHydrogen bonding causes higher boiling points compared to alkanes.\n\nOxidation: Primary -> Aldehyde -> Carboxylic acid.\n\nPhenols are more acidic than aliphatic alcohols due to resonance stabilization.\n\nDehydration: Uses H2SO4 to form alkenes.\n\nEsterification: Alcohol + Acid -> Ester + H2O.",
+      "si": "සාමාන්‍ය සූත්‍රය R-OH වේ. ඇල්කොහොල ප්‍රාථමික, ද්විතියික, තෘතීයික ලෙස වර්ග කරයි.\n\nහයිඩ්‍රජන් බන්ධන නිසා ඇල්කේනවලට වඩා තාපාංක ඉහළ අගයක් ගනී.\n\nඔක්සිකරණය: ප්‍රාථමික -> ඇල්ඩිහයිඩ -> කාබොක්සිලික් අම්ල.\n\nඅනුනාද ස්ථායීතාවය හේතුවෙන් ඇලිෆැටික් ඇල්කොහොලවලට වඩා ෆීනෝල ආම්ලික වේ.\n\nවිජලනය: H2SO4 භාවිතා කර ඇල්කීන සෑදේ.\n\nඑස්ටරීකරණය: ඇල්කොහොල + අම්ලය -> එස්ටර + H2O."
+    },
+    "level": 2,
+    "related_reactions": ["oxidation_alcohol", "esterification", "dehydration"],
+    "quizzes": [
+      {
+        "question": {
+          "en": "Which product is formed by the oxidation of a primary alcohol?",
+          "si": "ප්‍රාථමික ඇල්කොහොලයක් ඔක්සිකරණයෙන් සෑදෙන නිෂ්පාදිතය කුමක්ද?"
+        },
+        "options": [
+          { "en": "Ketone", "si": "කීටෝන" },
+          { "en": "Aldehyde", "si": "ඇල්ඩිහයිඩ" },
+          { "en": "Ether", "si": "ඊතර්" },
+          { "en": "Alkane", "si": "ඇල්කේන" }
+        ],
+        "correctOptionIndex": 1,
+        "points": 20
+      },
+      {
+        "question": {
+          "en": "Why are phenols more acidic than alcohols?",
+          "si": "ෆීනෝල ඇල්කොහොලවලට වඩා ආම්ලික වන්නේ ඇයි?"
+        },
+        "options": [
+          { "en": "Resonance", "si": "අනුනාදය" },
+          { "en": "Inductive effect", "si": "ප්‍රේරක ආචරණය" },
+          { "en": "Steric hindrance", "si": "ව්‍යුහාත්මක බාධාව" },
+          { "en": "Solubility", "si": "ද්‍රාව්‍යතාව" }
+        ],
+        "correctOptionIndex": 0,
+        "points": 20
+      },
+      {
+        "question": {
+          "en": "What reagent causes dehydration?",
+          "si": "විජලනයට හේතු වන ප්‍රතිකාරකය කුමක්ද?"
+        },
+        "options": [
+          { "en": "NaOH", "si": "NaOH" },
+          { "en": "H2SO4", "si": "H2SO4" },
+          { "en": "HCl", "si": "HCl" },
+          { "en": "NaCl", "si": "NaCl" }
+        ],
+        "correctOptionIndex": 1,
+        "points": 20
+      },
+      {
+        "question": {
+          "en": "What is the product of Esterification?",
+          "si": "එස්ටරීකරණයේදී ලැබෙන නිෂ්පාදිතය කුමක්ද?"
+        },
+        "options": [
+          { "en": "Aldehyde", "si": "ඇල්ඩිහයිඩ" },
+          { "en": "Ketone", "si": "කීටෝන" },
+          { "en": "Ester", "si": "එස්ටර" },
+          { "en": "Amine", "si": "ඇමයින්" }
+        ],
+        "correctOptionIndex": 2,
+        "points": 20
+      },
+      {
+        "question": {
+          "en": "What is the general formula of Alcohol?",
+          "si": "ඇල්කොහොලවල සාමාන්‍ය සූත්‍රය කුමක්ද?"
+        },
+        "options": [
+          { "en": "R-X", "si": "R-X" },
+          { "en": "R-OH", "si": "R-OH" },
+          { "en": "R-CHO", "si": "R-CHO" },
+          { "en": "R-COOH", "si": "R-COOH" }
+        ],
+        "correctOptionIndex": 1,
+        "points": 20
+      }
+    ]
+  },
+
+  {
+    "id": "carbonyls_01",
+    "title": {
+      "en": "Aldehydes and Ketones",
+      "si": "ඇල්ඩිහයිඩ සහ කීටෝන"
+    },
+    "body": {
+      "en": "Contain C=O carbonyl group. Highly reactive due to polar C=O bond.\n\nNucleophilic addition: HCN, Grignard reagents add to C=O.\n\nAldehydes are easily oxidized to Carboxylic acids.\n\nTollens' reagent: Used to identify aldehydes (silver mirror test).\n\nFehling's test: Distinguishes between aldehydes and ketones.\n\nIodoform test: Used for methyl ketones.",
+      "si": "C=O කාබොනයිල් කාණ්ඩය අඩංගු වේ. ධ්‍රැවීය C=O බන්ධනය නිසා ඉතා ප්‍රතික්‍රියාශීලී වේ.\n\nනියුක්ලියෝෆිලික එකතු වීම: HCN, ග්‍රිනාඩ් ප්‍රතිකාරක C=O සමඟ එකතු වේ.\n\nඇල්ඩිහයිඩ පහසුවෙන් කාබොක්සිලික් අම්ල දක්වා ඔක්සිකරණය වේ.\n\nටොලන්ස් ප්‍රතිකාරකය: ඇල්ඩිහයිඩ හඳුනා ගැනීමට යොදා ගනී (රිදී කණ්ණාඩි පරීක්ෂාව).\n\nෆෙලින් පරීක්ෂාව: ඇල්ඩිහයිඩ සහ කීටෝන වෙන් කර හඳුනා ගැනීමට යොදා ගනී.\n\nඅයඩෝෆෝම් පරීක්ෂාව: මෙතිල් කීටෝන සඳහා යොදා ගනී."
+    },
+    "level": 2,
+    "related_reactions": ["nucleophilic_addition", "oxidation_aldehyde", "tollens", "fehling", "iodoform"],
+    "quizzes": [
+      {
+        "question": {
+          "en": "Which test produces a silver mirror?",
+          "si": "රිදී කණ්ණාඩියක් ලබා දෙන පරීක්ෂණය කුමක්ද?"
+        },
+        "options": [
+          { "en": "Fehling's", "si": "ෆෙලින්" },
+          { "en": "Tollens'", "si": "ටොලන්ස්" },
+          { "en": "Iodoform", "si": "අයඩෝෆෝම්" },
+          { "en": "Litmus", "si": "ලිට්මස්" }
+        ],
+        "correctOptionIndex": 1,
+        "points": 20
+      },
+      {
+        "question": {
+          "en": "What group is common to both aldehydes and ketones?",
+          "si": "ඇල්ඩිහයිඩ සහ කීටෝන යන දෙකටම පොදු කාණ්ඩය කුමක්ද?"
+        },
+        "options": [
+          { "en": "Hydroxyl", "si": "හයිඩ්‍රොක්සිල්" },
+          { "en": "Carbonyl", "si": "කාබොනයිල්" },
+          { "en": "Carboxyl", "si": "කාබොක්සිල්" },
+          { "en": "Amino", "si": "ඇමයිනෝ" }
+        ],
+        "correctOptionIndex": 1,
+        "points": 20
+      },
+      {
+        "question": {
+          "en": "Which reagent is used for methyl ketone identification?",
+          "si": "මෙතිල් කීටෝන හඳුනා ගැනීමට යොදා ගන්නා ප්‍රතිකාරකය කුමක්ද?"
+        },
+        "options": [
+          { "en": "Tollens'", "si": "ටොලන්ස්" },
+          { "en": "Iodoform", "si": "අයඩෝෆෝම්" },
+          { "en": "H2SO4", "si": "H2SO4" },
+          { "en": "NaOH", "si": "NaOH" }
+        ],
+        "correctOptionIndex": 1,
+        "points": 20
+      },
+      {
+        "question": {
+          "en": "What is the result of nucleophilic addition to C=O?",
+          "si": "C=O වෙත නියුක්ලියෝෆිලික එකතු වීමේ ප්‍රතිඵලය කුමක්ද?"
+        },
+        "options": [
+          { "en": "Elimination", "si": "නිෂ්ක්‍රමණය" },
+          { "en": "Addition product", "si": "එකතු වීමේ නිෂ්පාදිතය" },
+          { "en": "Substitution", "si": "ආදේශනය" },
+          { "en": "Reduction", "si": "ඔක්සිහරණය" }
+        ],
+        "correctOptionIndex": 1,
+        "points": 20
+      },
+      {
+        "question": {
+          "en": "Which is more easily oxidized?",
+          "si": "පහසුවෙන් ඔක්සිකරණය වන්නේ කුමක්ද?"
+        },
+        "options": [
+          { "en": "Ketone", "si": "කීටෝන" },
+          { "en": "Aldehyde", "si": "ඇල්ඩිහයිඩ" },
+          { "en": "Alkane", "si": "ඇල්කේන" },
+          { "en": "Alkene", "si": "ඇල්කීන" }
+        ],
+        "correctOptionIndex": 1,
+        "points": 20
+      }
+    ]
+  },
+
+  {
+    "id": "carboxylic_acids_01",
+    "title": {
+      "en": "Carboxylic Acids and Derivatives",
+      "si": "කාබොක්සිලික් අම්ල සහ ව්‍යුත්පන්න"
+    },
+    "body": {
+      "en": "General formula R-COOH. Contains both carbonyl (C=O) and hydroxyl (-OH) groups.\n\nAcidity: Carboxylic acids are more acidic than alcohols and phenols due to resonance stabilization of the carboxylate ion.\n\nDecarboxylation: Heating with Soda Lime (NaOH + CaO) removes CO2 to form alkanes.\n\nReduction: LiAlH4 reduces carboxylic acids directly to primary alcohols.\n\nReaction with PCl5/SOCl2: Forms acid chlorides (R-COCl).\n\nEsters: Formed by reacting with alcohols in the presence of concentrated H2SO4.",
+      "si": "සාමාන්‍ය සූත්‍රය R-COOH වේ. කාබොනයිල් (C=O) සහ හයිඩ්‍රොක්සිල් (-OH) යන කාණ්ඩ දෙකම අඩංගු වේ.\n\nආම්ලිකතාවය: කාබොක්සිලේට් අයනයේ අනුනාද ස්ථායීතාවය හේතුවෙන් ඇල්කොහොල සහ ෆීනෝලවලට වඩා කාබොක්සිලික් අම්ල ආම්ලික වේ.\n\nවිසංයෝජනය: සෝඩා ලයිම් (NaOH + CaO) සමඟ රත් කළ විට CO2 ඉවත් වී ඇල්කේන සෑදේ.\n\nඔක්සිහරණය: LiAlH4 මගින් කාබොක්සිලික් අම්ල කෙලින්ම ප්‍රාථමික ඇල්කොහොල දක්වා ඔක්සිහරණය කරයි.\n\nPCl5/SOCl2 සමඟ ප්‍රතික්‍රියාව: අම්ල ක්ලෝරයිඩ (R-COCl) සාදයි.\n\nඑස්ටර: සාන්ද්‍ර H2SO4 ඉදිරියේ ඇල්කොහොල සමඟ ප්‍රතික්‍රියා කිරීමෙන් එස්ටර සාදයි."
+    },
+    "level": 2,
+    "related_reactions": ["decarboxylation", "esterification", "reduction_acid", "acyl_chloride"],
+    "quizzes": [
+      {
+        "question": {
+          "en": "What reagent is used for Decarboxylation?",
+          "si": "විසංයෝජනය (Decarboxylation) සඳහා භාවිතා කරන ප්‍රතිකාරකය කුමක්ද?"
+        },
+        "options": [
+          { "en": "H2SO4", "si": "H2SO4" },
+          { "en": "Soda Lime", "si": "සෝඩා ලයිම්" },
+          { "en": "LiAlH4", "si": "LiAlH4" },
+          { "en": "PCl5", "si": "PCl5" }
+        ],
+        "correctOptionIndex": 1,
+        "points": 20
+      },
+      {
+        "question": {
+          "en": "Which ion's resonance stabilization makes these acids strong?",
+          "si": "කාබොක්සිලික් අම්ල ශක්තිමත් වීමට හේතු වන අනුනාද ස්ථායී අයනය කුමක්ද?"
+        },
+        "options": [
+          { "en": "Carboxylate ion", "si": "කාබොක්සිලේට් අයනය" },
+          { "en": "Alkoxide ion", "si": "ඇල්කොක්සයිඩ් අයනය" },
+          { "en": "Phenoxide ion", "si": "ෆීනොක්සයිඩ් අයනය" },
+          { "en": "Carbonium ion", "si": "කාබෝනියම් අයනය" }
+        ],
+        "correctOptionIndex": 0,
+        "points": 20
+      },
+      {
+        "question": {
+          "en": "Product of R-COOH reduction with LiAlH4?",
+          "si": "LiAlH4 සමඟ R-COOH ඔක්සිහරණය කළ විට ලැබෙන නිෂ්පාදිතය කුමක්ද?"
+        },
+        "options": [
+          { "en": "Aldehyde", "si": "ඇල්ඩිහයිඩ" },
+          { "en": "Ketone", "si": "කීටෝන" },
+          { "en": "Primary Alcohol", "si": "ප්‍රාථමික ඇල්කොහොල" },
+          { "en": "Alkane", "si": "ඇල්කේන" }
+        ],
+        "correctOptionIndex": 2,
+        "points": 20
+      },
+      {
+        "question": {
+          "en": "Reagent to convert R-COOH to R-COCl?",
+          "si": "R-COOH, R-COCl බවට පත් කිරීමට භාවිතා කරන ප්‍රතිකාරකය කුමක්ද?"
+        },
+        "options": [
+          { "en": "NaOH", "si": "NaOH" },
+          { "en": "PCl5", "si": "PCl5" },
+          { "en": "HCl", "si": "HCl" },
+          { "en": "H2O", "si": "H2O" }
+        ],
+        "correctOptionIndex": 1,
+        "points": 20
+      },
+      {
+        "question": {
+          "en": "Carboxylic acid + Alcohol gives?",
+          "si": "කාබොක්සිලික් අම්ලය + ඇල්කොහොල ප්‍රතික්‍රියාවෙන් ලැබෙන්නේ?"
+        },
+        "options": [
+          { "en": "Ether", "si": "ඊතර්" },
+          { "en": "Ester", "si": "එස්ටර" },
+          { "en": "Amide", "si": "ඇමයිඩ්" },
+          { "en": "Alkene", "si": "ඇල්කීන" }
+        ],
+        "correctOptionIndex": 1,
+        "points": 20
+      }
+    ]
+  },
+
+  {
+    "id": "amines_01",
+    "title": {
+      "en": "Nitrogen Compounds: Amines",
+      "si": "නයිට්‍රජන් සංයෝග: ඇමයින්"
+    },
+    "body": {
+      "en": "Amines are derivatives of ammonia (NH3). Classified as 1st, 2nd, and 3rd degree.\n\nBasicity: Amines act as Lewis bases due to the lone pair of electrons on Nitrogen.\n\nAliphatic amines are more basic than ammonia due to the +I effect of alkyl groups.\n\nAniline (aromatic amine) is less basic than ammonia due to resonance delocalization of the lone pair.\n\nReaction with Nitrous Acid (HNO2): Primary aliphatic amines release Nitrogen gas (bubbles).\n\nDiazotization: Aniline + NaNO2/HCl (0-5°C) forms Benzene Diazonium Chloride.",
+      "si": "ඇමයින් යනු ඇමෝනියා (NH3) වල ව්‍යුත්පන්න වේ. ප්‍රාථමික, ද්විතියික සහ තෘතීයික ලෙස වර්ගීකරණය කරයි.\n\nභාෂ්මිකතාවය: නයිට්‍රජන් මත ඇති හුදකලා ඉලෙක්ට්‍රෝන යුගලය නිසා ඇමයින් ලුවිස් භෂ්ම ලෙස ක්‍රියා කරයි.\n\nඇල්කයිල් කාණ්ඩවල +I ආචරණය නිසා ඇමෝනියා වලට වඩා ඇලිෆැටික් ඇමයින් භාෂ්මික වේ.\n\nඇනිලීන්හි හුදකලා යුගලය අනුනාදය මගින් විමධ්‍යගත වන නිසා එය ඇමෝනියා වලට වඩා භාෂ්මිකතාවයෙන් අඩුය.\n\nනයිට්‍රස් අම්ලය (HNO2) සමඟ ප්‍රතික්‍රියාව: ප්‍රාථමික ඇලිෆැටික් ඇමයින් නයිට්‍රජන් වායුව පිට කරයි (බුබුළු).\n\nඩයසෝකරණය: ඇනිලීන් + NaNO2/HCl (0-5°C) සමඟ බෙන්සීන් ඩයසෝනියම් ක්ලෝරයිඩ් සාදයි."
+    },
+    "level": 2,
+    "related_reactions": ["diazotization", "nitrous_acid_reaction", "amine_basicity"],
+    "quizzes": [
+      {
+        "question": {
+          "en": "Why are amines basic?",
+          "si": "ඇමයින් භාෂ්මික වන්නේ ඇයි?"
+        },
+        "options": [
+          { "en": "Lone pair on Nitrogen", "si": "නයිට්‍රජන් මත ඇති හුදකලා යුගලය" },
+          { "en": "Positive charge", "si": "ධන ආරෝපණය" },
+          { "en": "Acidic hydrogen", "si": "ආම්ලික හයිඩ්‍රජන්" },
+          { "en": "Triple bond", "si": "ත්‍රිත්ව බන්ධනය" }
+        ],
+        "correctOptionIndex": 0,
+        "points": 20
+      },
+      {
+        "question": {
+          "en": "Which is more basic: Ammonia or Methylamine?",
+          "si": "වැඩිපුර භාෂ්මික වන්නේ කුමක්ද: ඇමෝනියා ද මෙතිල්ඇමයින් ද?"
+        },
+        "options": [
+          { "en": "Ammonia", "si": "ඇමෝනියා" },
+          { "en": "Methylamine", "si": "මෙතිල්ඇමයින්" },
+          { "en": "Both equal", "si": "දෙකම සමානයි" },
+          { "en": "None", "si": "නැත" }
+        ],
+        "correctOptionIndex": 1,
+        "points": 20
+      },
+      {
+        "question": {
+          "en": "Primary aliphatic amine + HNO2 releases which gas?",
+          "si": "ප්‍රාථමික ඇලිෆැටික් ඇමයින් + HNO2 ප්‍රතික්‍රියාවෙන් පිටවන වායුව කුමක්ද?"
+        },
+        "options": [
+          { "en": "O2", "si": "O2" },
+          { "en": "H2", "si": "H2" },
+          { "en": "N2", "si": "N2" },
+          { "en": "CO2", "si": "CO2" }
+        ],
+        "correctOptionIndex": 2,
+        "points": 20
+      },
+      {
+        "question": {
+          "en": "Temperature for Diazotization?",
+          "si": "ඩයසෝකරණය සඳහා අවශ්‍ය උෂ්ණත්වය කුමක්ද?"
+        },
+        "options": [
+          { "en": "0-5 °C", "si": "0-5 °C" },
+          { "en": "100 °C", "si": "100 °C" },
+          { "en": "Room Temp", "si": "කාමර උෂ්ණත්වය" },
+          { "en": "50 °C", "si": "50 °C" }
+        ],
+        "correctOptionIndex": 0,
+        "points": 20
+      },
+      {
+        "question": {
+          "en": "Is Aniline more or less basic than Ammonia?",
+          "si": "ඇනිලීන්, ඇමෝනියා වලට වඩා භාෂ්මිකතාවයෙන් වැඩිද අඩුද?"
+        },
+        "options": [
+          { "en": "More basic", "si": "භාෂ්මිකතාවයෙන් වැඩි" },
+          { "en": "Less basic", "si": "භාෂ්මිකතාවයෙන් අඩු" },
+          { "en": "Same", "si": "සමානයි" },
+          { "en": "Highly acidic", "si": "ඉතා ආම්ලිකයි" }
+        ],
+        "correctOptionIndex": 1,
+        "points": 20
+      }
+    ]
+  },
+
+  {
+    "id": "benzene_01",
+    "title": {
+      "en": "Benzene and Aromaticity",
+      "si": "බෙන්සීන් සහ ඇරෝමැටිකතාවය"
+    },
+    "body": {
+      "en": "Benzene (C6H6) is a planar cyclic molecule with delocalized pi-electrons.\n\nHuckel's Rule: Aromatic compounds must have (4n+2) pi-electrons in a planar ring.\n\nElectrophilic Substitution: Benzene prefers substitution over addition to preserve aromatic stability.\n\nNitration: Benzene + Conc. HNO3/H2SO4 -> Nitrobenzene.\n\nFriedel-Crafts Alkylation: Benzene + Alkyl halide (with AlCl3 catalyst).\n\nOrtho, Meta, Para directing groups determine the position of the second substituent.",
+      "si": "බෙන්සීන් (C6H6) යනු විමධ්‍යගත පයි (pi) ඉලෙක්ට්‍රෝන සහිත සමතල චක්‍රීය අණුවකි.\n\nහකල් නියමය: ඇරෝමැටික සංයෝගවල සමතල වළල්ලක (4n+2) පයි ඉලෙක්ට්‍රෝන පැවතිය යුතුය.\n\nඉලෙක්ට්‍රෝනකාමී ආදේශනය: ඇරෝමැටික ස්ථායීතාවය රැකගැනීමට බෙන්සීන් එකතු වීමේ ප්‍රතික්‍රියා වලට වඩා ආදේශන වලට කැමැත්තක් දක්වයි.\n\nනයිට්‍රකරණය: බෙන්සීන් + සාන්ද්‍ර HNO3/H2SO4 -> නයිට්‍රොබෙන්සීන්.\n\nෆ්‍රීඩල්-ක්‍රාෆ්ට්ස් ඇල්කයිල්කරණය: බෙන්සීන් + ඇල්කයිල් හේලයිඩ (AlCl3 උත්ප්‍රේරකය සමඟ).\n\nඔතෝ, මෙටා, පැරා නිර්දේශිත කාණ්ඩ මගින් දෙවන ආදේශකය පිහිටන ස්ථානය තීරණය කරයි."
+    },
+    "level": 2,
+    "related_reactions": ["nitration", "friedel_crafts", "electrophilic_substitution"],
+    "quizzes": [
+      {
+        "question": {
+          "en": "According to Huckel's rule, how many pi electrons for aromaticity?",
+          "si": "හකල් නියමයට අනුව ඇරෝමැටිකතාව සඳහා පයි ඉලෙක්ට්‍රෝන ගණන කීයද?"
+        },
+        "options": [
+          { "en": "4n", "si": "4n" },
+          { "en": "4n+2", "si": "4n+2" },
+          { "en": "2n+2", "si": "2n+2" },
+          { "en": "6n", "si": "6n" }
+        ],
+        "correctOptionIndex": 1,
+        "points": 20
+      },
+      {
+        "question": {
+          "en": "Why does Benzene prefer substitution?",
+          "si": "බෙන්සීන් ආදේශන වලට කැමැත්තක් දක්වන්නේ ඇයි?"
+        },
+        "options": [
+          { "en": "To be reactive", "si": "ප්‍රතික්‍රියාශීලී වීමට" },
+          { "en": "To preserve aromatic stability", "si": "ඇරෝමැටික ස්ථායීතාවය රැකගැනීමට" },
+          { "en": "It has no double bonds", "si": "ද්විත්ව බන්ධන නොමැති නිසා" },
+          { "en": "To form alkanes", "si": "ඇල්කේන සෑදීමට" }
+        ],
+        "correctOptionIndex": 1,
+        "points": 20
+      },
+      {
+        "question": {
+          "en": "Which catalyst is used in Friedel-Crafts?",
+          "si": "ෆ්‍රීඩල්-ක්‍රාෆ්ට්ස් ප්‍රතික්‍රියාවේදී භාවිතා වන උත්ප්‍රේරකය කුමක්ද?"
+        },
+        "options": [
+          { "en": "FeCl3", "si": "FeCl3" },
+          { "en": "AlCl3", "si": "AlCl3" },
+          { "en": "NaCl", "si": "NaCl" },
+          { "en": "H2SO4", "si": "H2SO4" }
+        ],
+        "correctOptionIndex": 1,
+        "points": 20
+      },
+      {
+        "question": {
+          "en": "What is the product of Nitration of Benzene?",
+          "si": "බෙන්සීන් නයිට්‍රකරණයෙන් ලැබෙන නිෂ්පාදිතය කුමක්ද?"
+        },
+        "options": [
+          { "en": "Chlorobenzene", "si": "ක්ලෝරෝබෙන්සීන්" },
+          { "en": "Nitrobenzene", "si": "නයිට්‍රොබෙන්සීන්" },
+          { "en": "Phenol", "si": "ෆීනෝල්" },
+          { "en": "Aniline", "si": "ඇනිලීන්" }
+        ],
+        "correctOptionIndex": 1,
+        "points": 20
+      },
+      {
+        "question": {
+          "en": "Is benzene a cyclic molecule?",
+          "si": "බෙන්සීන් චක්‍රීය අණුවක්ද?"
+        },
+        "options": [
+          { "en": "Yes", "si": "ඔව්" },
+          { "en": "No", "si": "නැත" },
+          { "en": "Only in liquid state", "si": "ද්‍රව අවස්ථාවේදී පමණි" },
+          { "en": "Only at high heat", "si": "අධික උෂ්ණත්වයේදී පමණි" }
+        ],
+        "correctOptionIndex": 0,
+        "points": 20
+      }
+    ]
+  },
+
+  {
+    "id": "everyday_chem_01",
+    "title": {
+      "en": "Organic Compounds in Everyday Life",
+      "si": "එදිනෙදා ජීවිතයේ කාබනික සංයෝග"
+    },
+    "body": {
+      "en": "Polymers: Large molecules made of repeating monomers (e.g., Polyethene, PVC).\n\nSoap: Sodium salt of fatty acids. Has hydrophobic and hydrophilic ends for cleaning.\n\nDetergents: Synthetic cleaning agents similar to soap but work in hard water.\n\nMedicines: Aspirin, Paracetamol are common organic pharmaceuticals.\n\nFood Chemistry: Proteins (amino acids), Carbohydrates (sugars), Lipids (fats).\n\nSustainability: Recycling plastics reduces environmental pollution.",
+      "si": "පොලිමර්: පුනරාවර්තී ඒකක (මොනෝමර) වලින් සෑදුණු විශාල අණු (උදා: පොලිතීන්, PVC).\n\nසබන්: මේද අම්ලවල සෝඩියම් ලවණය. පිරිසිදු කිරීමට ජලභීතික සහ ජලකාමී කෙළවරවල් ඇත.\n\nඩිටර්ජන්ට්: සබන්වලට සමාන කෘත්‍රිම පිරිසිදුකාරක, නමුත් දෘඩ ජලයෙහි හොඳින් ක්‍රියා කරයි.\n\nඖෂධ: ඇස්පිරින්, පැරසිටමෝල් යනු පොදු කාබනික ඖෂධ වේ.\n\nආහාර රසායනය: ප්‍රෝටීන (ඇමයිනෝ අම්ල), කාබෝහයිඩ්‍රේට් (සීනි), ලිපිඩ (මේද).\n\nතිරසාරභාවය: ප්ලාස්ටික් ප්‍රතිචක්‍රීකරණය මගින් පාරිසරික දූෂණය අවම කළ හැක."
+    },
+    "level": 1,
+    "related_reactions": ["polymerization", "saponification", "esterification"],
+    "quizzes": [
+      {
+        "question": {
+          "en": "What are the repeating units in polymers called?",
+          "si": "පොලිමර්වල පුනරාවර්තී ඒකක හඳුන්වන්නේ කුමන නමකින්ද?"
+        },
+        "options": [
+          { "en": "Atoms", "si": "පරමාණු" },
+          { "en": "Monomers", "si": "මොනෝමර" },
+          { "en": "Isomers", "si": "සමාවයවික" },
+          { "en": "Isotopes", "si": "සමස්ථානික" }
+        ],
+        "correctOptionIndex": 1,
+        "points": 20
+      },
+      {
+        "question": {
+          "en": "Which part of soap is attracted to oil?",
+          "si": "සබන් අණුවේ තෙල් වලට ආකර්ෂණය වන කොටස කුමක්ද?"
+        },
+        "options": [
+          { "en": "Hydrophilic", "si": "ජලකාමී" },
+          { "en": "Hydrophobic", "si": "ජලභීතික" },
+          { "en": "Oxygen", "si": "ඔක්සිජන්" },
+          { "en": "Sodium", "si": "සෝඩියම්" }
+        ],
+        "correctOptionIndex": 1,
+        "points": 20
+      },
+      {
+        "question": {
+          "en": "Are detergents effective in hard water?",
+          "si": "ඩිටර්ජන්ට් දෘඩ ජලයෙහි ක්‍රියාත්මකද?"
+        },
+        "options": [
+          { "en": "Yes", "si": "ඔව්" },
+          { "en": "No", "si": "නැත" },
+          { "en": "Only when boiled", "si": "තම්බන විට පමණි" },
+          { "en": "Slowly", "si": "මන්දගාමීව" }
+        ],
+        "correctOptionIndex": 0,
+        "points": 20
+      },
+      {
+        "question": {
+          "en": "Example of a common organic medicine?",
+          "si": "පොදු කාබනික ඖෂධයකට උදාහරණයක්?"
+        },
+        "options": [
+          { "en": "Salt", "si": "ලුණු" },
+          { "en": "Aspirin", "si": "ඇස්පිරින්" },
+          { "en": "Water", "si": "ජලය" },
+          { "en": "Iron", "si": "යකඩ" }
+        ],
+        "correctOptionIndex": 1,
+        "points": 20
+      },
+      {
+        "question": {
+          "en": "What is the primary benefit of recycling plastics?",
+          "si": "ප්ලාස්ටික් ප්‍රතිචක්‍රීකරණයේ මූලික ප්‍රතිලාභය කුමක්ද?"
+        },
+        "options": [
+          { "en": "Faster production", "si": "වේගවත් නිෂ්පාදනය" },
+          { "en": "Reduce pollution", "si": "පාරිසරික දූෂණය අඩු කිරීම" },
+          { "en": "Making new atoms", "si": "නව පරමාණු සෑදීම" },
+          { "en": "Better smell", "si": "හොඳ සුවඳක්" }
+        ],
+        "correctOptionIndex": 1,
+        "points": 20
+      }
+    ]
+  }
+]

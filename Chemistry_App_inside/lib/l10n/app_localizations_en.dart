@@ -1,0 +1,146 @@
+// ignore: unused_import
+import 'package:intl/intl.dart' as intl;
+import 'app_localizations.dart';
+
+// ignore_for_file: type=lint
+
+/// The translations for English (`en`).
+class AppLocalizationsEn extends AppLocalizations {
+  AppLocalizationsEn([String locale = 'en']) : super(locale);
+
+  @override
+  String get appTitle => 'ChemLearn';
+
+  @override
+  String get appSubtitle => 'Master Organic Chemistry';
+
+  @override
+  String get loadingData => 'Loading chemistry data…';
+
+  @override
+  String get retry => 'Retry';
+
+  @override
+  String get yourScore => 'Your Score';
+
+  @override
+  String get points => 'points';
+
+  @override
+  String get correct => 'Correct';
+
+  @override
+  String get attempts => 'Attempts';
+
+  @override
+  String get lessons => 'Lessons';
+
+  @override
+  String get startLearning => 'Start Learning';
+
+  @override
+  String lessonsSubtitle(int count, int completed) {
+    return '$count topics · $completed completed';
+  }
+
+  @override
+  String get practiceLab => 'Practice Lab';
+
+  @override
+  String get practiceLabSubtitle => 'Mix reactants & discover products';
+
+  @override
+  String get chemistryTutor => 'Chemistry Tutor';
+
+  @override
+  String get chemistryTutorSubtitle => 'AI-powered Q&A for organic chemistry';
+
+  @override
+  String get settings => 'Settings';
+
+  @override
+  String get language => 'Language';
+
+  @override
+  String get noLessons => 'No lessons available yet.';
+
+  @override
+  String level(int level) {
+    return 'Level $level';
+  }
+
+  @override
+  String reactionsCount(int count) {
+    return '$count reactions';
+  }
+
+  @override
+  String get reactantA => 'Reactant A';
+
+  @override
+  String get reactantB => 'Reactant B (optional)';
+
+  @override
+  String get reactionCondition => 'Reaction Condition';
+
+  @override
+  String get selectCondition => 'Select condition';
+
+  @override
+  String get reactButton => 'React!';
+
+  @override
+  String get analyzing => 'Analyzing...';
+
+  @override
+  String get instructions =>
+      'Search and select reactants, then tap \"React!\" to analyze.';
+
+  @override
+  String get aiFormulating => 'AI is formulating response...';
+
+  @override
+  String get pubChemData => 'PubChem Data';
+
+  @override
+  String get iupacName => 'IUPAC Name';
+
+  @override
+  String get formula => 'Formula';
+
+  @override
+  String get molecularWeight => 'Molecular Weight';
+
+  @override
+  String get reactionOccurred => 'Reaction Occurred!';
+
+  @override
+  String get noReaction => 'No Reaction';
+
+  @override
+  String productName(String name) {
+    return 'Product: $name';
+  }
+
+  @override
+  String get clearChat => 'Clear chat';
+
+  @override
+  String get aiTutorUnavailable => 'AI Tutor Unavailable';
+
+  @override
+  String get aiTutorRequiresKey => 'The AI tutor requires a Gemini API key.';
+
+  @override
+  String get askAnything => 'Ask me anything about\nOrganic Chemistry!';
+
+  @override
+  String get iCanExplain =>
+      'I can explain reactions, concepts,\nand help you understand chemistry better.';
+
+  @override
+  String get thinking => 'Thinking…';
+
+  @override
+  String get askAQuestion => 'Ask a chemistry question…';
+}

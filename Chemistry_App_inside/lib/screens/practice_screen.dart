@@ -3,6 +3,7 @@ import 'package:flutter_typeahead/flutter_typeahead.dart';
 import 'package:provider/provider.dart';
 
 import '../core/theme/app_theme.dart';
+import '../l10n/app_localizations.dart';
 import '../providers/chemistry_provider.dart';
 import '../services/pubchem_service.dart';
 
@@ -14,7 +15,7 @@ class PracticeScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Practice Lab'),
+        title: Text(AppLocalizations.of(context)!.practiceLab),
         actions: [
           Consumer<ChemistryProvider>(
             builder: (_, p, __) => Container(
@@ -53,10 +54,10 @@ class PracticeScreen extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                _buildInstructions(),
+                _buildInstructions(context),
                 const SizedBox(height: 28),
 
-                const _SectionLabel(label: 'Reactant A', icon: Icons.science),
+                const _SectionLabel(label: 'reactantA', icon: Icons.science),
                 const SizedBox(height: 10),
                 _CompoundSearchField(
                   hint: 'e.g. Propene',
@@ -64,10 +65,7 @@ class PracticeScreen extends StatelessWidget {
                 ),
                 const SizedBox(height: 22),
 
-                const _SectionLabel(
-                  label: 'Reactant B (optional)',
-                  icon: Icons.science,
-                ),
+                const _SectionLabel(label: 'reactantB', icon: Icons.science),
                 const SizedBox(height: 10),
                 _CompoundSearchField(
                   hint: 'e.g. Water',
@@ -76,7 +74,7 @@ class PracticeScreen extends StatelessWidget {
                 const SizedBox(height: 22),
 
                 const _SectionLabel(
-                  label: 'Reaction Condition',
+                  label: 'reactionCondition',
                   icon: Icons.thermostat,
                 ),
                 const SizedBox(height: 10),
@@ -87,7 +85,7 @@ class PracticeScreen extends StatelessWidget {
                 ),
                 const SizedBox(height: 32),
 
-                _buildReactButton(provider),
+                _buildReactButton(context, provider),
                 const SizedBox(height: 28),
 
                 // ── Visual Flow & Results ─────────
@@ -114,7 +112,7 @@ class PracticeScreen extends StatelessWidget {
   }
 
   // Helper Widgets
-  Widget _buildInstructions() => Container(
+  Widget _buildInstructions(BuildContext context) => Container(
     width: double.infinity,
     padding: const EdgeInsets.all(18),
     decoration: BoxDecoration(
@@ -122,21 +120,28 @@ class PracticeScreen extends StatelessWidget {
       borderRadius: BorderRadius.circular(14),
       border: Border.all(color: Colors.white.withValues(alpha: 0.06)),
     ),
-    child: const Row(
+    child: Row(
       children: [
-        Icon(Icons.lightbulb_outline, color: Color(0xFFA78BFA), size: 22),
-        SizedBox(width: 14),
+        const Icon(Icons.lightbulb_outline, color: Color(0xFFA78BFA), size: 22),
+        const SizedBox(width: 14),
         Expanded(
           child: Text(
-            'Search and select reactants, then tap "React!" to analyze.',
-            style: TextStyle(color: Colors.white60, fontSize: 13, height: 1.5),
+            AppLocalizations.of(context)!.instructions,
+            style: const TextStyle(
+              color: Colors.white60,
+              fontSize: 13,
+              height: 1.5,
+            ),
           ),
         ),
       ],
     ),
   );
 
-  Widget _buildReactButton(ChemistryProvider provider) => SizedBox(
+  Widget _buildReactButton(
+    BuildContext context,
+    ChemistryProvider provider,
+  ) => SizedBox(
     width: double.infinity,
     height: 54,
     child: ElevatedButton.icon(
@@ -151,7 +156,12 @@ class PracticeScreen extends StatelessWidget {
               ),
             )
           : const Icon(Icons.bolt_rounded),
-      label: Text(provider.isEnriching ? 'Analyzing...' : 'React!'),
+      label: Text(
+        provider.isEnriching
+            ? AppLocalizations.of(context)!
+                  .analyzing // දැන් මෙතන context වැඩ කරයි!
+            : AppLocalizations.of(context)!.reactButton,
+      ),
       style: ElevatedButton.styleFrom(
         backgroundColor: const Color(0xFF7C3AED),
         foregroundColor: Colors.white,
@@ -316,7 +326,7 @@ class _SectionLabel extends StatelessWidget {
       Icon(icon, size: 18, color: Colors.white38),
       const SizedBox(width: 8),
       Text(
-        label,
+        _getLocalizedLabel(context, label),
         style: const TextStyle(
           fontSize: 14,
           fontWeight: FontWeight.w600,
@@ -325,6 +335,20 @@ class _SectionLabel extends StatelessWidget {
       ),
     ],
   );
+}
+
+String _getLocalizedLabel(BuildContext context, String key) {
+  final l10n = AppLocalizations.of(context)!;
+  switch (key) {
+    case 'reactantA':
+      return l10n.reactantA;
+    case 'reactantB':
+      return l10n.reactantB;
+    case 'reactionCondition':
+      return l10n.reactionCondition;
+    default:
+      return key;
+  }
 }
 
 class _ConditionDropdown extends StatelessWidget {
@@ -347,9 +371,9 @@ class _ConditionDropdown extends StatelessWidget {
       child: DropdownButton<String>(
         value: value,
         isExpanded: true,
-        hint: const Text(
-          'Select condition',
-          style: TextStyle(color: Colors.white30, fontSize: 14),
+        hint: Text(
+          AppLocalizations.of(context)!.selectCondition,
+          style: const TextStyle(color: Colors.white30, fontSize: 14),
         ),
         dropdownColor: AppTheme.cardDark,
         items: conditions
@@ -417,7 +441,9 @@ class _ResultCard extends StatelessWidget {
               ),
               const SizedBox(width: 10),
               Text(
-                isCorrect ? 'Reaction Occurred!' : 'No Reaction',
+                isCorrect
+                    ? AppLocalizations.of(context)!.reactionOccurred
+                    : AppLocalizations.of(context)!.noReaction,
                 style: const TextStyle(
                   fontSize: 20,
                   fontWeight: FontWeight.w800,
@@ -471,7 +497,9 @@ class _ResultCard extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          'Product: ${result.product!.name}',
+                          AppLocalizations.of(
+                            context,
+                          )!.productName(result.product!.name),
                           style: const TextStyle(
                             fontSize: 16,
                             fontWeight: FontWeight.w700,
@@ -570,7 +598,7 @@ class _LoadingShimmerCard extends StatelessWidget {
               ),
               const SizedBox(width: 12),
               Text(
-                'AI is formulating response...',
+                AppLocalizations.of(context)!.aiFormulating,
                 style: TextStyle(
                   color: Colors.white.withValues(alpha: 0.6),
                   fontSize: 14,
@@ -635,9 +663,9 @@ class _PubChemCard extends StatelessWidget {
                 ),
               ),
               const SizedBox(width: 10),
-              const Text(
-                'PubChem Data',
-                style: TextStyle(
+              Text(
+                AppLocalizations.of(context)!.pubChemData,
+                style: const TextStyle(
                   fontSize: 15,
                   fontWeight: FontWeight.w700,
                   color: Color(0xFFA78BFA),
@@ -657,11 +685,17 @@ class _PubChemCard extends StatelessWidget {
           const SizedBox(height: 16),
 
           // Properties grid
-          _propertyRow('IUPAC Name', compound.iupacName),
-          _propertyRow('Formula', compound.molecularFormula),
+          _propertyRow(
+            AppLocalizations.of(context)!.iupacName,
+            compound.iupacName,
+          ),
+          _propertyRow(
+            AppLocalizations.of(context)!.formula,
+            compound.molecularFormula,
+          ),
           if (compound.molecularWeight > 0.0)
             _propertyRow(
-              'Molecular Weight',
+              AppLocalizations.of(context)!.molecularWeight,
               '${compound.molecularWeight} g/mol',
             ),
 

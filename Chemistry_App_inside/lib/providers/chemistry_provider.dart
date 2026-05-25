@@ -58,6 +58,7 @@ class ChemistryProvider extends ChangeNotifier {
   final ChemistryRepository _repository;
   final AiService _aiService;
   final PubChemService _pubChemService;
+  Locale _currentLocale = const Locale('en');
 
   ChemistryProvider({
     required ChemistryRepository repository,
@@ -66,6 +67,16 @@ class ChemistryProvider extends ChangeNotifier {
   }) : _repository = repository,
        _aiService = aiService,
        _pubChemService = pubChemService;
+
+  void updateLocale(Locale locale) {
+    if (_currentLocale != locale) {
+      _currentLocale = locale;
+      notifyListeners();
+    }
+  }
+
+  // Points add කරන්න මේ method එකත් අනිවාර්යයෙන්ම තියෙන්න ඕනේ
+  bool get _isSinhala => _currentLocale.languageCode == 'si';
 
   // ── Loading State ─────────────────────────────────────────
   bool _isLoading = true;
@@ -84,12 +95,21 @@ class ChemistryProvider extends ChangeNotifier {
   // ── Score ──────────────────────────────────────────────────
   int _score = 0;
   int get score => _score;
+  int get totalPoints => _score;
 
   int _totalAttempts = 0;
   int get totalAttempts => _totalAttempts;
 
   int _correctAttempts = 0;
   int get correctAttempts => _correctAttempts;
+
+  /// Adds points to the user's global score (e.g. from quiz completion).
+  void addPoints(int points) {
+    if (points > 0) {
+      _score += points;
+      notifyListeners();
+    }
+  }
 
   // ── Completed Lessons ─────────────────────────────────────
   final Set<String> _completedLessonIds = {};
@@ -227,6 +247,7 @@ class ChemistryProvider extends ChangeNotifier {
       final aiResult = await _aiService.predictReaction(
         reactantNames: reactantNames,
         condition: _selectedCondition!,
+        isSinhala: _isSinhala,
       );
 
       if (aiResult != null &&
@@ -312,7 +333,10 @@ class ChemistryProvider extends ChangeNotifier {
     notifyListeners();
 
     try {
-      final response = await _aiService.askTutor(question);
+      final response = await _aiService.askTutor(
+        question,
+        isSinhala: _isSinhala,
+      );
       _tutorMessages.add(
         TutorMessage(
           text: response ?? 'Sorry, I couldn\'t process that. Try again!',

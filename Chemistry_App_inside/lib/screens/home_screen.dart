@@ -2,15 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import '../core/theme/app_theme.dart';
+import '../l10n/app_localizations.dart';
 import '../providers/chemistry_provider.dart';
+import '../providers/lesson_provider.dart';
+import '../providers/locale_provider.dart';
 import 'lesson_list_screen.dart';
 import 'practice_screen.dart';
 import 'tutor_screen.dart';
 
-/// The main landing screen of the app.
-///
-/// Shows a welcome header, the user's score, and navigation cards
-/// for Lessons and Practice Lab.
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
 
@@ -18,114 +17,88 @@ class HomeScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: SafeArea(
-        child: Consumer<ChemistryProvider>(
-          builder: (context, provider, _) {
-            if (provider.isLoading) {
-              return const Center(
+        // Consumer2 මගින් Provider දෙකම එකට monitor කරනවා
+        child: Consumer2<ChemistryProvider, LessonProvider>(
+          builder: (context, chem, lesson, _) {
+            if (chem.isLoading || lesson.isLoading) {
+              return Center(
                 child: Column(
                   mainAxisSize: MainAxisSize.min,
                   children: [
-                    CircularProgressIndicator(),
-                    SizedBox(height: 16),
-                    Text('Loading chemistry data…'),
+                    const CircularProgressIndicator(),
+                    const SizedBox(height: 16),
+                    Text(AppLocalizations.of(context)!.loadingData),
                   ],
                 ),
               );
             }
 
-            if (provider.errorMessage != null) {
-              return Center(
-                child: Padding(
-                  padding: const EdgeInsets.all(24),
-                  child: Column(
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      const Icon(Icons.error_outline,
-                          size: 64, color: AppTheme.errorRed),
-                      const SizedBox(height: 16),
-                      Text(
-                        provider.errorMessage!,
-                        textAlign: TextAlign.center,
-                        style: const TextStyle(color: AppTheme.errorRed),
-                      ),
-                      const SizedBox(height: 24),
-                      ElevatedButton(
-                        onPressed: () => provider.initialize(),
-                        child: const Text('Retry'),
-                      ),
-                    ],
-                  ),
-                ),
-              );
-            }
+            final l10n = AppLocalizations.of(context)!;
 
             return SingleChildScrollView(
               padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 24),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  // ── Header ──────────────────────────────────
-                  _buildHeader(context, provider),
+                  _buildHeader(context, chem),
                   const SizedBox(height: 32),
-
-                  // ── Score Card ──────────────────────────────
-                  _buildScoreCard(context, provider),
+                  _buildScoreCard(context, chem),
+                  const SizedBox(height: 28),
+                  _buildQuickStats(context, chem, lesson),
                   const SizedBox(height: 28),
 
-                  // ── Quick Stats ─────────────────────────────
-                  _buildQuickStats(provider),
-                  const SizedBox(height: 28),
-
-                  // ── Navigation Cards ────────────────────────
                   Text(
-                    'Start Learning',
+                    l10n.startLearning,
                     style: Theme.of(context).textTheme.titleLarge?.copyWith(
-                          fontWeight: FontWeight.bold,
-                          color: Colors.white,
-                        ),
+                      fontWeight: FontWeight.bold,
+                      color: Colors.white,
+                    ),
                   ),
                   const SizedBox(height: 16),
+
+                  // Lessons Card - මෙතන lesson provider එකේ length එක පාවිච්චි වෙනවා
                   _buildNavCard(
                     context,
                     icon: Icons.menu_book_rounded,
-                    title: 'Lessons',
-                    subtitle:
-                        '${provider.lessons.length} topics · ${provider.completedLessonIds.length} completed',
+                    title: l10n.lessons,
+                    subtitle: l10n.lessonsSubtitle(
+                      lesson.lessons.length,
+                      chem.completedLessonIds.length,
+                    ),
                     gradient: AppTheme.primaryGradient,
                     onTap: () => Navigator.push(
                       context,
                       MaterialPageRoute(
-                          builder: (_) => const LessonListScreen()),
+                        builder: (_) => const LessonListScreen(),
+                      ),
                     ),
                   ),
                   const SizedBox(height: 16),
                   _buildNavCard(
                     context,
                     icon: Icons.science_rounded,
-                    title: 'Practice Lab',
-                    subtitle: 'Mix reactants & discover products',
+                    title: l10n.practiceLab,
+                    subtitle: l10n.practiceLabSubtitle,
                     gradient: const LinearGradient(
                       colors: [Color(0xFF7C3AED), Color(0xFFA78BFA)],
                     ),
                     onTap: () => Navigator.push(
                       context,
-                      MaterialPageRoute(
-                          builder: (_) => const PracticeScreen()),
+                      MaterialPageRoute(builder: (_) => const PracticeScreen()),
                     ),
                   ),
                   const SizedBox(height: 16),
                   _buildNavCard(
                     context,
                     icon: Icons.psychology_rounded,
-                    title: 'Chemistry Tutor',
-                    subtitle: 'AI-powered Q&A for organic chemistry',
+                    title: l10n.chemistryTutor,
+                    subtitle: l10n.chemistryTutorSubtitle,
                     gradient: const LinearGradient(
                       colors: [Color(0xFFEF6C00), Color(0xFFFFA726)],
                     ),
                     onTap: () => Navigator.push(
                       context,
-                      MaterialPageRoute(
-                          builder: (_) => const TutorScreen()),
+                      MaterialPageRoute(builder: (_) => const TutorScreen()),
                     ),
                   ),
                 ],
@@ -137,7 +110,6 @@ class HomeScreen extends StatelessWidget {
     );
   }
 
-  // ── Header with app name ──────────────────────────────────
   Widget _buildHeader(BuildContext context, ChemistryProvider provider) {
     return Row(
       children: [
@@ -148,33 +120,63 @@ class HomeScreen extends StatelessWidget {
             gradient: AppTheme.primaryGradient,
             borderRadius: BorderRadius.circular(14),
           ),
-          child: const Icon(Icons.biotech_rounded,
-              color: Colors.white, size: 28),
+          child: const Icon(
+            Icons.biotech_rounded,
+            color: Colors.white,
+            size: 28,
+          ),
         ),
         const SizedBox(width: 14),
-        Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text(
-              'ChemLearn',
-              style: Theme.of(context).textTheme.headlineSmall?.copyWith(
-                    fontWeight: FontWeight.w800,
-                    color: Colors.white,
-                  ),
-            ),
-            Text(
-              'Master Organic Chemistry',
-              style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                    color: Colors.white54,
-                  ),
-            ),
-          ],
+        Expanded(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                'ChemLearn',
+                style: Theme.of(context).textTheme.headlineSmall?.copyWith(
+                  fontWeight: FontWeight.w800,
+                  color: Colors.white,
+                ),
+              ),
+              Text(
+                AppLocalizations.of(context)!.appSubtitle,
+                style: Theme.of(
+                  context,
+                ).textTheme.bodySmall?.copyWith(color: Colors.white54),
+              ),
+            ],
+          ),
         ),
+        _buildLanguageToggle(context),
       ],
     );
   }
 
-  // ── Score Card ────────────────────────────────────────────
+  Widget _buildLanguageToggle(BuildContext context) {
+    final localeProvider = context.watch<LocaleProvider>();
+    final isSinhala = localeProvider.locale?.languageCode == 'si';
+    return IconButton(
+      icon: Container(
+        padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+        decoration: BoxDecoration(
+          border: Border.all(color: Colors.white24),
+          borderRadius: BorderRadius.circular(8),
+        ),
+        child: Text(
+          isSinhala ? 'EN' : 'සිං',
+          style: const TextStyle(
+            color: Colors.white,
+            fontWeight: FontWeight.bold,
+            fontSize: 12,
+          ),
+        ),
+      ),
+      onPressed: () => localeProvider.setLocale(
+        isSinhala ? const Locale('en') : const Locale('si'),
+      ),
+    );
+  }
+
   Widget _buildScoreCard(BuildContext context, ChemistryProvider provider) {
     return Container(
       width: double.infinity,
@@ -182,19 +184,14 @@ class HomeScreen extends StatelessWidget {
       decoration: BoxDecoration(
         gradient: AppTheme.cardGradient,
         borderRadius: BorderRadius.circular(20),
-        border: Border.all(color: Colors.white.withValues(alpha: 0.08)),
+        border: Border.all(color: Colors.white10),
       ),
       child: Column(
         children: [
-          const Text(
-            'Your Score',
-            style: TextStyle(
-              color: Colors.white54,
-              fontSize: 14,
-              fontWeight: FontWeight.w500,
-            ),
+          Text(
+            AppLocalizations.of(context)!.yourScore,
+            style: const TextStyle(color: Colors.white54, fontSize: 14),
           ),
-          const SizedBox(height: 8),
           TweenAnimationBuilder<int>(
             tween: IntTween(begin: 0, end: provider.score),
             duration: const Duration(milliseconds: 600),
@@ -207,28 +204,27 @@ class HomeScreen extends StatelessWidget {
               ),
             ),
           ),
-          const SizedBox(height: 4),
           Text(
-            'points',
-            style: TextStyle(
-              color: Colors.white.withValues(alpha: 0.4),
-              fontSize: 14,
-            ),
+            AppLocalizations.of(context)!.points,
+            style: TextStyle(color: Colors.white30, fontSize: 14),
           ),
         ],
       ),
     );
   }
 
-  // ── Quick Stats Row ───────────────────────────────────────
-  Widget _buildQuickStats(ChemistryProvider provider) {
+  Widget _buildQuickStats(
+    BuildContext context,
+    ChemistryProvider chem,
+    LessonProvider lesson,
+  ) {
     return Row(
       children: [
         Expanded(
           child: _statTile(
             icon: Icons.check_circle_outline,
-            value: '${provider.correctAttempts}',
-            label: 'Correct',
+            value: '${chem.correctAttempts}',
+            label: AppLocalizations.of(context)!.correct,
             color: AppTheme.accentGreen,
           ),
         ),
@@ -236,8 +232,8 @@ class HomeScreen extends StatelessWidget {
         Expanded(
           child: _statTile(
             icon: Icons.repeat_rounded,
-            value: '${provider.totalAttempts}',
-            label: 'Attempts',
+            value: '${chem.totalAttempts}',
+            label: AppLocalizations.of(context)!.attempts,
             color: AppTheme.accentOrange,
           ),
         ),
@@ -245,9 +241,8 @@ class HomeScreen extends StatelessWidget {
         Expanded(
           child: _statTile(
             icon: Icons.book_outlined,
-            value:
-                '${provider.completedLessonIds.length}/${provider.lessons.length}',
-            label: 'Lessons',
+            value: '${chem.completedLessonIds.length}/${lesson.lessons.length}',
+            label: AppLocalizations.of(context)!.lessons,
             color: const Color(0xFF42A5F5),
           ),
         ),
@@ -266,7 +261,7 @@ class HomeScreen extends StatelessWidget {
       decoration: BoxDecoration(
         color: AppTheme.cardDark,
         borderRadius: BorderRadius.circular(14),
-        border: Border.all(color: Colors.white.withValues(alpha: 0.06)),
+        //border: Border.all(color: Colors.white),
       ),
       child: Column(
         children: [
@@ -280,7 +275,6 @@ class HomeScreen extends StatelessWidget {
               color: color,
             ),
           ),
-          const SizedBox(height: 2),
           Text(
             label,
             style: const TextStyle(fontSize: 11, color: Colors.white38),
@@ -290,7 +284,6 @@ class HomeScreen extends StatelessWidget {
     );
   }
 
-  // ── Navigation Card ───────────────────────────────────────
   Widget _buildNavCard(
     BuildContext context, {
     required IconData icon,
@@ -309,7 +302,7 @@ class HomeScreen extends StatelessWidget {
           borderRadius: BorderRadius.circular(18),
           boxShadow: [
             BoxShadow(
-              color: Colors.black.withValues(alpha: 0.3),
+              color: Colors.black26,
               blurRadius: 12,
               offset: const Offset(0, 6),
             ),
@@ -321,7 +314,7 @@ class HomeScreen extends StatelessWidget {
               width: 48,
               height: 48,
               decoration: BoxDecoration(
-                color: Colors.white.withValues(alpha: 0.2),
+                color: Colors.white24,
                 borderRadius: BorderRadius.circular(12),
               ),
               child: Icon(icon, color: Colors.white, size: 26),
@@ -339,19 +332,18 @@ class HomeScreen extends StatelessWidget {
                       color: Colors.white,
                     ),
                   ),
-                  const SizedBox(height: 4),
                   Text(
                     subtitle,
-                    style: TextStyle(
-                      fontSize: 13,
-                      color: Colors.white.withValues(alpha: 0.8),
-                    ),
+                    style: TextStyle(fontSize: 13, color: Colors.white70),
                   ),
                 ],
               ),
             ),
-            Icon(Icons.arrow_forward_ios_rounded,
-                color: Colors.white.withValues(alpha: 0.7), size: 18),
+            const Icon(
+              Icons.arrow_forward_ios_rounded,
+              color: Colors.white70,
+              size: 18,
+            ),
           ],
         ),
       ),
