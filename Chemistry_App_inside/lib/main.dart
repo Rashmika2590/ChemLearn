@@ -10,7 +10,9 @@ import 'core/theme/app_theme.dart';
 import 'services/firestore_service.dart';
 import 'services/ai_service.dart';
 import 'repositories/chemistry_repository.dart';
+import 'repositories/lesson_repository.dart';
 import 'providers/chemistry_provider.dart';
+import 'providers/lesson_provider.dart';
 import 'providers/locale_provider.dart';
 import 'screens/home_screen.dart';
 import 'services/pubchem_service.dart';
@@ -80,8 +82,8 @@ class ChemLearnApp extends StatelessWidget {
     return MultiProvider(
       providers: [
         ChangeNotifierProvider(create: (_) => LocaleProvider()),
-        ChangeNotifierProvider(
-          create: (_) {
+        ChangeNotifierProxyProvider<LocaleProvider, ChemistryProvider>(
+          create: (context) {
             final provider = ChemistryProvider(
               repository: repository,
               aiService: aiService,
@@ -90,6 +92,29 @@ class ChemLearnApp extends StatelessWidget {
             // Kick off data loading immediately
             provider.initialize();
             return provider;
+          },
+          update: (context, localeProvider, chemistryProvider) {
+            if (localeProvider.locale != null) {
+              chemistryProvider!.updateLocale(localeProvider.locale!);
+            }
+            return chemistryProvider!;
+          },
+        ),
+        ChangeNotifierProxyProvider2<LocaleProvider, ChemistryProvider, LessonProvider>(
+          create: (context) {
+            final provider = LessonProvider(
+              repository: LessonRepository(),
+              chemistryProvider: Provider.of<ChemistryProvider>(context, listen: false),
+            );
+            // Kick off data loading immediately
+            provider.loadLessons();
+            return provider;
+          },
+          update: (context, localeProvider, chemistryProvider, lessonProvider) {
+            if (localeProvider.locale != null) {
+              lessonProvider!.updateLocale(localeProvider.locale!.languageCode);
+            }
+            return lessonProvider!;
           },
         ),
       ],

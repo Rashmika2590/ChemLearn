@@ -6,9 +6,6 @@ import '../l10n/app_localizations.dart';
 import '../providers/chemistry_provider.dart';
 
 /// AI-powered chemistry tutor chat screen.
-///
-/// Students can ask freeform questions about organic chemistry.
-/// The AI is constrained to chemistry topics via system prompt.
 class TutorScreen extends StatefulWidget {
   const TutorScreen({super.key});
 
@@ -34,7 +31,6 @@ class _TutorScreenState extends State<TutorScreen> {
     _controller.clear();
     provider.askTutor(text);
 
-    // Scroll to bottom after a short delay
     Future.delayed(const Duration(milliseconds: 100), () {
       if (_scrollController.hasClients) {
         _scrollController.animateTo(
@@ -69,17 +65,12 @@ class _TutorScreenState extends State<TutorScreen> {
 
           return Column(
             children: [
-              // ── Chat Messages ──────────────────────────
               Expanded(
                 child: provider.tutorMessages.isEmpty
-                    ? _buildEmptyState()
+                    ? _buildEmptyState(provider) // මෙතනට provider එක pass කළා
                     : _buildMessageList(provider),
               ),
-
-              // ── Typing Indicator ───────────────────────
               if (provider.isTutorTyping) _buildTypingIndicator(),
-
-              // ── Input Bar ──────────────────────────────
               _buildInputBar(provider),
             ],
           );
@@ -99,11 +90,14 @@ class _TutorScreenState extends State<TutorScreen> {
               width: 72,
               height: 72,
               decoration: BoxDecoration(
-                color: AppTheme.accentOrange.withValues(alpha: 0.15),
+                color: AppTheme.accentOrange.withOpacity(0.15),
                 shape: BoxShape.circle,
               ),
-              child: const Icon(Icons.wifi_off_rounded,
-                  color: AppTheme.accentOrange, size: 36),
+              child: const Icon(
+                Icons.wifi_off_rounded,
+                color: AppTheme.accentOrange,
+                size: 36,
+              ),
             ),
             const SizedBox(height: 20),
             Text(
@@ -118,7 +112,11 @@ class _TutorScreenState extends State<TutorScreen> {
             Text(
               AppLocalizations.of(context)!.aiTutorRequiresKey,
               textAlign: TextAlign.center,
-              style: const TextStyle(color: Colors.white38, fontSize: 13, height: 1.6),
+              style: const TextStyle(
+                color: Colors.white38,
+                fontSize: 13,
+                height: 1.6,
+              ),
             ),
           ],
         ),
@@ -126,7 +124,27 @@ class _TutorScreenState extends State<TutorScreen> {
     );
   }
 
-  Widget _buildEmptyState() {
+  // 🎯 වෙනස් කළ කොටස: මෙතනදී දැනට තියෙන Locale එක බලලා ප්‍රශ්න ටික සිංහලෙන් හෝ ඉංග්‍රීසියෙන් පෙන්වනවා
+  Widget _buildEmptyState(ChemistryProvider provider) {
+    final l10n = AppLocalizations.of(context)!;
+
+    // දැනට ඇප් එක සිංහලද කියලා බලාගන්න ක්‍රමය (උඹේ ChemistryProvider එකේ තියෙන logic එක)
+    final bool isSinhalaActive =
+        Localizations.localeOf(context).languageCode == 'si';
+
+    // භාෂාව අනුව ප්‍රශ්න ලැයිස්තුව වෙනස් කිරීම
+    final suggestedQuestions = isSinhalaActive
+        ? [
+            "මාර්කොව්නිකොව් නියමය යනු කුමක්ද?",
+            "ඉලෙක්ට්‍රොෆිලික ආකලන ප්‍රතික්‍රියා පැහැදිලි කරන්න",
+            "ඇල්කීන යනු මොනවාද?",
+          ]
+        : [
+            "What is Markovnikov's rule?",
+            "Explain electrophilic addition",
+            "What are alkenes?",
+          ];
+
     return Center(
       child: Padding(
         padding: const EdgeInsets.all(32),
@@ -137,15 +155,18 @@ class _TutorScreenState extends State<TutorScreen> {
               width: 72,
               height: 72,
               decoration: BoxDecoration(
-                color: const Color(0xFF00897B).withValues(alpha: 0.15),
+                color: const Color(0xFF00897B).withOpacity(0.15),
                 shape: BoxShape.circle,
               ),
-              child: const Icon(Icons.psychology_rounded,
-                  color: Color(0xFF00E5FF), size: 36),
+              child: const Icon(
+                Icons.psychology_rounded,
+                color: Color(0xFF00E5FF),
+                size: 36,
+              ),
             ),
             const SizedBox(height: 20),
             Text(
-              AppLocalizations.of(context)!.askAnything,
+              l10n.askAnything,
               textAlign: TextAlign.center,
               style: const TextStyle(
                 fontSize: 18,
@@ -155,39 +176,30 @@ class _TutorScreenState extends State<TutorScreen> {
             ),
             const SizedBox(height: 12),
             Text(
-              AppLocalizations.of(context)!.iCanExplain,
+              l10n.iCanExplain,
               textAlign: TextAlign.center,
-              style: const TextStyle(color: Colors.white38, fontSize: 13, height: 1.5),
+              style: const TextStyle(
+                color: Colors.white38,
+                fontSize: 13,
+                height: 1.5,
+              ),
             ),
             const SizedBox(height: 28),
-            // Suggested questions
+
+            // Dynamic Suggested Chips
             Wrap(
               spacing: 8,
               runSpacing: 8,
               alignment: WrapAlignment.center,
-              children: [
-                _SuggestedChip(
-                  label: "What is Markovnikov's rule?",
+              children: suggestedQuestions.map((question) {
+                return _SuggestedChip(
+                  label: question,
                   onTap: (text) {
                     _controller.text = text;
                     _sendMessage(context.read<ChemistryProvider>());
                   },
-                ),
-                _SuggestedChip(
-                  label: 'Explain electrophilic addition',
-                  onTap: (text) {
-                    _controller.text = text;
-                    _sendMessage(context.read<ChemistryProvider>());
-                  },
-                ),
-                _SuggestedChip(
-                  label: 'What are alkenes?',
-                  onTap: (text) {
-                    _controller.text = text;
-                    _sendMessage(context.read<ChemistryProvider>());
-                  },
-                ),
-              ],
+                );
+              }).toList(),
             ),
           ],
         ),
@@ -225,7 +237,7 @@ class _TutorScreenState extends State<TutorScreen> {
               height: 16,
               child: CircularProgressIndicator(
                 strokeWidth: 2,
-                color: Colors.white.withValues(alpha: 0.5),
+                color: Colors.white.withOpacity(0.5),
               ),
             ),
             const SizedBox(width: 10),
@@ -249,9 +261,7 @@ class _TutorScreenState extends State<TutorScreen> {
       ),
       decoration: BoxDecoration(
         color: AppTheme.surfaceDark,
-        border: Border(
-          top: BorderSide(color: Colors.white.withValues(alpha: 0.06)),
-        ),
+        border: Border(top: BorderSide(color: Colors.white.withOpacity(0.06))),
       ),
       child: Row(
         children: [
@@ -269,7 +279,9 @@ class _TutorScreenState extends State<TutorScreen> {
                   borderSide: BorderSide.none,
                 ),
                 contentPadding: const EdgeInsets.symmetric(
-                    horizontal: 20, vertical: 12),
+                  horizontal: 20,
+                  vertical: 12,
+                ),
               ),
               textInputAction: TextInputAction.send,
               onSubmitted: (_) => _sendMessage(provider),
@@ -297,19 +309,13 @@ class _TutorScreenState extends State<TutorScreen> {
   }
 }
 
-// ═══════════════════════════════════════════════════════════════
-// HELPER WIDGETS
-// ═══════════════════════════════════════════════════════════════
-
 class _MessageBubble extends StatelessWidget {
   final TutorMessage message;
-
   const _MessageBubble({required this.message});
 
   @override
   Widget build(BuildContext context) {
     final isUser = message.isUser;
-
     return Align(
       alignment: isUser ? Alignment.centerRight : Alignment.centerLeft,
       child: Container(
@@ -319,9 +325,7 @@ class _MessageBubble extends StatelessWidget {
         margin: const EdgeInsets.only(bottom: 10),
         padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
         decoration: BoxDecoration(
-          gradient: isUser
-              ? AppTheme.primaryGradient
-              : null,
+          gradient: isUser ? AppTheme.primaryGradient : null,
           color: isUser ? null : AppTheme.cardDark,
           borderRadius: BorderRadius.only(
             topLeft: const Radius.circular(18),
@@ -346,7 +350,6 @@ class _MessageBubble extends StatelessWidget {
 class _SuggestedChip extends StatelessWidget {
   final String label;
   final ValueChanged<String> onTap;
-
   const _SuggestedChip({required this.label, required this.onTap});
 
   @override
@@ -358,7 +361,7 @@ class _SuggestedChip extends StatelessWidget {
         decoration: BoxDecoration(
           color: AppTheme.cardDark,
           borderRadius: BorderRadius.circular(20),
-          border: Border.all(color: Colors.white.withValues(alpha: 0.1)),
+          border: Border.all(color: Colors.white.withOpacity(0.1)),
         ),
         child: Text(
           label,

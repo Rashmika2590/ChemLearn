@@ -1,7 +1,6 @@
 import 'dart:convert';
 import 'package:flutter/foundation.dart';
-import 'package:http/http.dart'
-    as http; // 👈 කෙලින්ම HTTP රික්වෙස්ට් දාන්න මේක ඕනේ
+import 'package:http/http.dart' as http;
 
 class AiService {
   final String apiKey;
@@ -9,7 +8,7 @@ class AiService {
 
   static const String _modelName = 'llama-3.3-70b-versatile';
   static const String _baseUrl =
-      'https://api.groq.com/openai/v1/chat/completions'; // 🎯 නිවැරදිම URL එක
+      'https://api.groq.com/openai/v1/chat/completions';
 
   static const _systemInstruction = '''
 You are ChemLearn Tutor, a friendly and encouraging organic chemistry tutor and reaction predictor for beginner students (school level).
@@ -33,25 +32,38 @@ RULES:
 
   bool get isAvailable => _isInitialized;
 
+  String _getLanguageInstruction(bool isSinhala) {
+    if (isSinhala) {
+      return 'Respond in fluent, natural Sinhala. Keep chemical names, formulas, and technical terminology in English where appropriate, but explain the reaction and logic entirely in Sinhala.';
+    } else {
+      return 'Respond in clear, simple English.';
+    }
+  }
+
   // ────────────────────────────────────────────────────────────
   // REACTION PREDICTION (Practice Lab)
   // ────────────────────────────────────────────────────────────
   Future<Map<String, dynamic>?> predictReaction({
     required List<String> reactantNames,
     required String condition,
+    bool isSinhala = false,
   }) async {
     if (!_isInitialized) return null;
 
+    // මෙන්න මේ variable එක හදන්න ඕනේ මචං
+    final langInstruction = _getLanguageInstruction(isSinhala);
+
     final prompt =
         '''
+$langInstruction
 Predict the organic chemistry product for the following mixture:
 Reactants: ${reactantNames.join(' + ')}
 Condition: $condition
 
-If a reaction occurs, predict the primary organic product. 
-If NO reaction occurs, set product_name to "No Reaction", formula to "N/A", and type to "none".
+IMPORTANT: You MUST respond ONLY with a raw JSON object. 
+Keep JSON keys (product_name, formula, type, explanation) in English.
+Translate only the values of the JSON fields into the requested language (Sinhala or English).
 
-You MUST respond ONLY with a raw JSON object matching this schema exactly. Do not include markdown like ```json.
 {
   "product_name": "Common or IUPAC name of the product",
   "formula": "Standard condensed chemical formula without spaces",
@@ -59,6 +71,8 @@ You MUST respond ONLY with a raw JSON object matching this schema exactly. Do no
   "explanation": "A short, beginner-friendly explanation of how this reaction happens."
 }
 ''';
+
+    // ඉතුරු ටික මෙහෙමමයි...
 
     try {
       final response = await http.post(
@@ -69,10 +83,14 @@ You MUST respond ONLY with a raw JSON object matching this schema exactly. Do no
         },
         body: jsonEncode({
           'model': _modelName,
-          'response_format': {'type': 'json_object'}, // Force JSON format
+          'response_format': {'type': 'json_object'},
           'temperature': 0.1,
           'messages': [
-            {'role': 'system', 'content': _systemInstruction},
+            {
+              'role': 'system',
+              'content':
+                  '$_systemInstruction\n${_getLanguageInstruction(isSinhala)}',
+            },
             {'role': 'user', 'content': prompt},
           ],
         }),
@@ -95,16 +113,20 @@ You MUST respond ONLY with a raw JSON object matching this schema exactly. Do no
   }
 
   // ────────────────────────────────────────────────────────────
-  // FREEFORM TUTOR Q&A (Chat History එක්කම)
+  // FREEFORM TUTOR Q&A
   // ────────────────────────────────────────────────────────────
   final List<Map<String, String>> _chatHistory = [];
 
-  Future<String?> askTutor(String question) async {
+  Future<String?> askTutor(String question, {bool isSinhala = false}) async {
     if (!_isInitialized) return null;
 
     try {
       if (_chatHistory.isEmpty) {
-        _chatHistory.add({'role': 'system', 'content': _systemInstruction});
+        _chatHistory.add({
+          'role': 'system',
+          'content':
+              '$_systemInstruction\n${_getLanguageInstruction(isSinhala)}',
+        });
       }
 
       _chatHistory.add({'role': 'user', 'content': question});
@@ -152,23 +174,28 @@ You MUST respond ONLY with a raw JSON object matching this schema exactly. Do no
     required String productName,
     required String reactionType,
     required String localExplanation,
+    bool isSinhala = false,
   }) async {
     final prompt =
         'Explain this reaction simply for a beginner: ${reactantNames.join(' + ')} -> $productName ($reactionType). Textbook description: $localExplanation';
-    return _generateOneShot(prompt);
+    return _generateOneShot(prompt, isSinhala: isSinhala);
   }
 
   Future<String?> generateHint({
     required List<String> reactantNames,
     required String condition,
     required String localHint,
+    bool isSinhala = false,
   }) async {
     final prompt =
         'Give an encouraging chemistry hint for wrong mixture: ${reactantNames.join(' + ')} under $condition. System hint: $localHint. Don\'t give the answer.';
-    return _generateOneShot(prompt);
+    return _generateOneShot(prompt, isSinhala: isSinhala);
   }
 
-  Future<String?> _generateOneShot(String prompt) async {
+  Future<String?> _generateOneShot(
+    String prompt, {
+    bool isSinhala = false,
+  }) async {
     if (!_isInitialized) return null;
     try {
       final response = await http.post(
@@ -181,6 +208,7 @@ You MUST respond ONLY with a raw JSON object matching this schema exactly. Do no
           'model': _modelName,
           'temperature': 0.5,
           'messages': [
+            {'role': 'system', 'content': _getLanguageInstruction(isSinhala)},
             {'role': 'user', 'content': prompt},
           ],
         }),

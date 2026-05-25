@@ -3,11 +3,12 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import '../l10n/app_localizations.dart';
-import '../models/lesson.dart';
+import '../models/lesson_model.dart';
 import '../providers/chemistry_provider.dart';
-import 'lesson_detail_screen.dart';
+import '../providers/lesson_provider.dart';
+import 'lesson_screen.dart';
 
-/// Displays the list of available lessons as stylish cards.
+/// Displays the list of available localized lessons loaded from local JSON assets.
 class LessonListScreen extends StatelessWidget {
   const LessonListScreen({super.key});
 
@@ -15,9 +16,15 @@ class LessonListScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(title: Text(AppLocalizations.of(context)!.lessons)),
-      body: Consumer<ChemistryProvider>(
-        builder: (context, provider, _) {
-          if (provider.lessons.isEmpty) {
+      body: Consumer<LessonProvider>(
+        builder: (context, lessonProvider, _) {
+          if (lessonProvider.isLoading) {
+            return const Center(
+              child: CircularProgressIndicator(),
+            );
+          }
+
+          if (lessonProvider.lessons.isEmpty) {
             return Center(
               child: Text(
                 AppLocalizations.of(context)!.noLessons,
@@ -26,16 +33,20 @@ class LessonListScreen extends StatelessWidget {
             );
           }
 
+          // We read completion status from the ChemistryProvider
+          final chemistryProvider = context.watch<ChemistryProvider>();
+
           return ListView.builder(
             padding: const EdgeInsets.all(20),
-            itemCount: provider.lessons.length,
+            itemCount: lessonProvider.lessons.length,
             itemBuilder: (context, index) {
-              final lesson = provider.lessons[index];
-              final isCompleted = provider.isLessonCompleted(lesson.id);
+              final lesson = lessonProvider.lessons[index];
+              final isCompleted = chemistryProvider.isLessonCompleted(lesson.id);
               return _LessonCard(
                 lesson: lesson,
                 index: index,
                 isCompleted: isCompleted,
+                currentLocale: lessonProvider.currentLocale,
               );
             },
           );
@@ -50,11 +61,13 @@ class _LessonCard extends StatelessWidget {
   final Lesson lesson;
   final int index;
   final bool isCompleted;
+  final String currentLocale;
 
   const _LessonCard({
     required this.lesson,
     required this.index,
     required this.isCompleted,
+    required this.currentLocale,
   });
 
   static const _accentColors = [
@@ -68,12 +81,17 @@ class _LessonCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final accent = _accentColors[index % _accentColors.length];
+    final titleText = lesson.title.get(currentLocale);
 
     return GestureDetector(
-      onTap: () => Navigator.push(
-        context,
-        MaterialPageRoute(builder: (_) => LessonDetailScreen(lesson: lesson)),
-      ),
+      onTap: () {
+        final lessonProvider = Provider.of<LessonProvider>(context, listen: false);
+        lessonProvider.setLessonIndex(index);
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (_) => const LessonScreen()),
+        );
+      },
       child: Container(
         margin: const EdgeInsets.only(bottom: 16),
         decoration: BoxDecoration(
@@ -128,7 +146,7 @@ class _LessonCard extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      lesson.title,
+                      titleText,
                       style: const TextStyle(
                         fontSize: 16,
                         fontWeight: FontWeight.w700,
