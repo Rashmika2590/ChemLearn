@@ -50,7 +50,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get practiceLabSubtitle => 'Mix reactants & discover products';
 
   @override
-  String get chemistryTutor => 'Chemistry Tutor';
+  String get chemistryTutor => 'Organic Chemistry Tutor';
 
   @override
   String get chemistryTutorSubtitle => 'AI-powered Q&A for organic chemistry';
@@ -143,4 +143,71 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get askAQuestion => 'Ask a chemistry question…';
+
+  @override
+  String get conversionMaster => 'Conversion Master';
+
+  @override
+  String get conversionSubtitle => 'Master your organic reactions step-by-step';
+
+  @override
+  String get conversions => 'conversions';
+
+  @override
+  String get start => 'START';
+
+  @override
+  String get current => 'CURRENT';
+
+  @override
+  String get target => 'TARGET';
+
+  @override
+  String get gameOver => 'Game Over!';
+
+  @override
+  String scoreRestart(int score) {
+    return 'Score: $score. Restart the challenge?';
+  }
+
+  @override
+  String get restart => 'Restart';
+
+  @override
+  String get playAgain => 'PLAY AGAIN';
+
+  @override
+  String get searchReagents => 'Search reagents...';
+
+  @override
+  String newChallenge(String start, String target) {
+    return 'New Challenge: Transform $start to $target!';
+  }
+
+  @override
+  String get excellentLevelComplete => 'Excellent! Level Complete.';
+
+  @override
+  String get correctKeepGoing => 'Correct! Keep going.';
+
+  @override
+  String get incorrectTryAgain => 'Incorrect! Try another reagent.';
+
+  @override
+  String get nextLevel => 'Next Level';
+
+  @override
+  String get exit => 'Exit';
+
+  @override
+  String get yourScoreLabel => 'Your Score';
+
+  @override
+  String get totalScore => 'Total Score';
+
+  @override
+  String get stepsCompleted => 'Steps Completed';
+
+  @override
+  String get newChallengeButton => 'New Challenge';
 }

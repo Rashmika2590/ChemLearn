@@ -46,7 +46,7 @@
   "practiceLabSubtitle": "Mix reactants & discover products",
   "@practiceLabSubtitle": { "description": "Subtitle for Practice Lab card" },
 
-  "chemistryTutor": "Chemistry Tutor",
+  "chemistryTutor": "Organic Chemistry Tutor",
   "@chemistryTutor": { "description": "Navigation card title for AI Tutor" },
 
   "chemistryTutorSubtitle": "AI-powered Q&A for organic chemistry",
@@ -146,5 +146,79 @@
   "@thinking": { "description": "Shown when AI is processing a chat query" },
 
   "askAQuestion": "Ask a chemistry question…",
-  "@askAQuestion": { "description": "Hint for chat input" }
+  "@askAQuestion": { "description": "Hint for chat input" },
+
+  "conversionMaster": "Conversion Master",
+  "@conversionMaster": { "description": "Title for Conversion Master feature" },
+  
+  "conversionSubtitle": "Master your organic reactions step-by-step",
+  "@conversionSubtitle": { "description": "Subtitle for Conversion Master card" },
+  
+  "conversions": "conversions",
+  "@conversions": { "description": "App bar title for Conversion screen" },
+  
+  "start": "START",
+  "@start": { "description": "Start compound label" },
+  
+  "current": "CURRENT",
+  "@current": { "description": "Current compound label" },
+  
+  "target": "TARGET",
+  "@target": { "description": "Target compound label" },
+  
+  "gameOver": "Game Over!",
+  "@gameOver": { "description": "Game over dialog title" },
+  
+  "scoreRestart": "Score: {score}. Restart the challenge?",
+  "@scoreRestart": {
+    "description": "Game over dialog content",
+    "placeholders": {
+      "score": { "type": "int", "example": "50" }
+    }
+  },
+  
+  "restart": "Restart",
+  "@restart": { "description": "Restart button label" },
+  
+  "playAgain": "PLAY AGAIN",
+  "@playAgain": { "description": "Play again button label" },
+  
+  "searchReagents": "Search reagents...",
+  "@searchReagents": { "description": "Search field hint text" },
+  
+  "newChallenge": "New Challenge: Transform {start} to {target}!",
+  "@newChallenge": {
+    "description": "Feedback when starting new level",
+    "placeholders": {
+      "start": { "type": "String", "example": "Methane" },
+      "target": { "type": "String", "example": "Methanol" }
+    }
+  },
+  
+  "excellentLevelComplete": "Excellent! Level Complete.",
+  "@excellentLevelComplete": { "description": "Success message when level completed" },
+  
+  "correctKeepGoing": "Correct! Keep going.",
+  "@correctKeepGoing": { "description": "Success message for correct step" },
+  
+  "incorrectTryAgain": "Incorrect! Try another reagent.",
+  "@incorrectTryAgain": { "description": "Error message for incorrect reagent" },
+
+  "nextLevel": "Next Level",
+  "@nextLevel": { "description": "Next level button label" },
+
+  "exit": "Exit",
+  "@exit": { "description": "Exit button label" },
+
+  "yourScoreLabel": "Your Score",
+  "@yourScoreLabel": { "description": "Label for local score in conversion game" },
+
+  "totalScore": "Total Score",
+  "@totalScore": { "description": "Label for global total score" },
+
+  "stepsCompleted": "Steps Completed",
+  "@stepsCompleted": { "description": "Label for number of steps completed" },
+
+  "newChallengeButton": "New Challenge",
+  "@newChallengeButton": { "description": "Tooltip for new challenge button" }
 }
