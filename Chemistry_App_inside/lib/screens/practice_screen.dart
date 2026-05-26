@@ -18,7 +18,7 @@ class PracticeScreen extends StatelessWidget {
         title: Text(AppLocalizations.of(context)!.practiceLab),
         actions: [
           Consumer<ChemistryProvider>(
-            builder: (_, p, __) => Container(
+            builder: (_, p, _) => Container(
               margin: const EdgeInsets.only(right: 16),
               padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 6),
               decoration: BoxDecoration(
@@ -183,7 +183,7 @@ class PracticeScreen extends StatelessWidget {
       margin: const EdgeInsets.only(bottom: 20),
       padding: const EdgeInsets.all(16),
       decoration: BoxDecoration(
-        color: AppTheme.cardDark.withOpacity(0.5),
+        color: AppTheme.cardDark.withAlpha(128),
         borderRadius: BorderRadius.circular(16),
         border: Border.all(color: Colors.white10),
       ),
@@ -239,8 +239,8 @@ class PracticeScreen extends StatelessWidget {
       padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
       decoration: BoxDecoration(
         color: isProduct
-            ? Colors.purple.withOpacity(0.2)
-            : Colors.white.withOpacity(0.05),
+            ? Colors.purple.withAlpha(51)
+            : Colors.white.withAlpha(128),
         borderRadius: BorderRadius.circular(8),
         border: Border.all(
           color: isProduct ? Colors.purpleAccent : Colors.white24,
@@ -728,7 +728,7 @@ class _PubChemCard extends StatelessWidget {
                 child: Image.network(
                   compound.imageUrl!,
                   fit: BoxFit.contain,
-                  errorBuilder: (_, __, ___) => const Center(
+                  errorBuilder: (_, _, _) => const Center(
                     child: Text(
                       'Structure image unavailable',
                       style: TextStyle(color: Colors.grey, fontSize: 12),

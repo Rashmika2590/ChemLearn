@@ -90,7 +90,7 @@ class _TutorScreenState extends State<TutorScreen> {
               width: 72,
               height: 72,
               decoration: BoxDecoration(
-                color: AppTheme.accentOrange.withOpacity(0.15),
+                color: AppTheme.accentOrange.withAlpha(38),
                 shape: BoxShape.circle,
               ),
               child: const Icon(
@@ -155,7 +155,7 @@ class _TutorScreenState extends State<TutorScreen> {
               width: 72,
               height: 72,
               decoration: BoxDecoration(
-                color: const Color(0xFF00897B).withOpacity(0.15),
+                color: const Color(0xFF00897B).withAlpha(38),
                 shape: BoxShape.circle,
               ),
               child: const Icon(
@@ -237,7 +237,7 @@ class _TutorScreenState extends State<TutorScreen> {
               height: 16,
               child: CircularProgressIndicator(
                 strokeWidth: 2,
-                color: Colors.white.withOpacity(0.5),
+                color: Colors.white.withAlpha(128),
               ),
             ),
             const SizedBox(width: 10),
@@ -261,7 +261,7 @@ class _TutorScreenState extends State<TutorScreen> {
       ),
       decoration: BoxDecoration(
         color: AppTheme.surfaceDark,
-        border: Border(top: BorderSide(color: Colors.white.withOpacity(0.06))),
+        border: Border(top: BorderSide(color: Colors.white.withAlpha(15))),
       ),
       child: Row(
         children: [
@@ -361,7 +361,7 @@ class _SuggestedChip extends StatelessWidget {
         decoration: BoxDecoration(
           color: AppTheme.cardDark,
           borderRadius: BorderRadius.circular(20),
-          border: Border.all(color: Colors.white.withOpacity(0.1)),
+          border: Border.all(color: Colors.white.withAlpha(26)),
         ),
         child: Text(
           label,

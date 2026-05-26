@@ -342,7 +342,7 @@ class _ConversionScreenState extends State<ConversionScreen> {
                           i < provider.lives
                               ? Icons.favorite
                               : Icons.favorite_border,
-                          color: Colors.red,
+                          color: Colors.amberAccent,
                           size: 20,
                         ),
                       ),
@@ -534,7 +534,7 @@ class _ConversionScreenState extends State<ConversionScreen> {
                     child: ListView.separated(
                       scrollDirection: Axis.horizontal,
                       itemCount: filteredReagents.length,
-                      separatorBuilder: (_, __) => const SizedBox(width: 8),
+                      separatorBuilder: (_, _) => const SizedBox(width: 8),
                       itemBuilder: (context, index) {
                         final reagent = filteredReagents[index];
                         return ActionChip(

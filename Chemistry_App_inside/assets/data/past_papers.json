@@ -1,0 +1,429 @@
+{
+  "questions": [
+    {
+      "year": 2025,
+      "questions": [
+        {
+          "id": 1,
+          "questionEn": "What is the electrophile in the nitration reaction of benzene?",
+          "questionSi": "බෙන්සීන්වල නයිට්‍රිකරණ ප්‍රතික්‍රියාවේ ඉලෙක්ට්‍රොන්කාකෘෂ්ටකය වන්නේ කුමක්ද?",
+          "optionsEn": ["NO2+", "NO3-", "HSO4-", "NO2-"],
+          "optionsSi": ["NO2+", "NO3-", "HSO4-", "NO2-"],
+          "correctAnswer": "NO2+"
+        },
+        {
+          "id": 2,
+          "questionEn": "Which reagent is used for the oxidation of primary alcohol to aldehyde?",
+          "questionSi": "ප්‍රාථමික මධ්‍යසාර ඔක්සිකරණයෙන් ඇල්ඩිහයිඩයක් ලබා ගැනීමට භාවිතා කරන ප්‍රතික්‍රියාකාරකය කුමක්ද?",
+          "optionsEn": ["KMnO4", "K2Cr2O7", "PCC", "HNO3"],
+          "optionsSi": ["KMnO4", "K2Cr2O7", "PCC", "HNO3"],
+          "correctAnswer": "PCC"
+        },
+        {
+          "id": 3,
+          "questionEn": "What is the product when ethene reacts with water in presence of H2SO4?",
+          "questionSi": "H2SO4 ඉදිරියේ එතීන් ජලය සමඟ ප්‍රතික්‍රියා කිරීමෙන් ලැබෙන නිෂ්පාදනය කුමක්ද?",
+          "optionsEn": ["Ethane", "Ethanol", "Ethene", "Ethanoic acid"],
+          "optionsSi": ["එතේන්", "එතනෝල්", "එතීන්", "එතනොයික් අම්ලය"],
+          "correctAnswer": "Ethanol"
+        },
+        {
+          "id": 4,
+          "questionEn": "Which of the following is an aromatic compound?",
+          "questionSi": "පහත සඳහන් ඒවායින් සුවඳැති සංයෝගය කුමක්ද?",
+          "optionsEn": ["Cyclohexane", "Benzene", "Ethene", "Methane"],
+          "optionsSi": ["සයික්ලොහෙක්සේන්", "බෙන්සීන්", "එතීන්", "මීතේන්"],
+          "correctAnswer": "Benzene"
+        },
+        {
+          "id": 5,
+          "questionEn": "What type of reaction is the conversion of ethanol to ethene?",
+          "questionSi": "එතනෝල් එතීන් බවට පරිවර්තනය වීම කුමන ආකාරයේ ප්‍රතික්‍රියාවක්ද?",
+          "optionsEn": ["Oxidation", "Reduction", "Dehydration", "Hydration"],
+          "optionsSi": ["ඔක්සිකරණය", "අවකරණය", "ජලභංගනය", "ජලනය"],
+          "correctAnswer": "Dehydration"
+        },
+        {
+          "id": 6,
+          "questionEn": "Which functional group is present in carboxylic acids?",
+          "questionSi": "කාබොක්සිලික් අම්ලවල පවතින ක්‍රියාකාරී කාණ්ඩය කුමක්ද?",
+          "optionsEn": ["-OH", "-CHO", "-COOH", "-COOR"],
+          "optionsSi": ["-OH", "-CHO", "-COOH", "-COOR"],
+          "correctAnswer": "-COOH"
+        },
+        {
+          "id": 7,
+          "questionEn": "What is the IUPAC name of CH3CH2CH2OH?",
+          "questionSi": "CH3CH2CH2OH හි IUPAC නාමය කුමක්ද?",
+          "optionsEn": ["Methanol", "Ethanol", "Propanol", "Butanol"],
+          "optionsSi": ["මෙතනෝල්", "එතනෝල්", "ප්‍රොපනෝල්", "බියුටනෝල්"],
+          "correctAnswer": "Propanol"
+        },
+        {
+          "id": 8,
+          "questionEn": "Which catalyst is used in the hydrogenation of alkenes?",
+          "questionSi": "ඇල්කීන හයිඩ්‍රජනනයේදී භාවිතා කරන උත්ප්‍රේරකය කුමක්ද?",
+          "optionsEn": ["Ni", "Pt", "Pd", "All of the above"],
+          "optionsSi": ["Ni", "Pt", "Pd", "ඉහත සියල්ල"],
+          "correctAnswer": "All of the above"
+        },
+        {
+          "id": 9,
+          "questionEn": "What is the product of the reaction between ethanoic acid and ethanol?",
+          "questionSi": "එතනොයික් අම්ලය සහ එතනෝල් අතර ප්‍රතික්‍රියාවේ නිෂ්පාදනය කුමක්ද?",
+          "optionsEn": ["Ethyl ethanoate", "Ethanal", "Ethene", "Ethane"],
+          "optionsSi": ["එතයිල් එතනොයේට්", "එතනාල්", "එතීන්", "එතේන්"],
+          "correctAnswer": "Ethyl ethanoate"
+        },
+        {
+          "id": 10,
+          "questionEn": "Which test is used to distinguish between aldehydes and ketones?",
+          "questionSi": "ඇල්ඩිහයිඩ සහ කීටෝන වෙන්කර හඳුනා ගැනීමට භාවිතා කරන පරීක්ෂණය කුමක්ද?",
+          "optionsEn": ["Bromine water test", "Tollens' test", "Lucas test", "Iodoform test"],
+          "optionsSi": ["බ්‍රෝමීන් ජල පරීක්ෂණය", "ටොලන්ස් පරීක්ෂණය", "ලූකස් පරීක්ෂණය", "අයඩොෆෝම් පරීක්ෂණය"],
+          "correctAnswer": "Tollens' test"
+        }
+      ]
+    },
+    {
+      "year": 2024,
+      "questions": [
+        {
+          "id": 11,
+          "questionEn": "What is the common name of 2-hydroxybenzoic acid?",
+          "questionSi": "2-හයිඩ්‍රොක්සිබෙන්සොයික් අම්ලයේ පොදු නාමය කුමක්ද?",
+          "optionsEn": ["Benzoic acid", "Salicylic acid", "Phthalic acid", "Citric acid"],
+          "optionsSi": ["බෙන්සොයික් අම්ලය", "සැලිසිලික් අම්ලය", "තැලික් අම්ලය", "සිට්‍රික් අම්ලය"],
+          "correctAnswer": "Salicylic acid"
+        },
+        {
+          "id": 12,
+          "questionEn": "Which of the following is a secondary alcohol?",
+          "questionSi": "පහත සඳහන් ඒවායින් ද්විතීයික මධ්‍යසාරය කුමක්ද?",
+          "optionsEn": ["CH3OH", "CH3CH2OH", "(CH3)2CHOH", "(CH3)3COH"],
+          "optionsSi": ["CH3OH", "CH3CH2OH", "(CH3)2CHOH", "(CH3)3COH"],
+          "correctAnswer": "(CH3)2CHOH"
+        },
+        {
+          "id": 13,
+          "questionEn": "What is the product of the reaction of benzene with concentrated HNO3 and H2SO4?",
+          "questionSi": "සාන්ද්‍ර HNO3 සහ H2SO4 සමඟ බෙන්සීන් ප්‍රතික්‍රියා කිරීමෙන් ලැබෙන නිෂ්පාදනය කුමක්ද?",
+          "optionsEn": ["Nitrobenzene", "Aniline", "Phenol", "Chlorobenzene"],
+          "optionsSi": ["නයිට්‍රොබෙන්සීන්", "ඇනිලීන්", "ෆීනෝල්", "ක්ලෝරොබෙන්සීන්"],
+          "correctAnswer": "Nitrobenzene"
+        },
+        {
+          "id": 14,
+          "questionEn": "Which type of reaction is the addition of hydrogen to alkene?",
+          "questionSi": "ඇල්කීනයකට හයිඩ්‍රජන් එකතු කිරීම කුමන ආකාරයේ ප්‍රතික්‍රියාවක්ද?",
+          "optionsEn": ["Oxidation", "Reduction", "Substitution", "Elimination"],
+          "optionsSi": ["ඔක්සිකරණය", "අවකරණය", "ආදේශනය", "ඉවත් කිරීම"],
+          "correctAnswer": "Reduction"
+        },
+        {
+          "id": 15,
+          "questionEn": "What is the functional group of aldehydes?",
+          "questionSi": "ඇල්ඩිහයිඩවල ක්‍රියාකාරී කාණ්ඩය කුමක්ද?",
+          "optionsEn": ["-OH", "-CHO", "-COOH", "-NH2"],
+          "optionsSi": ["-OH", "-CHO", "-COOH", "-NH2"],
+          "correctAnswer": "-CHO"
+        },
+        {
+          "id": 16,
+          "questionEn": "Which compound gives a positive iodoform test?",
+          "questionSi": "කුමන සංයෝගය ධන අයඩොෆෝම් පරීක්ෂණයක් ලබා දෙයිද?",
+          "optionsEn": ["Methanol", "Ethanol", "Propanol", "Butanol"],
+          "optionsSi": ["මෙතනෝල්", "එතනෝල්", "ප්‍රොපනෝල්", "බියුටනෝල්"],
+          "correctAnswer": "Ethanol"
+        },
+        {
+          "id": 17,
+          "questionEn": "What is the IUPAC name of CH3COCH3?",
+          "questionSi": "CH3COCH3 හි IUPAC නාමය කුමක්ද?",
+          "optionsEn": ["Acetone", "Propanone", "Butanone", "Ethanal"],
+          "optionsSi": ["ඇසිටෝන්", "ප්‍රොපනෝන්", "බියුටනෝන්", "එතනාල්"],
+          "correctAnswer": "Propanone"
+        },
+        {
+          "id": 18,
+          "questionEn": "Which of the following is used as a preservative for biological specimens?",
+          "questionSi": "ජීව විද්‍යාත්මක සාම්පල සඳහා කල් තබා ගන්නා ද්‍රව්‍යයක් ලෙස පහත සඳහන් කුමක් භාවිතා කරයිද?",
+          "optionsEn": ["Methanol", "Ethanol", "Formaldehyde", "Acetone"],
+          "optionsSi": ["මෙතනෝල්", "එතනෝල්", "ෆෝමල්ඩිහයිඩ්", "ඇසිටෝන්"],
+          "correctAnswer": "Formaldehyde"
+        },
+        {
+          "id": 19,
+          "questionEn": "What type of isomerism is shown by CH3CH2OH and CH3OCH3?",
+          "questionSi": "CH3CH2OH සහ CH3OCH3 මගින් පෙන්වන සමාවයවිකතා වර්ගය කුමක්ද?",
+          "optionsEn": ["Chain isomerism", "Position isomerism", "Functional isomerism", "Geometric isomerism"],
+          "optionsSi": ["දාම සමාවයවිකතාව", "ස්ථාන සමාවයවිකතාව", "ක්‍රියාකාරී සමාවයවිකතාව", "ජ්‍යාමිතික සමාවයවිකතාව"],
+          "correctAnswer": "Functional isomerism"
+        },
+        {
+          "id": 20,
+          "questionEn": "Which reagent is used to test for unsaturation in organic compounds?",
+          "questionSi": "කාබනික සංයෝගවල අසංතෘප්තතාව පරීක්ෂා කිරීමට භාවිතා කරන ප්‍රතික්‍රියාකාරකය කුමක්ද?",
+          "optionsEn": ["Bromine water", "KMnO4", "Both A and B", "None of these"],
+          "optionsSi": ["බ්‍රෝමීන් ජලය", "KMnO4", "A සහ B දෙකම", "මේ කිසිවක් නැත"],
+          "correctAnswer": "Both A and B"
+        }
+      ]
+    },
+    {
+      "year": 2023,
+      "questions": [
+        {
+          "id": 21,
+          "questionEn": "What is the product when phenol reacts with bromine water?",
+          "questionSi": "ෆීනෝල් බ්‍රෝමීන් ජලය සමඟ ප්‍රතික්‍රියා කිරීමෙන් ලැබෙන නිෂ්පාදනය කුමක්ද?",
+          "optionsEn": ["2-Bromophenol", "4-Bromophenol", "2,4,6-Tribromophenol", "No reaction"],
+          "optionsSi": ["2-බ්‍රෝමොෆීනෝල්", "4-බ්‍රෝමොෆීනෝල්", "2,4,6-ට්‍රයිබ්‍රෝමොෆීනෝල්", "ප්‍රතික්‍රියාවක් නැත"],
+          "correctAnswer": "2,4,6-Tribromophenol"
+        },
+        {
+          "id": 22,
+          "questionEn": "Which of the following is a reducing sugar?",
+          "questionSi": "පහත සඳහන් ඒවායින් අවකාරක සීනි කුමක්ද?",
+          "optionsEn": ["Sucrose", "Glucose", "Cellulose", "Starch"],
+          "optionsSi": ["සුක්රෝස්", "ග්ලූකෝස්", "සෙලියුලෝස්", "පිෂ්ඨය"],
+          "correctAnswer": "Glucose"
+        },
+        {
+          "id": 23,
+          "questionEn": "What is the main product of the fermentation of glucose?",
+          "questionSi": "ග්ලූකෝස් පැසවීමේ ප්‍රධාන නිෂ්පාදනය කුමක්ද?",
+          "optionsEn": ["Methanol", "Ethanol", "Propanol", "Butanol"],
+          "optionsSi": ["මෙතනෝල්", "එතනෝල්", "ප්‍රොපනෝල්", "බියුටනෝල්"],
+          "correctAnswer": "Ethanol"
+        },
+        {
+          "id": 24,
+          "questionEn": "Which compound gives a precipitate with AgNO3 in ammonia solution?",
+          "questionSi": "ඇමෝනියා ද්‍රාවණයේ AgNO3 සමඟ අවක්ෂේපයක් ලබා දෙන සංයෝගය කුමක්ද?",
+          "optionsEn": ["Ethene", "Ethyne", "Ethane", "Methane"],
+          "optionsSi": ["එතීන්", "එතයින්", "එතේන්", "මීතේන්"],
+          "correctAnswer": "Ethyne"
+        },
+        {
+          "id": 25,
+          "questionEn": "What is the IUPAC name of the compound CH3CH=CHCH3?",
+          "questionSi": "CH3CH=CHCH3 සංයෝගයේ IUPAC නාමය කුමක්ද?",
+          "optionsEn": ["But-1-ene", "But-2-ene", "Butane", "Butyne"],
+          "optionsSi": ["බියුට්-1-ඊන්", "බියුට්-2-ඊන්", "බියුටේන්", "බියුටයින්"],
+          "correctAnswer": "But-2-ene"
+        },
+        {
+          "id": 26,
+          "questionEn": "Which of the following is used to prepare Grignard reagent?",
+          "questionSi": "ග්‍රිග්නාර්ඩ් ප්‍රතික්‍රියාකාරකය සකස් කිරීමට පහත සඳහන් කුමක් භාවිතා කරයිද?",
+          "optionsEn": ["Mg in dry ether", "Na in alcohol", "AlCl3", "FeCl3"],
+          "optionsSi": ["වියළි ඊතර් වල Mg", "මධ්‍යසාරයේ Na", "AlCl3", "FeCl3"],
+          "correctAnswer": "Mg in dry ether"
+        },
+        {
+          "id": 27,
+          "questionEn": "What is the product of the reaction of ethanal with HCN?",
+          "questionSi": "HCN සමඟ එතනාල් ප්‍රතික්‍රියාවේ නිෂ්පාදනය කුමක්ද?",
+          "optionsEn": ["Acetone cyanohydrin", "Ethanal cyanohydrin", "Acetaldehyde", "Ethanol"],
+          "optionsSi": ["ඇසිටෝන් සයනොහයිඩ්‍රින්", "එතනාල් සයනොහයිඩ්‍රින්", "ඇසිටැල්ඩිහයිඩ්", "එතනෝල්"],
+          "correctAnswer": "Ethanal cyanohydrin"
+        },
+        {
+          "id": 28,
+          "questionEn": "Which functional group is present in esters?",
+          "questionSi": "එස්ටරවල පවතින ක්‍රියාකාරී කාණ්ඩය කුමක්ද?",
+          "optionsEn": ["-COO-", "-COOH", "-CHO", "-OH"],
+          "optionsSi": ["-COO-", "-COOH", "-CHO", "-OH"],
+          "correctAnswer": "-COO-"
+        },
+        {
+          "id": 29,
+          "questionEn": "What is the common name of methanal?",
+          "questionSi": "මෙතනාල් හි පොදු නාමය කුමක්ද?",
+          "optionsEn": ["Formaldehyde", "Acetaldehyde", "Benzaldehyde", "Acetone"],
+          "optionsSi": ["ෆෝමල්ඩිහයිඩ්", "ඇසිටැල්ඩිහයිඩ්", "බෙන්සැල්ඩිහයිඩ්", "ඇසිටෝන්"],
+          "correctAnswer": "Formaldehyde"
+        },
+        {
+          "id": 30,
+          "questionEn": "Which of the following is NOT a saturated hydrocarbon?",
+          "questionSi": "පහත සඳහන් ඒවායින් සංතෘප්ත හයිඩ්‍රොකාබනයක් නොවන කුමක්ද?",
+          "optionsEn": ["Methane", "Ethane", "Ethene", "Propane"],
+          "optionsSi": ["මීතේන්", "එතේන්", "එතීන්", "ප්‍රොපේන්"],
+          "correctAnswer": "Ethene"
+        }
+      ]
+    },
+    {
+      "year": 2022,
+      "questions": [
+        {
+          "id": 31,
+          "questionEn": "What is the product when benzene reacts with chlorine in the presence of sunlight?",
+          "questionSi": "හිරු එළිය ඉදිරියේ ක්ලෝරීන් සමඟ බෙන්සීන් ප්‍රතික්‍රියා කිරීමෙන් ලැබෙන නිෂ්පාදනය කුමක්ද?",
+          "optionsEn": ["Chlorobenzene", "Benzene hexachloride", "Benzoyl chloride", "No reaction"],
+          "optionsSi": ["ක්ලෝරොබෙන්සීන්", "බෙන්සීන් හෙක්සාක්ලෝරයිඩ්", "බෙන්සොයිල් ක්ලෝරයිඩ්", "ප්‍රතික්‍රියාවක් නැත"],
+          "correctAnswer": "Benzene hexachloride"
+        },
+        {
+          "id": 32,
+          "questionEn": "Which compound gives a silver mirror with Tollens' reagent?",
+          "questionSi": "ටොලන්ස් ප්‍රතික්‍රියාකාරකය සමඟ රිදී කැඩපතක් ලබා දෙන සංයෝගය කුමක්ද?",
+          "optionsEn": ["Acetone", "Propanone", "Ethanal", "Diethyl ether"],
+          "optionsSi": ["ඇසිටෝන්", "ප්‍රොපනෝන්", "එතනාල්", "ඩයිඑතයිල් ඊතර්"],
+          "correctAnswer": "Ethanal"
+        },
+        {
+          "id": 33,
+          "questionEn": "What is the IUPAC name of the compound CH3CH2COOH?",
+          "questionSi": "CH3CH2COOH සංයෝගයේ IUPAC නාමය කුමක්ද?",
+          "optionsEn": ["Methanoic acid", "Ethanoic acid", "Propanoic acid", "Butanoic acid"],
+          "optionsSi": ["මෙතනොයික් අම්ලය", "එතනොයික් අම්ලය", "ප්‍රොපනොයික් අම්ලය", "බියුටනොයික් අම්ලය"],
+          "correctAnswer": "Propanoic acid"
+        },
+        {
+          "id": 34,
+          "questionEn": "Which of the following is used as antifreeze in car radiators?",
+          "questionSi": "මෝටර් රථ රේඩියේටර් වල ඇන්ටිෆ්‍රීස් ලෙස පහත සඳහන් කුමක් භාවිතා කරයිද?",
+          "optionsEn": ["Methanol", "Ethanol", "Ethylene glycol", "Glycerol"],
+          "optionsSi": ["මෙතනෝල්", "එතනෝල්", "එතිලීන් ග්ලයිකෝල්", "ග්ලිසරෝල්"],
+          "correctAnswer": "Ethylene glycol"
+        },
+        {
+          "id": 35,
+          "questionEn": "What is the product of the reaction of ethyne with excess H2 in the presence of Ni?",
+          "questionSi": "Ni ඉදිරියේ අතිරික්ත H2 සමඟ එතයින් ප්‍රතික්‍රියා කිරීමෙන් ලැබෙන නිෂ්පාදනය කුමක්ද?",
+          "optionsEn": ["Ethene", "Ethane", "Acetylene", "Methane"],
+          "optionsSi": ["එතීන්", "එතේන්", "ඇසිටිලීන්", "මීතේන්"],
+          "correctAnswer": "Ethane"
+        },
+        {
+          "id": 36,
+          "questionEn": "Which functional group is present in ketones?",
+          "questionSi": "කීටෝනවල පවතින ක්‍රියාකාරී කාණ්ඩය කුමක්ද?",
+          "optionsEn": ["-CHO", "-CO-", "-COOH", "-OH"],
+          "optionsSi": ["-CHO", "-CO-", "-COOH", "-OH"],
+          "correctAnswer": "-CO-"
+        },
+        {
+          "id": 37,
+          "questionEn": "What is the common name of propanone?",
+          "questionSi": "ප්‍රොපනෝන් හි පොදු නාමය කුමක්ද?",
+          "optionsEn": ["Acetone", "Formaldehyde", "Acetaldehyde", "Benzaldehyde"],
+          "optionsSi": ["ඇසිටෝන්", "ෆෝමල්ඩිහයිඩ්", "ඇසිටැල්ඩිහයිඩ්", "බෙන්සැල්ඩිහයිඩ්"],
+          "correctAnswer": "Acetone"
+        },
+        {
+          "id": 38,
+          "questionEn": "Which of the following is a tertiary alcohol?",
+          "questionSi": "පහත සඳහන් ඒවායින් තෘතීයික මධ්‍යසාරය කුමක්ද?",
+          "optionsEn": ["CH3OH", "CH3CH2OH", "(CH3)2CHOH", "(CH3)3COH"],
+          "optionsSi": ["CH3OH", "CH3CH2OH", "(CH3)2CHOH", "(CH3)3COH"],
+          "correctAnswer": "(CH3)3COH"
+        },
+        {
+          "id": 39,
+          "questionEn": "What is the product when ethanol is heated with concentrated H2SO4 at 170°C?",
+          "questionSi": "170°C දී සාන්ද්‍ර H2SO4 සමඟ එතනෝල් රත් කළ විට ලැබෙන නිෂ්පාදනය කුමක්ද?",
+          "optionsEn": ["Ethane", "Ethene", "Ethyne", "Diethyl ether"],
+          "optionsSi": ["එතේන්", "එතීන්", "එතයින්", "ඩයිඑතයිල් ඊතර්"],
+          "correctAnswer": "Ethene"
+        },
+        {
+          "id": 40,
+          "questionEn": "Which compound is used in the manufacture of soap?",
+          "questionSi": "සබන් නිෂ්පාදනයේදී භාවිතා කරන සංයෝගය කුමක්ද?",
+          "optionsEn": ["Ethanol", "Glycerol", "Sodium hydroxide", "Both B and C"],
+          "optionsSi": ["එතනෝල්", "ග්ලිසරෝල්", "සෝඩියම් හයිඩ්‍රොක්සයිඩ්", "B සහ C දෙකම"],
+          "correctAnswer": "Both B and C"
+        }
+      ]
+    },
+    {
+      "year": 2021,
+      "questions": [
+        {
+          "id": 41,
+          "questionEn": "What is the product of the reaction of benzene with concentrated H2SO4?",
+          "questionSi": "සාන්ද්‍ර H2SO4 සමඟ බෙන්සීන් ප්‍රතික්‍රියා කිරීමෙන් ලැබෙන නිෂ්පාදනය කුමක්ද?",
+          "optionsEn": ["Benzenesulfonic acid", "Nitrobenzene", "Phenol", "Toluene"],
+          "optionsSi": ["බෙන්සීන්සල්ෆොනික් අම්ලය", "නයිට්‍රොබෙන්සීන්", "ෆීනෝල්", "ටොලුයින්"],
+          "correctAnswer": "Benzenesulfonic acid"
+        },
+        {
+          "id": 42,
+          "questionEn": "Which of the following gives a positive Lucas test?",
+          "questionSi": "පහත සඳහන් ඒවායින් ධන ලූකස් පරීක්ෂණයක් ලබා දෙන්නේ කුමක්ද?",
+          "optionsEn": ["Methanol", "Primary alcohol", "Secondary alcohol", "Tertiary alcohol"],
+          "optionsSi": ["මෙතනෝල්", "ප්‍රාථමික මධ්‍යසාර", "ද්විතීයික මධ්‍යසාර", "තෘතීයික මධ්‍යසාර"],
+          "correctAnswer": "Tertiary alcohol"
+        },
+        {
+          "id": 43,
+          "questionEn": "What is the IUPAC name of CH3CHClCH3?",
+          "questionSi": "CH3CHClCH3 හි IUPAC නාමය කුමක්ද?",
+          "optionsEn": ["1-Chloropropane", "2-Chloropropane", "Chloromethane", "Chloroethane"],
+          "optionsSi": ["1-ක්ලෝරොප්‍රොපේන්", "2-ක්ලෝරොප්‍රොපේන්", "ක්ලෝරොමීතේන්", "ක්ලෝරොඑතේන්"],
+          "correctAnswer": "2-Chloropropane"
+        },
+        {
+          "id": 44,
+          "questionEn": "Which compound is used as a starting material for the synthesis of Teflon?",
+          "questionSi": "ටෙෆ්ලෝන් සංස්ලේෂණය සඳහා ආරම්භක ද්‍රව්‍යයක් ලෙස භාවිතා කරන සංයෝගය කුමක්ද?",
+          "optionsEn": ["Ethylene", "Acetylene", "Tetrafluoroethylene", "Vinyl chloride"],
+          "optionsSi": ["එතිලීන්", "ඇසිටිලීන්", "ටෙට්‍රාෆ්ලෝරොඑතිලීන්", "වයිනයිල් ක්ලෝරයිඩ්"],
+          "correctAnswer": "Tetrafluoroethylene"
+        },
+        {
+          "id": 45,
+          "questionEn": "What is the product when ethanal is oxidized?",
+          "questionSi": "එතනාල් ඔක්සිකරණය වූ විට ලැබෙන නිෂ්පාදනය කුමක්ද?",
+          "optionsEn": ["Ethanol", "Ethanoic acid", "Ethene", "Ethane"],
+          "optionsSi": ["එතනෝල්", "එතනොයික් අම්ලය", "එතීන්", "එතේන්"],
+          "correctAnswer": "Ethanoic acid"
+        },
+        {
+          "id": 46,
+          "questionEn": "Which of the following is an addition polymer?",
+          "questionSi": "පහත සඳහන් ඒවායින් ආකලන බහුඅවයවිකයක් කුමක්ද?",
+          "optionsEn": ["Nylon", "Polyethylene", "Polyester", "Protein"],
+          "optionsSi": ["නයිලෝන්", "පොලිඑතිලීන්", "පොලිඑස්ටර්", "ප්‍රෝටීන්"],
+          "correctAnswer": "Polyethylene"
+        },
+        {
+          "id": 47,
+          "questionEn": "What is the functional group of amines?",
+          "questionSi": "ඇමයිනවල ක්‍රියාකාරී කාණ්ඩය කුමක්ද?",
+          "optionsEn": ["-OH", "-NH2", "-COOH", "-CHO"],
+          "optionsSi": ["-OH", "-NH2", "-COOH", "-CHO"],
+          "correctAnswer": "-NH2"
+        },
+        {
+          "id": 48,
+          "questionEn": "Which compound is used as a sweetening agent?",
+          "questionSi": "රසකාරක කාරකයක් ලෙස භාවිතා කරන සංයෝගය කුමක්ද?",
+          "optionsEn": ["Glucose", "Fructose", "Sucrose", "All of the above"],
+          "optionsSi": ["ග්ලූකෝස්", "ෆෲක්ටෝස්", "සුක්රෝස්", "ඉහත සියල්ල"],
+          "correctAnswer": "All of the above"
+        },
+        {
+          "id": 49,
+          "questionEn": "What is the product of the reaction of ethene with bromine?",
+          "questionSi": "බ්‍රෝමීන් සමඟ එතීන් ප්‍රතික්‍රියාවේ නිෂ්පාදනය කුමක්ද?",
+          "optionsEn": ["Ethane", "1,2-Dibromoethane", "Bromoethane", "Ethyne"],
+          "optionsSi": ["එතේන්", "1,2-ඩයිබ්‍රෝමොඑතේන්", "බ්‍රෝමොඑතේන්", "එතයින්"],
+          "correctAnswer": "1,2-Dibromoethane"
+        },
+        {
+          "id": 50,
+          "questionEn": "Which of the following is NOT a greenhouse gas?",
+          "questionSi": "පහත සඳහන් ඒවායින් හරිතාගාර වායුවක් නොවන කුමක්ද?",
+          "optionsEn": ["CO2", "CH4", "N2O", "O2"],
+          "optionsSi": ["CO2", "CH4", "N2O", "O2"],
+          "correctAnswer": "O2"
+        }
+      ]
+    }
+  ]
+}

@@ -19,7 +19,7 @@ class ScoreAnimationWidget extends StatefulWidget {
 class _ScoreAnimationWidgetState extends State<ScoreAnimationWidget>
     with SingleTickerProviderStateMixin {
   final ScoringService _scoringService = ScoringService();
-  List<FloatingPoint> _floatingPoints = [];
+  final List<FloatingPoint> _floatingPoints = [];
 
   @override
   void initState() {

@@ -154,7 +154,6 @@ class ChemistryProvider extends ChangeNotifier {
       _completedLessonIds.add(id);
 
       // Award points for lesson completion
-      final scoringService = ScoringService();
       // Note: You'll need context here. We'll handle this differently
       // For now, just add points directly
       addPoints(100);
@@ -261,7 +260,7 @@ class ChemistryProvider extends ChangeNotifier {
   Future<void> checkReaction({BuildContext? context}) async {
     // Build selected reactant list
     final reactantIds = <String>[
-      if (_selectedReactantA != null) _selectedReactantA!,
+      ?_selectedReactantA,
       if (_selectedReactantB != null && _selectedReactantB!.isNotEmpty)
         _selectedReactantB!,
     ];

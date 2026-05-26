@@ -11,6 +11,7 @@
   "points": "ලකුණු",
 
   "correct": "නිවැරදි",
+  "incorrect": "වැරදි",
   "attempts": "උත්සාහයන්",
   "lessons": "පාඩම්",
 
@@ -86,5 +87,58 @@
   "@stepsCompleted": { "description": "Label for number of steps completed" },
 
   "newChallengeButton": "නව අභියෝගය",
-  "@newChallengeButton": { "description": "Tooltip for new challenge button" }
+  "@newChallengeButton": { "description": "Tooltip for new challenge button" },
+
+  "pastPaperChallenge": "පසුගිය ප්‍රශ්න පත්‍ර",
+  "@pastPaperChallenge": { "description": "Title for Past Paper Challenge card" },
+
+  "pastPaperSubtitle": "2000-2025 කාබනික MCQ ප්‍රශ්න",
+  "@pastPaperSubtitle": { "description": "Subtitle for Past Paper Challenge card" },
+
+  "mcqQuiz": "MCQ ප්‍රශ්න",
+  "@mcqQuiz": { "description": "Title for MCQ Quiz screen" },
+
+  "questionNumber": "ප්‍රශ්නය {current}/{total}",
+  "@questionNumber": {
+    "description": "Question counter display",
+    "placeholders": {
+      "current": { "type": "int", "example": "1" },
+      "total": { "type": "int", "example": "50" }
+    }
+  },
+
+  "explanationError": "විවරණයක් ලබා ගැනීමට නොහැකි විය.",
+  "@explanationError": { "description": "Error message when explanation cannot be retrieved" },
+
+  "excellent": "විශිෂ්ටයි!",
+  "@excellent": { "description": "Success message for high quiz score" },
+
+  "quizCompleted": "ප්‍රශ්නාවලි සම්පූර්ණයි!",
+  "@quizCompleted": { "description": "Quiz completion message" },
+
+  "percentage": "ප්‍රතිශතය",
+  "@percentage": { "description": "Label for percentage score" },
+
+  "correctAnswers": "නිවැරදි පිළිතුරු",
+  "@correctAnswers": { "description": "Label for correct answers count" },
+
+  "close": "වසන්න",
+  "@close": { "description": "Close button label" },
+
+  "claimBonus": "බෝනස් ලබා ගන්න",
+  "@claimBonus": { "description": "Claim bonus points button label" },
+
+  "pastPapers": "පසුගිය ප්‍රශ්න පත්‍ර (2000-2025)",
+  "@pastPapers": { "description": "Title for Past Papers list screen" },
+
+  "chemistryYear": "{year} A/L ප්‍රශ්න",
+  "@chemistryYear": {
+    "description": "Chemistry paper title with year",
+    "placeholders": {
+      "year": { "type": "int", "example": "2025" }
+    }
+  },
+
+  "questionsNotAvailable": "මෙම අවුරුද්දට අදාළ ප්‍රශ්න තවම ඇතුළත් කර නැත.",
+  "@questionsNotAvailable": { "description": "Error message when paper data is not available" }
 }

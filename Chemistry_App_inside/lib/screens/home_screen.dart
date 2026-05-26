@@ -1,4 +1,5 @@
 import 'package:chemistry_app/screens/conversion_screen.dart';
+import 'package:chemistry_app/screens/past_paper_list_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -66,7 +67,14 @@ class HomeScreen extends StatelessWidget {
                       lesson.lessons.length,
                       chem.completedLessonIds.length,
                     ),
-                    gradient: AppTheme.primaryGradient,
+                    gradient: const LinearGradient(
+                      begin: Alignment.topLeft,
+                      end: Alignment.bottomRight,
+                      colors: [
+                        Color(0xFF00BCD4),
+                        Color(0xFF26C6DA),
+                      ], // Cyan/Teal
+                    ),
                     onTap: () => Navigator.push(
                       context,
                       MaterialPageRoute(
@@ -74,22 +82,29 @@ class HomeScreen extends StatelessWidget {
                       ),
                     ),
                   ),
+
                   const SizedBox(height: 16),
+
+                  // Practice Lab Card
                   _buildNavCard(
                     context,
                     icon: Icons.science_rounded,
                     title: l10n.practiceLab,
                     subtitle: l10n.practiceLabSubtitle,
                     gradient: const LinearGradient(
-                      colors: [Color(0xFF7C3AED), Color(0xFFA78BFA)],
+                      begin: Alignment.topLeft,
+                      end: Alignment.bottomRight,
+                      colors: [Color(0xFF7C3AED), Color(0xFFA78BFA)], // Purple
                     ),
                     onTap: () => Navigator.push(
                       context,
                       MaterialPageRoute(builder: (_) => const PracticeScreen()),
                     ),
                   ),
+
                   const SizedBox(height: 16),
-                  // ── Conversion Master Card ──────────────────────────
+
+                  // Conversion Master Card
                   _buildNavCard(
                     context,
                     icon: Icons.sync_alt_rounded,
@@ -98,7 +113,10 @@ class HomeScreen extends StatelessWidget {
                     gradient: const LinearGradient(
                       begin: Alignment.topLeft,
                       end: Alignment.bottomRight,
-                      colors: [Color(0xFF1E88E5), Color(0xFF64B5F6)],
+                      colors: [
+                        Color(0xFF1E88E5),
+                        Color(0xFF64B5F6),
+                      ], // Light Blue
                     ),
                     onTap: () {
                       Navigator.push(
@@ -109,18 +127,45 @@ class HomeScreen extends StatelessWidget {
                       );
                     },
                   ),
-                  const SizedBox(height: 16), // ඊට පස්සේ tutor කාඩ් එක එනවා
+
+                  const SizedBox(height: 16),
+
+                  // Chemistry Tutor Card
                   _buildNavCard(
                     context,
                     icon: Icons.psychology_rounded,
                     title: l10n.chemistryTutor,
                     subtitle: l10n.chemistryTutorSubtitle,
                     gradient: const LinearGradient(
-                      colors: [Color(0xFFEF6C00), Color(0xFFFFA726)],
+                      begin: Alignment.topLeft,
+                      end: Alignment.bottomRight,
+                      colors: [Color(0xFFEF6C00), Color(0xFFFFA726)], // Orange
                     ),
                     onTap: () => Navigator.push(
                       context,
                       MaterialPageRoute(builder: (_) => const TutorScreen()),
+                    ),
+                  ),
+
+                  const SizedBox(height: 16),
+
+                  // Past Paper Challenge Card (NEW)
+                  _buildNavCard(
+                    context,
+                    icon: Icons.assignment_turned_in_rounded,
+                    title: l10n.pastPaperChallenge,
+                    subtitle: l10n.pastPaperSubtitle,
+                    gradient: const LinearGradient(
+                      begin: Alignment.topLeft,
+                      end: Alignment.bottomRight,
+                      colors: [
+                        Color(0xFF00838F),
+                        Color(0xFF00ACC1),
+                      ], // Deep Teal to Cyan
+                    ),
+                    onTap: () => Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (_) => PastPaperListScreen()),
                     ),
                   ),
                 ],
@@ -217,7 +262,7 @@ class HomeScreen extends StatelessWidget {
           TweenAnimationBuilder<int>(
             tween: IntTween(begin: 0, end: provider.score),
             duration: const Duration(milliseconds: 600),
-            builder: (_, value, __) => Text(
+            builder: (_, value, _) => Text(
               '$value',
               style: const TextStyle(
                 fontSize: 48,
