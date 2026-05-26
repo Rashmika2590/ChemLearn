@@ -75,7 +75,7 @@ class ScoringService {
     // Update streak if enabled
     if (updateStreak) {
       await _updateStreak(mode, context);
-
+      if (!context.mounted) return;
       // Check for streak bonuses
       final streakBonus = await _checkStreakBonus(mode, context);
       if (streakBonus > 0) {
@@ -85,12 +85,24 @@ class ScoringService {
     }
 
     // Check for first-time completion bonus
+    // 1. මුලින්ම await කරලා bonus එක ගන්නවා
     final firstTimeBonus = await _checkFirstTimeBonus(mode, action, context);
+
+    // 2. අනිවාර්යයෙන්ම මේ check එක කරන්න!
+    if (!context.mounted) return;
+
+    // 3. දැන් Points update කරන logic එක තියන්න
     if (firstTimeBonus > 0) {
       points += firstTimeBonus;
       _notifyPointsAdded(mode, firstTimeBonus, '🎉 First Time Bonus!');
     }
+    // මේ පේළිය අනිවාර්යයි
+    if (!context.mounted) return;
 
+    if (firstTimeBonus > 0) {
+      points += firstTimeBonus;
+      _notifyPointsAdded(mode, firstTimeBonus, '🎉 First Time Bonus!');
+    }
     // Add points using ChemistryProvider's method
     chemistryProvider.addPoints(points);
 

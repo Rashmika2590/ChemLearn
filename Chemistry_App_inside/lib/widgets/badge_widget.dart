@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 
 class BadgeWidget extends StatelessWidget {
   final bool isMastered;
@@ -8,8 +7,9 @@ class BadgeWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    if (!isMastered)
+    if (!isMastered) {
       return const SizedBox.shrink(); // මාස්ටර් වෙලා නැත්නම් පෙන්වන්න එපා
+    }
 
     return Container(
       padding: const EdgeInsets.all(16),

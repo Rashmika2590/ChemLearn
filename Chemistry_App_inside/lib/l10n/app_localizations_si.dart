@@ -30,6 +30,9 @@ class AppLocalizationsSi extends AppLocalizations {
   String get correct => 'නිවැරදි';
 
   @override
+  String get incorrect => 'වැරදි';
+
+  @override
   String get attempts => 'උත්සාහයන්';
 
   @override
@@ -215,4 +218,51 @@ class AppLocalizationsSi extends AppLocalizations {
 
   @override
   String get newChallengeButton => 'නව අභියෝගය';
+
+  @override
+  String get pastPaperChallenge => 'පසුගිය ප්‍රශ්න පත්‍ර';
+
+  @override
+  String get pastPaperSubtitle => '2000-2025 කාබනික MCQ ප්‍රශ්න';
+
+  @override
+  String get mcqQuiz => 'MCQ ප්‍රශ්න';
+
+  @override
+  String questionNumber(int current, int total) {
+    return 'ප්‍රශ්නය $current/$total';
+  }
+
+  @override
+  String get explanationError => 'විවරණයක් ලබා ගැනීමට නොහැකි විය.';
+
+  @override
+  String get excellent => 'විශිෂ්ටයි!';
+
+  @override
+  String get quizCompleted => 'ප්‍රශ්නාවලි සම්පූර්ණයි!';
+
+  @override
+  String get percentage => 'ප්‍රතිශතය';
+
+  @override
+  String get correctAnswers => 'නිවැරදි පිළිතුරු';
+
+  @override
+  String get close => 'වසන්න';
+
+  @override
+  String get claimBonus => 'බෝනස් ලබා ගන්න';
+
+  @override
+  String get pastPapers => 'පසුගිය ප්‍රශ්න පත්‍ර (2000-2025)';
+
+  @override
+  String chemistryYear(int year) {
+    return '$year A/L ප්‍රශ්න';
+  }
+
+  @override
+  String get questionsNotAvailable =>
+      'මෙම අවුරුද්දට අදාළ ප්‍රශ්න තවම ඇතුළත් කර නැත.';
 }

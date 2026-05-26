@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
+import 'package:flutter_tts/flutter_tts.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 
 import '../core/theme/app_theme.dart';
 import '../l10n/app_localizations.dart';
@@ -90,7 +93,7 @@ class _TutorScreenState extends State<TutorScreen> {
               width: 72,
               height: 72,
               decoration: BoxDecoration(
-                color: AppTheme.accentOrange.withOpacity(0.15),
+                color: AppTheme.accentOrange.withAlpha(38),
                 shape: BoxShape.circle,
               ),
               child: const Icon(
@@ -155,7 +158,7 @@ class _TutorScreenState extends State<TutorScreen> {
               width: 72,
               height: 72,
               decoration: BoxDecoration(
-                color: const Color(0xFF00897B).withOpacity(0.15),
+                color: const Color(0xFF00897B).withAlpha(38),
                 shape: BoxShape.circle,
               ),
               child: const Icon(
@@ -214,7 +217,13 @@ class _TutorScreenState extends State<TutorScreen> {
       itemCount: provider.tutorMessages.length,
       itemBuilder: (context, index) {
         final msg = provider.tutorMessages[index];
-        return _MessageBubble(message: msg);
+        // Find the preceding user question for AI responses
+        String? userQuestion;
+        if (!msg.isUser && index > 0) {
+          final prev = provider.tutorMessages[index - 1];
+          if (prev.isUser) userQuestion = prev.text;
+        }
+        return _MessageBubble(message: msg, userQuestion: userQuestion);
       },
     );
   }
@@ -237,7 +246,7 @@ class _TutorScreenState extends State<TutorScreen> {
               height: 16,
               child: CircularProgressIndicator(
                 strokeWidth: 2,
-                color: Colors.white.withOpacity(0.5),
+                color: Colors.white.withAlpha(128),
               ),
             ),
             const SizedBox(width: 10),
@@ -261,7 +270,7 @@ class _TutorScreenState extends State<TutorScreen> {
       ),
       decoration: BoxDecoration(
         color: AppTheme.surfaceDark,
-        border: Border(top: BorderSide(color: Colors.white.withOpacity(0.06))),
+        border: Border(top: BorderSide(color: Colors.white.withAlpha(15))),
       ),
       child: Row(
         children: [
@@ -309,13 +318,353 @@ class _TutorScreenState extends State<TutorScreen> {
   }
 }
 
-class _MessageBubble extends StatelessWidget {
+class _MessageBubble extends StatefulWidget {
   final TutorMessage message;
-  const _MessageBubble({required this.message});
+  final String? userQuestion;
+  const _MessageBubble({required this.message, this.userQuestion});
+
+  @override
+  State<_MessageBubble> createState() => _MessageBubbleState();
+}
+
+class _MessageBubbleState extends State<_MessageBubble> {
+  final FlutterTts _flutterTts = FlutterTts();
+  bool _isSpeaking = false;
+  bool _isReporting = false;
+
+  @override
+  void initState() {
+    super.initState();
+    _flutterTts.setCompletionHandler(() {
+      if (mounted) setState(() => _isSpeaking = false);
+    });
+    _flutterTts.setCancelHandler(() {
+      if (mounted) setState(() => _isSpeaking = false);
+    });
+    _flutterTts.setErrorHandler((_) {
+      if (mounted) setState(() => _isSpeaking = false);
+    });
+  }
+
+  @override
+  void dispose() {
+    _flutterTts.stop();
+    super.dispose();
+  }
+
+  // ── Text-to-Speech ──────────────────────────────────────────
+  Future<void> _toggleTts() async {
+    if (_isSpeaking) {
+      await _flutterTts.stop();
+      setState(() => _isSpeaking = false);
+    } else {
+      // 1. Text එකේ තියෙන ** අයින් කරන්න මෙන්න මේ පේළිය දාන්න:
+      String cleanText = widget.message.text.replaceAll(RegExp(r'\*\*'), '');
+
+      // 2. අනිත් markdown symbols අයින් කරන්න ඕන නම් මේකත් දාන්න:
+      cleanText = cleanText.replaceAll(RegExp(r'#'), ''); // Heading symbols
+
+      await _flutterTts.setSpeechRate(0.45);
+      await _flutterTts.setPitch(1.0);
+      setState(() => _isSpeaking = true);
+
+      // 3. Clean කරපු text එක කියවන්න
+      await _flutterTts.speak(cleanText);
+    }
+  }
+
+  // ── Copy to Clipboard ──────────────────────────────────────
+  void _copyToClipboard() {
+    Clipboard.setData(ClipboardData(text: widget.message.text));
+    ScaffoldMessenger.of(context).removeCurrentSnackBar();
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        content: const Row(
+          children: [
+            Icon(Icons.check_circle_rounded, color: Colors.white, size: 18),
+            SizedBox(width: 10),
+            Text('Copied to Clipboard'),
+          ],
+        ),
+        backgroundColor: const Color(0xFF00897B),
+        behavior: SnackBarBehavior.floating,
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+        margin: const EdgeInsets.symmetric(horizontal: 24, vertical: 12),
+        duration: const Duration(seconds: 2),
+      ),
+    );
+  }
+
+  // ── Report Dialog with Firestore ────────────────────────────
+  void _showReportDialog() {
+    String? selectedReason;
+    final reasons = [
+      'Incorrect Answer',
+      'Inappropriate Content',
+      'Incomplete Response',
+      'Misleading Information',
+      'Other',
+    ];
+
+    showDialog(
+      context: context,
+      builder: (dialogContext) {
+        return StatefulBuilder(
+          builder: (context, setDialogState) {
+            return AlertDialog(
+              backgroundColor: AppTheme.surfaceDark,
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(20),
+                side: BorderSide(color: Colors.white.withAlpha(20)),
+              ),
+              title: const Row(
+                children: [
+                  Icon(Icons.flag_rounded, color: Color(0xFFFFA726), size: 22),
+                  SizedBox(width: 10),
+                  Text(
+                    'Report Response',
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 18,
+                      fontWeight: FontWeight.w700,
+                    ),
+                  ),
+                ],
+              ),
+              content: Column(
+                mainAxisSize: MainAxisSize.min,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  const Text(
+                    'Select a reason for reporting:',
+                    style: TextStyle(color: Colors.white60, fontSize: 13),
+                  ),
+                  const SizedBox(height: 14),
+                  ...reasons.map((reason) {
+                    final isSelected = selectedReason == reason;
+                    return Padding(
+                      padding: const EdgeInsets.only(bottom: 8),
+                      child: InkWell(
+                        onTap: () =>
+                            setDialogState(() => selectedReason = reason),
+                        borderRadius: BorderRadius.circular(12),
+                        child: AnimatedContainer(
+                          duration: const Duration(milliseconds: 200),
+                          padding: const EdgeInsets.symmetric(
+                            horizontal: 14,
+                            vertical: 12,
+                          ),
+                          decoration: BoxDecoration(
+                            color: isSelected
+                                ? const Color(0xFF00897B).withAlpha(40)
+                                : AppTheme.cardDark,
+                            borderRadius: BorderRadius.circular(12),
+                            border: Border.all(
+                              color: isSelected
+                                  ? const Color(0xFF00ACC1)
+                                  : Colors.white.withAlpha(15),
+                              width: isSelected ? 1.5 : 1,
+                            ),
+                          ),
+                          child: Row(
+                            children: [
+                              Icon(
+                                isSelected
+                                    ? Icons.radio_button_checked_rounded
+                                    : Icons.radio_button_off_rounded,
+                                color: isSelected
+                                    ? const Color(0xFF00E5FF)
+                                    : Colors.white30,
+                                size: 20,
+                              ),
+                              const SizedBox(width: 12),
+                              Text(
+                                reason,
+                                style: TextStyle(
+                                  color: isSelected
+                                      ? Colors.white
+                                      : Colors.white70,
+                                  fontSize: 14,
+                                  fontWeight: isSelected
+                                      ? FontWeight.w600
+                                      : FontWeight.w400,
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
+                    );
+                  }),
+                ],
+              ),
+              actionsPadding: const EdgeInsets.symmetric(
+                horizontal: 16,
+                vertical: 12,
+              ),
+              actions: [
+                TextButton(
+                  onPressed: () => Navigator.of(dialogContext).pop(),
+                  child: Text(
+                    'Cancel',
+                    style: TextStyle(
+                      color: Colors.white.withAlpha(150),
+                      fontWeight: FontWeight.w500,
+                    ),
+                  ),
+                ),
+                AnimatedOpacity(
+                  opacity: selectedReason != null ? 1.0 : 0.4,
+                  duration: const Duration(milliseconds: 200),
+                  child: FilledButton.icon(
+                    onPressed: selectedReason == null || _isReporting
+                        ? null
+                        : () async {
+                            setState(() => _isReporting = true);
+                            setDialogState(() {});
+                            try {
+                              await FirebaseFirestore.instance
+                                  .collection('reports')
+                                  .add({
+                                    'question':
+                                        widget.userQuestion ??
+                                        'Unknown question',
+                                    'aiResponse': widget.message.text,
+                                    'reportReason': selectedReason,
+                                    'timestamp': FieldValue.serverTimestamp(),
+                                    'userId': null, // No auth configured
+                                  });
+
+                              if (dialogContext.mounted) {
+                                Navigator.of(dialogContext).pop();
+                              }
+                              if (mounted) {
+                                setState(() => _isReporting = false);
+                                ScaffoldMessenger.of(
+                                  this.context,
+                                ).removeCurrentSnackBar();
+                                ScaffoldMessenger.of(this.context).showSnackBar(
+                                  SnackBar(
+                                    content: const Row(
+                                      children: [
+                                        Icon(
+                                          Icons.check_circle_rounded,
+                                          color: Colors.white,
+                                          size: 18,
+                                        ),
+                                        SizedBox(width: 10),
+                                        Text('Report submitted. Thank you!'),
+                                      ],
+                                    ),
+                                    backgroundColor: const Color(0xFF00897B),
+                                    behavior: SnackBarBehavior.floating,
+                                    shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(12),
+                                    ),
+                                    margin: const EdgeInsets.symmetric(
+                                      horizontal: 24,
+                                      vertical: 12,
+                                    ),
+                                    duration: const Duration(seconds: 2),
+                                  ),
+                                );
+                              }
+                            } catch (e) {
+                              if (mounted) {
+                                setState(() => _isReporting = false);
+                                ScaffoldMessenger.of(
+                                  this.context,
+                                ).removeCurrentSnackBar();
+                                ScaffoldMessenger.of(this.context).showSnackBar(
+                                  SnackBar(
+                                    content: const Row(
+                                      children: [
+                                        Icon(
+                                          Icons.error_outline_rounded,
+                                          color: Colors.white,
+                                          size: 18,
+                                        ),
+                                        SizedBox(width: 10),
+                                        Text('Failed to submit report.'),
+                                      ],
+                                    ),
+                                    backgroundColor: AppTheme.errorRed,
+                                    behavior: SnackBarBehavior.floating,
+                                    shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(12),
+                                    ),
+                                    margin: const EdgeInsets.symmetric(
+                                      horizontal: 24,
+                                      vertical: 12,
+                                    ),
+                                    duration: const Duration(seconds: 3),
+                                  ),
+                                );
+                              }
+                            }
+                          },
+                    icon: _isReporting
+                        ? const SizedBox(
+                            width: 16,
+                            height: 16,
+                            child: CircularProgressIndicator(
+                              strokeWidth: 2,
+                              color: Colors.white,
+                            ),
+                          )
+                        : const Icon(Icons.send_rounded, size: 16),
+                    label: Text(_isReporting ? 'Submitting...' : 'Submit'),
+                    style: FilledButton.styleFrom(
+                      backgroundColor: const Color(0xFF00897B),
+                      foregroundColor: Colors.white,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(12),
+                      ),
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: 20,
+                        vertical: 12,
+                      ),
+                    ),
+                  ),
+                ),
+              ],
+            );
+          },
+        );
+      },
+    );
+  }
+
+  // ── Action Button Helper ────────────────────────────────────
+  Widget _actionButton({
+    required IconData icon,
+    required String tooltip,
+    required VoidCallback onPressed,
+    Color? iconColor,
+  }) {
+    return Tooltip(
+      message: tooltip,
+      child: Material(
+        color: Colors.transparent,
+        child: InkWell(
+          onTap: onPressed,
+          borderRadius: BorderRadius.circular(8),
+          child: Padding(
+            padding: const EdgeInsets.all(6),
+            child: Icon(
+              icon,
+              size: 17,
+              color: iconColor ?? Colors.white.withAlpha(100),
+            ),
+          ),
+        ),
+      ),
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
-    final isUser = message.isUser;
+    final isUser = widget.message.isUser;
     return Align(
       alignment: isUser ? Alignment.centerRight : Alignment.centerLeft,
       child: Container(
@@ -323,24 +672,74 @@ class _MessageBubble extends StatelessWidget {
           maxWidth: MediaQuery.of(context).size.width * 0.78,
         ),
         margin: const EdgeInsets.only(bottom: 10),
-        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
-        decoration: BoxDecoration(
-          gradient: isUser ? AppTheme.primaryGradient : null,
-          color: isUser ? null : AppTheme.cardDark,
-          borderRadius: BorderRadius.only(
-            topLeft: const Radius.circular(18),
-            topRight: const Radius.circular(18),
-            bottomLeft: Radius.circular(isUser ? 18 : 4),
-            bottomRight: Radius.circular(isUser ? 4 : 18),
-          ),
-        ),
-        child: Text(
-          message.text,
-          style: TextStyle(
-            color: isUser ? Colors.white : Colors.white70,
-            fontSize: 14,
-            height: 1.5,
-          ),
+        child: Column(
+          crossAxisAlignment: isUser
+              ? CrossAxisAlignment.end
+              : CrossAxisAlignment.start,
+          children: [
+            // ── Message Bubble ──
+            Container(
+              padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+              decoration: BoxDecoration(
+                gradient: isUser ? AppTheme.primaryGradient : null,
+                color: isUser ? null : AppTheme.cardDark,
+                borderRadius: BorderRadius.only(
+                  topLeft: const Radius.circular(18),
+                  topRight: const Radius.circular(18),
+                  bottomLeft: Radius.circular(isUser ? 18 : 4),
+                  bottomRight: Radius.circular(isUser ? 4 : 18),
+                ),
+              ),
+              child: isUser
+                  ? Text(
+                      widget.message.text,
+                      style: const TextStyle(
+                        color: Colors.white,
+                        fontSize: 14,
+                        height: 1.5,
+                      ),
+                    )
+                  : SelectableText(
+                      widget.message.text,
+                      style: const TextStyle(
+                        color: Colors.white70,
+                        fontSize: 14,
+                        height: 1.5,
+                      ),
+                    ),
+            ),
+
+            // ── Action Row (AI responses only) ──
+            if (!isUser)
+              Padding(
+                padding: const EdgeInsets.only(top: 4, left: 4),
+                child: Row(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    _actionButton(
+                      icon: _isSpeaking
+                          ? Icons.stop_circle_rounded
+                          : Icons.volume_up_rounded,
+                      tooltip: _isSpeaking ? 'Stop' : 'Read Aloud',
+                      onPressed: _toggleTts,
+                      iconColor: _isSpeaking ? const Color(0xFF00E5FF) : null,
+                    ),
+                    const SizedBox(width: 2),
+                    _actionButton(
+                      icon: Icons.copy_rounded,
+                      tooltip: 'Copy',
+                      onPressed: _copyToClipboard,
+                    ),
+                    const SizedBox(width: 2),
+                    _actionButton(
+                      icon: Icons.flag_outlined,
+                      tooltip: 'Report',
+                      onPressed: _showReportDialog,
+                    ),
+                  ],
+                ),
+              ),
+          ],
         ),
       ),
     );
@@ -361,7 +760,7 @@ class _SuggestedChip extends StatelessWidget {
         decoration: BoxDecoration(
           color: AppTheme.cardDark,
           borderRadius: BorderRadius.circular(20),
-          border: Border.all(color: Colors.white.withOpacity(0.1)),
+          border: Border.all(color: Colors.white.withAlpha(26)),
         ),
         child: Text(
           label,

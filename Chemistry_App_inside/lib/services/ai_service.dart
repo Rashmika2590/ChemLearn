@@ -15,7 +15,7 @@ You are ChemLearn Tutor, a friendly and encouraging organic chemistry tutor and 
 RULES:
 1. ONLY answer questions or predict results about organic chemistry topics.
 2. Use simple language, analogies, and keep explanations under 200 words.
-3. Format key terms in **bold** for emphasis.
+3. Do NOT use markdown bold syntax (like **) because it interferes with Text-to-Speech engines. Instead, emphasize key terms by using uppercase or simply stating them clearly.
 4. When asked to predict a reaction, strictly output a structured JSON object matching the requested schema.
 ''';
 
@@ -270,6 +270,30 @@ Translate only the values of the JSON fields into the requested language (Sinhal
     Explain the electron movement step-by-step using simple terms.
     If in Sinhala, explain in natural Sinhala with English terms for compounds.
   ''';
+    return _generateOneShot(prompt, isSinhala: isSinhala);
+  }
+
+  Future<String?> getMcqExplanation(
+    String question,
+    String options,
+    String correctAnswer,
+    String studentAnswer,
+    bool isSinhala,
+  ) async {
+    final prompt =
+        '''
+    Question: $question
+    Options: $options
+    Correct Answer: $correctAnswer
+    Student's Answer: $studentAnswer
+
+    Evaluate the student's answer. 
+    1. If it's correct, say "Correct!" and explain why briefly.
+    2. If it's incorrect, say "Incorrect." and explain why the correct answer is the right one.
+    Use simple, encouraging language.
+    If isSinhala is true, respond in clear, natural Sinhala.
+    ''';
+
     return _generateOneShot(prompt, isSinhala: isSinhala);
   }
 }

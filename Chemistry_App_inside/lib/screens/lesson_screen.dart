@@ -28,10 +28,11 @@ class _LessonScreenState extends State<LessonScreen> {
     return Consumer<LessonProvider>(
       builder: (context, lp, _) {
         final lesson = lp.currentLesson;
-        if (lesson == null)
+        if (lesson == null) {
           return const Scaffold(
             body: Center(child: CircularProgressIndicator()),
           );
+        }
 
         final slides = lesson.body
             .get(lp.currentLocale)
@@ -152,9 +153,9 @@ class _LessonScreenState extends State<LessonScreen> {
         bool isCorrect = i == quiz.correctOptionIndex;
         Color color = lp.isAnswerSubmitted
             ? (isCorrect
-                  ? Colors.green.withOpacity(0.4)
-                  : (isSelected ? Colors.red.withOpacity(0.4) : Colors.white10))
-            : (isSelected ? Colors.blue.withOpacity(0.3) : Colors.white10);
+                  ? Colors.green.withAlpha(128)
+                  : (isSelected ? Colors.red.withAlpha(102) : Colors.white10))
+            : (isSelected ? Colors.blue.withAlpha(77) : Colors.white10);
 
         return Container(
           margin: const EdgeInsets.only(bottom: 12),
@@ -172,7 +173,7 @@ class _LessonScreenState extends State<LessonScreen> {
         Container(
           padding: const EdgeInsets.all(16),
           decoration: BoxDecoration(
-            color: Colors.amber.withOpacity(0.2),
+            color: Colors.amber.withAlpha(51),
             borderRadius: BorderRadius.circular(12),
           ),
           child: const Row(

@@ -140,6 +140,12 @@ abstract class AppLocalizations {
   /// **'Correct'**
   String get correct;
 
+  /// Quick stats label – incorrect attempts
+  ///
+  /// In en, this message translates to:
+  /// **'Inorrect'**
+  String get incorrect;
+
   /// Quick stats label – total attempts
   ///
   /// In en, this message translates to:
@@ -475,6 +481,90 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'New Challenge'**
   String get newChallengeButton;
+
+  /// Title for Past Paper Challenge card
+  ///
+  /// In en, this message translates to:
+  /// **'Past Paper Challenge'**
+  String get pastPaperChallenge;
+
+  /// Subtitle for Past Paper Challenge card
+  ///
+  /// In en, this message translates to:
+  /// **'2000-2025 Organic MCQs'**
+  String get pastPaperSubtitle;
+
+  /// Title for MCQ Quiz screen
+  ///
+  /// In en, this message translates to:
+  /// **'MCQ Quiz'**
+  String get mcqQuiz;
+
+  /// Question counter display
+  ///
+  /// In en, this message translates to:
+  /// **'Question {current}/{total}'**
+  String questionNumber(int current, int total);
+
+  /// Error message when explanation cannot be retrieved
+  ///
+  /// In en, this message translates to:
+  /// **'Unable to fetch explanation.'**
+  String get explanationError;
+
+  /// Success message for high quiz score
+  ///
+  /// In en, this message translates to:
+  /// **'Excellent!'**
+  String get excellent;
+
+  /// Quiz completion message
+  ///
+  /// In en, this message translates to:
+  /// **'Quiz Completed!'**
+  String get quizCompleted;
+
+  /// Label for percentage score
+  ///
+  /// In en, this message translates to:
+  /// **'Percentage'**
+  String get percentage;
+
+  /// Label for correct answers count
+  ///
+  /// In en, this message translates to:
+  /// **'Correct Answers'**
+  String get correctAnswers;
+
+  /// Close button label
+  ///
+  /// In en, this message translates to:
+  /// **'Close'**
+  String get close;
+
+  /// Claim bonus points button label
+  ///
+  /// In en, this message translates to:
+  /// **'Claim Bonus'**
+  String get claimBonus;
+
+  /// Title for Past Papers list screen
+  ///
+  /// In en, this message translates to:
+  /// **'Past Papers (2000-2025)'**
+  String get pastPapers;
+
+  /// Chemistry paper title with year
+  ///
+  /// In en, this message translates to:
+  /// **'{year} A/L '**
+  String chemistryYear(int year);
+
+  /// Error message when paper data is not available
+  ///
+  /// In en, this message translates to:
+  /// **'Questions for this year are not yet available.'**
+  String get questionsNotAvailable;
 }
 
 class _AppLocalizationsDelegate

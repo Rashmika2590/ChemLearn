@@ -22,6 +22,9 @@
   "correct": "Correct",
   "@correct": { "description": "Quick stats label – correct attempts" },
 
+  "incorrect": "Inorrect",
+  "@incorrect": { "description": "Quick stats label – incorrect attempts" },
+
   "attempts": "Attempts",
   "@attempts": { "description": "Quick stats label – total attempts" },
 
@@ -220,5 +223,58 @@
   "@stepsCompleted": { "description": "Label for number of steps completed" },
 
   "newChallengeButton": "New Challenge",
-  "@newChallengeButton": { "description": "Tooltip for new challenge button" }
+  "@newChallengeButton": { "description": "Tooltip for new challenge button" },
+
+  "pastPaperChallenge": "Past Paper Challenge",
+  "@pastPaperChallenge": { "description": "Title for Past Paper Challenge card" },
+
+  "pastPaperSubtitle": "2000-2025 Organic MCQs",
+  "@pastPaperSubtitle": { "description": "Subtitle for Past Paper Challenge card" },
+
+  "mcqQuiz": "MCQ Quiz",
+  "@mcqQuiz": { "description": "Title for MCQ Quiz screen" },
+
+  "questionNumber": "Question {current}/{total}",
+  "@questionNumber": {
+    "description": "Question counter display",
+    "placeholders": {
+      "current": { "type": "int", "example": "1" },
+      "total": { "type": "int", "example": "50" }
+    }
+  },
+
+  "explanationError": "Unable to fetch explanation.",
+  "@explanationError": { "description": "Error message when explanation cannot be retrieved" },
+
+  "excellent": "Excellent!",
+  "@excellent": { "description": "Success message for high quiz score" },
+
+  "quizCompleted": "Quiz Completed!",
+  "@quizCompleted": { "description": "Quiz completion message" },
+
+  "percentage": "Percentage",
+  "@percentage": { "description": "Label for percentage score" },
+
+  "correctAnswers": "Correct Answers",
+  "@correctAnswers": { "description": "Label for correct answers count" },
+
+  "close": "Close",
+  "@close": { "description": "Close button label" },
+
+  "claimBonus": "Claim Bonus",
+  "@claimBonus": { "description": "Claim bonus points button label" },
+
+  "pastPapers": "Past Papers (2000-2025)",
+  "@pastPapers": { "description": "Title for Past Papers list screen" },
+
+  "chemistryYear": "{year} A/L ",
+  "@chemistryYear": {
+    "description": "Chemistry paper title with year",
+    "placeholders": {
+      "year": { "type": "int", "example": "2025" }
+    }
+  },
+
+  "questionsNotAvailable": "Questions for this year are not yet available.",
+  "@questionsNotAvailable": { "description": "Error message when paper data is not available" }
 }

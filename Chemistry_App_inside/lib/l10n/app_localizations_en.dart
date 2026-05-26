@@ -30,6 +30,9 @@ class AppLocalizationsEn extends AppLocalizations {
   String get correct => 'Correct';
 
   @override
+  String get incorrect => 'Inorrect';
+
+  @override
   String get attempts => 'Attempts';
 
   @override
@@ -210,4 +213,51 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get newChallengeButton => 'New Challenge';
+
+  @override
+  String get pastPaperChallenge => 'Past Paper Challenge';
+
+  @override
+  String get pastPaperSubtitle => '2000-2025 Organic MCQs';
+
+  @override
+  String get mcqQuiz => 'MCQ Quiz';
+
+  @override
+  String questionNumber(int current, int total) {
+    return 'Question $current/$total';
+  }
+
+  @override
+  String get explanationError => 'Unable to fetch explanation.';
+
+  @override
+  String get excellent => 'Excellent!';
+
+  @override
+  String get quizCompleted => 'Quiz Completed!';
+
+  @override
+  String get percentage => 'Percentage';
+
+  @override
+  String get correctAnswers => 'Correct Answers';
+
+  @override
+  String get close => 'Close';
+
+  @override
+  String get claimBonus => 'Claim Bonus';
+
+  @override
+  String get pastPapers => 'Past Papers (2000-2025)';
+
+  @override
+  String chemistryYear(int year) {
+    return '$year A/L ';
+  }
+
+  @override
+  String get questionsNotAvailable =>
+      'Questions for this year are not yet available.';
 }
